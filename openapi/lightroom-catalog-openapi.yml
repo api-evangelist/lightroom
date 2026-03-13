@@ -1,0 +1,224 @@
+openapi: 3.1.0
+info:
+  title: Lightroom Catalog API
+  description: >-
+    API for accessing catalog information and health status for Adobe Lightroom
+    cloud services. Each Lightroom customer has a single catalog that serves as
+    the top-level container for all their assets, albums, and metadata. The
+    catalog ID is required for most other Lightroom API operations.
+  version: '2'
+  contact:
+    name: Adobe Lightroom Developer Support
+    url: https://community.adobe.com/t5/lightroom/ct-p/ct-lightroom
+  license:
+    name: Adobe Terms of Service
+    url: https://www.adobe.com/legal/terms.html
+  termsOfService: https://www.adobe.com/legal/terms.html
+externalDocs:
+  description: Lightroom Catalog API Documentation
+  url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+servers:
+  - url: https://lr.adobe.io/v2
+    description: Lightroom Services Production Server
+tags:
+  - name: Health
+    description: API health and availability checks
+  - name: Catalog
+    description: Catalog metadata and configuration
+security:
+  - oauth2:
+      - lr_partner_apis
+  - apiKey: []
+paths:
+  /health:
+    get:
+      operationId: getHealthCheck
+      summary: Check API health
+      description: >-
+        Returns the current health status of the Lightroom Services API.
+        This endpoint does not require authentication and is intended for
+        monitoring and uptime verification.
+      tags:
+        - Health
+      security: []
+      responses:
+        '200':
+          description: API is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Health status
+                    examples:
+                      - available
+        '503':
+          description: API is unavailable
+  /catalog:
+    get:
+      operationId: getCatalog
+      summary: Get the authenticated user's catalog
+      description: >-
+        Retrieves the catalog for the currently authenticated Lightroom
+        customer. Each customer has exactly one catalog. The catalog ID
+        returned in the response is required as a path parameter for asset,
+        album, and other catalog-scoped API calls.
+      tags:
+        - Catalog
+      parameters:
+        - $ref: '#/components/parameters/XApiKey'
+      responses:
+        '200':
+          description: Catalog retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /catalogs/{catalog_id}:
+    get:
+      operationId: getCatalogById
+      summary: Get a catalog by ID
+      description: >-
+        Retrieves catalog metadata for the specified catalog. Returns the
+        catalog name, creation timestamp, and links to child resources
+        such as assets and albums.
+      tags:
+        - Catalog
+      parameters:
+        - $ref: '#/components/parameters/CatalogId'
+        - $ref: '#/components/parameters/XApiKey'
+      responses:
+        '200':
+          description: Catalog retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ims-na1.adobelogin.com/ims/authorize/v2
+          tokenUrl: https://ims-na1.adobelogin.com/ims/token/v3
+          scopes:
+            lr_partner_apis: Access Lightroom partner APIs
+    apiKey:
+      type: apiKey
+      name: X-Api-Key
+      in: header
+  parameters:
+    XApiKey:
+      name: X-Api-Key
+      in: header
+      required: true
+      description: API key from Adobe Developer Console
+      schema:
+        type: string
+    CatalogId:
+      name: catalog_id
+      in: path
+      required: true
+      description: Unique identifier of the Lightroom catalog
+      schema:
+        type: string
+  schemas:
+    CatalogResponse:
+      type: object
+      properties:
+        base:
+          type: string
+          description: Base URL for the API
+        id:
+          type: string
+          description: Unique catalog identifier
+        type:
+          type: string
+          description: Resource type
+          const: catalog
+        created:
+          type: string
+          format: date-time
+          description: Server-side creation timestamp
+        updated:
+          type: string
+          format: date-time
+          description: Server-side last updated timestamp
+        payload:
+          type: object
+          description: Catalog metadata
+          properties:
+            name:
+              type: string
+              description: Name of the catalog
+            userCreated:
+              type: string
+              format: date-time
+              description: User-side creation timestamp
+            userUpdated:
+              type: string
+              format: date-time
+              description: User-side last updated timestamp
+        links:
+          type: object
+          description: HATEOAS links to related resources
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+            assets:
+              type: object
+              properties:
+                href:
+                  type: string
+            albums:
+              type: object
+              properties:
+                href:
+                  type: string
+          additionalProperties:
+            type: object
+            properties:
+              href:
+                type: string
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        description:
+          type: string
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'

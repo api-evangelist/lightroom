@@ -1,0 +1,583 @@
+openapi: 3.1.0
+info:
+  title: Adobe Lightroom API (Firefly Services)
+  description: >-
+    AI-powered image editing API available through Adobe Firefly Services.
+    Provides programmatic access to Lightroom editing capabilities including
+    auto tone, auto straighten, preset application, and image editing
+    operations. All operations accept cloud-stored images and return processed
+    results to cloud storage. Supports Adobe Creative Cloud, Amazon S3,
+    Azure Blob Storage, and Dropbox as storage backends.
+  version: '1'
+  contact:
+    name: Adobe Firefly Services Support
+    url: https://community.adobe.com/t5/lightroom/ct-p/ct-lightroom
+  license:
+    name: Adobe Terms of Service
+    url: https://www.adobe.com/legal/terms.html
+  termsOfService: https://www.adobe.com/legal/terms.html
+externalDocs:
+  description: Firefly Services Lightroom API Documentation
+  url: https://developer.adobe.com/firefly-services/docs/lightroom/
+servers:
+  - url: https://image.adobe.io
+    description: Adobe Firefly Services Production Server
+tags:
+  - name: Auto Tone
+    description: Automatically adjust tonal values for optimal exposure and contrast
+  - name: Auto Straighten
+    description: Automatically detect and correct image horizon alignment
+  - name: Presets
+    description: Apply Lightroom presets (XMP develop settings) to images
+  - name: Edit Image
+    description: Apply custom Lightroom edit settings to images
+security:
+  - oauth2:
+      - firefly_api
+  - apiKey: []
+paths:
+  /lrService/autoTone:
+    post:
+      operationId: autoTone
+      summary: Apply auto tone adjustments
+      description: >-
+        Automatically adjusts the tonal values of an image for optimal
+        exposure, contrast, highlights, shadows, whites, blacks, and
+        vibrance. The AI analyzes the image content and applies appropriate
+        adjustments similar to the Auto button in Lightroom's Basic panel.
+      tags:
+        - Auto Tone
+      parameters:
+        - $ref: '#/components/parameters/XApiKey'
+        - $ref: '#/components/parameters/Authorization'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutoToneRequest'
+      responses:
+        '200':
+          description: Auto tone applied successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobResponse'
+        '202':
+          description: Job accepted and processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /lrService/autoStraighten:
+    post:
+      operationId: autoStraighten
+      summary: Automatically straighten an image
+      description: >-
+        Detects the horizon or dominant lines in an image and applies a
+        rotation correction to straighten it. Uses AI analysis to determine
+        the appropriate rotation angle, similar to Lightroom's auto
+        straighten feature in the Crop & Rotate tool.
+      tags:
+        - Auto Straighten
+      parameters:
+        - $ref: '#/components/parameters/XApiKey'
+        - $ref: '#/components/parameters/Authorization'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutoStraightenRequest'
+      responses:
+        '200':
+          description: Auto straighten applied successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobResponse'
+        '202':
+          description: Job accepted and processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /lrService/presets:
+    post:
+      operationId: applyPresets
+      summary: Apply Lightroom presets to an image
+      description: >-
+        Applies one or more Lightroom presets (XMP develop settings files) to
+        an image. Presets are provided as references to XMP files stored in
+        cloud storage. Multiple presets can be applied in sequence, with later
+        presets overriding earlier settings where they overlap.
+      tags:
+        - Presets
+      parameters:
+        - $ref: '#/components/parameters/XApiKey'
+        - $ref: '#/components/parameters/Authorization'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplyPresetsRequest'
+      responses:
+        '200':
+          description: Presets applied successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobResponse'
+        '202':
+          description: Job accepted and processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /lrService/edit:
+    post:
+      operationId: editImage
+      summary: Apply custom edit settings to an image
+      description: >-
+        Applies custom Lightroom develop settings to an image. Accepts a
+        comprehensive set of editing parameters covering white balance,
+        exposure, contrast, highlights, shadows, tone curve, HSL, split
+        toning, sharpening, noise reduction, lens corrections, and more.
+        Provides the full range of non-destructive editing capabilities
+        available in the Lightroom develop module.
+      tags:
+        - Edit Image
+      parameters:
+        - $ref: '#/components/parameters/XApiKey'
+        - $ref: '#/components/parameters/Authorization'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditImageRequest'
+      responses:
+        '200':
+          description: Edit applied successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobResponse'
+        '202':
+          description: Job accepted and processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 via Adobe IMS for Firefly Services
+      flows:
+        clientCredentials:
+          tokenUrl: https://ims-na1.adobelogin.com/ims/token/v3
+          scopes:
+            firefly_api: Access Firefly Services APIs
+            openid: OpenID Connect
+    apiKey:
+      type: apiKey
+      name: X-Api-Key
+      in: header
+      description: API key from Adobe Developer Console
+  parameters:
+    XApiKey:
+      name: X-Api-Key
+      in: header
+      required: true
+      description: API key (client_id) from Adobe Developer Console
+      schema:
+        type: string
+    Authorization:
+      name: Authorization
+      in: header
+      required: true
+      description: Bearer token from Adobe IMS
+      schema:
+        type: string
+        pattern: ^Bearer .+$
+  schemas:
+    StorageInput:
+      type: object
+      description: Reference to an input file stored in cloud storage
+      required:
+        - href
+        - storage
+      properties:
+        href:
+          type: string
+          description: >-
+            URL or path to the input file. For Creative Cloud, use the asset
+            path. For external storage, use the presigned URL.
+        storage:
+          type: string
+          description: Storage type where the input file is located
+          enum:
+            - adobe
+            - external
+            - azure
+            - dropbox
+    StorageOutput:
+      type: object
+      description: Reference to the output destination in cloud storage
+      required:
+        - href
+        - storage
+        - type
+      properties:
+        href:
+          type: string
+          description: URL or path for the output file
+        storage:
+          type: string
+          description: Storage type for the output
+          enum:
+            - adobe
+            - external
+            - azure
+            - dropbox
+        type:
+          type: string
+          description: Output image format
+          enum:
+            - image/jpeg
+            - image/png
+            - image/tiff
+            - image/dng
+        overwrite:
+          type: boolean
+          description: Whether to overwrite existing files
+          default: true
+        quality:
+          type: integer
+          description: JPEG quality (1-12) when output type is image/jpeg
+          minimum: 1
+          maximum: 12
+    AutoToneRequest:
+      type: object
+      required:
+        - inputs
+        - outputs
+      properties:
+        inputs:
+          type: object
+          required:
+            - source
+          properties:
+            source:
+              $ref: '#/components/schemas/StorageInput'
+        outputs:
+          type: array
+          description: One or more output destinations
+          items:
+            $ref: '#/components/schemas/StorageOutput'
+    AutoStraightenRequest:
+      type: object
+      required:
+        - inputs
+        - outputs
+      properties:
+        inputs:
+          type: object
+          required:
+            - source
+          properties:
+            source:
+              $ref: '#/components/schemas/StorageInput'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/StorageOutput'
+    ApplyPresetsRequest:
+      type: object
+      required:
+        - inputs
+        - outputs
+      properties:
+        inputs:
+          type: object
+          required:
+            - source
+            - presets
+          properties:
+            source:
+              $ref: '#/components/schemas/StorageInput'
+            presets:
+              type: array
+              description: >-
+                List of preset XMP files to apply. Presets are applied in
+                order, with later presets overriding earlier ones.
+              items:
+                $ref: '#/components/schemas/StorageInput'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/StorageOutput'
+    EditImageRequest:
+      type: object
+      required:
+        - inputs
+        - outputs
+      properties:
+        inputs:
+          type: object
+          required:
+            - source
+          properties:
+            source:
+              $ref: '#/components/schemas/StorageInput'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/StorageOutput'
+        options:
+          type: object
+          description: >-
+            Lightroom develop settings to apply. All values are optional and
+            correspond to Lightroom develop module parameters.
+          properties:
+            Exposure:
+              type: number
+              description: Exposure adjustment in stops
+              minimum: -5.0
+              maximum: 5.0
+            Contrast:
+              type: integer
+              description: Contrast adjustment
+              minimum: -100
+              maximum: 100
+            Highlights:
+              type: integer
+              description: Highlights recovery
+              minimum: -100
+              maximum: 100
+            Shadows:
+              type: integer
+              description: Shadow recovery
+              minimum: -100
+              maximum: 100
+            Whites:
+              type: integer
+              description: White point adjustment
+              minimum: -100
+              maximum: 100
+            Blacks:
+              type: integer
+              description: Black point adjustment
+              minimum: -100
+              maximum: 100
+            Clarity:
+              type: integer
+              description: Clarity (midtone contrast)
+              minimum: -100
+              maximum: 100
+            Dehaze:
+              type: integer
+              description: Dehaze amount
+              minimum: -100
+              maximum: 100
+            Vibrance:
+              type: integer
+              description: Vibrance adjustment
+              minimum: -100
+              maximum: 100
+            Saturation:
+              type: integer
+              description: Saturation adjustment
+              minimum: -100
+              maximum: 100
+            WhiteBalance:
+              type: string
+              description: White balance preset
+              enum:
+                - As Shot
+                - Auto
+                - Cloudy
+                - Custom
+                - Daylight
+                - Flash
+                - Fluorescent
+                - Shade
+                - Tungsten
+            Temperature:
+              type: integer
+              description: Color temperature in Kelvin
+              minimum: 2000
+              maximum: 50000
+            Tint:
+              type: integer
+              description: Tint adjustment (green-magenta)
+              minimum: -150
+              maximum: 150
+            Sharpness:
+              type: integer
+              description: Sharpening amount
+              minimum: 0
+              maximum: 150
+            SharpenRadius:
+              type: number
+              description: Sharpening radius
+              minimum: 0.5
+              maximum: 3.0
+            SharpenDetail:
+              type: integer
+              description: Sharpening detail
+              minimum: 0
+              maximum: 100
+            NoiseReduction:
+              type: integer
+              description: Luminance noise reduction
+              minimum: 0
+              maximum: 100
+            ColorNoiseReduction:
+              type: integer
+              description: Color noise reduction
+              minimum: 0
+              maximum: 100
+            VignetteAmount:
+              type: integer
+              description: Post-crop vignette amount
+              minimum: -100
+              maximum: 100
+            GrainAmount:
+              type: integer
+              description: Film grain amount
+              minimum: 0
+              maximum: 100
+    JobResponse:
+      type: object
+      properties:
+        jobId:
+          type: string
+          description: Unique job identifier for tracking
+        created:
+          type: string
+          format: date-time
+          description: Job creation timestamp
+        modified:
+          type: string
+          format: date-time
+          description: Job last modified timestamp
+        outputs:
+          type: array
+          items:
+            type: object
+            properties:
+              input:
+                type: string
+                description: Reference to the input file
+              status:
+                type: string
+                description: Processing status for this output
+                enum:
+                  - pending
+                  - running
+                  - succeeded
+                  - failed
+              href:
+                type: string
+                description: URL of the completed output
+              errors:
+                type: object
+                description: Error details if processing failed
+                properties:
+                  type:
+                    type: string
+                  title:
+                    type: string
+                  code:
+                    type: integer
+        _links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Error type URI
+        title:
+          type: string
+          description: Short error description
+        code:
+          type: integer
+          description: Error code
+        detail:
+          type: string
+          description: Detailed error message
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions or quota exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnsupportedMediaType:
+      description: Input file format not supported
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'

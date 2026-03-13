@@ -1,0 +1,494 @@
+openapi: 3.1.0
+info:
+  title: Lightroom Albums API
+  description: >-
+    API for creating and managing albums and collections within an Adobe
+    Lightroom cloud catalog. Albums organize assets into user-defined
+    collections. Supports listing, creating, updating, and deleting albums
+    as well as managing the assets within each album.
+  version: '2'
+  contact:
+    name: Adobe Lightroom Developer Support
+    url: https://community.adobe.com/t5/lightroom/ct-p/ct-lightroom
+  license:
+    name: Adobe Terms of Service
+    url: https://www.adobe.com/legal/terms.html
+  termsOfService: https://www.adobe.com/legal/terms.html
+externalDocs:
+  description: Lightroom Albums API Documentation
+  url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+servers:
+  - url: https://lr.adobe.io/v2
+    description: Lightroom Services Production Server
+tags:
+  - name: Albums
+    description: CRUD operations on albums
+  - name: Album Assets
+    description: Manage assets within albums
+security:
+  - oauth2:
+      - lr_partner_apis
+  - apiKey: []
+paths:
+  /catalogs/{catalog_id}/albums:
+    get:
+      operationId: listAlbums
+      summary: List albums in a catalog
+      description: >-
+        Retrieves a paginated list of all albums in the specified catalog.
+        Albums may be of subtype collection, collection_set, or project.
+      tags:
+        - Albums
+      parameters:
+        - $ref: '#/components/parameters/CatalogId'
+        - $ref: '#/components/parameters/XApiKey'
+        - name: subtype
+          in: query
+          description: Filter albums by subtype
+          schema:
+            type: string
+            enum:
+              - collection
+              - collection_set
+              - project
+        - name: limit
+          in: query
+          description: Maximum number of results
+          schema:
+            type: integer
+            default: 100
+            minimum: 1
+            maximum: 500
+        - name: offset
+          in: query
+          description: Pagination offset
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: Albums retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumsListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /catalogs/{catalog_id}/albums/{album_id}:
+    get:
+      operationId: getAlbum
+      summary: Get album details
+      description: >-
+        Retrieves detailed metadata for a specific album including its name,
+        subtype, cover asset reference, parent album reference, and timestamps.
+      tags:
+        - Albums
+      parameters:
+        - $ref: '#/components/parameters/CatalogId'
+        - $ref: '#/components/parameters/AlbumId'
+        - $ref: '#/components/parameters/XApiKey'
+      responses:
+        '200':
+          description: Album retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: createOrUpdateAlbum
+      summary: Create or update an album
+      description: >-
+        Creates a new album or updates an existing album. The album_id should
+        be a client-generated UUID for new albums. Set the subtype to
+        collection for a regular album, collection_set for a folder that
+        contains other albums, or project for a managed project.
+      tags:
+        - Albums
+      parameters:
+        - $ref: '#/components/parameters/CatalogId'
+        - $ref: '#/components/parameters/AlbumId'
+        - $ref: '#/components/parameters/XApiKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlbumCreateRequest'
+      responses:
+        '200':
+          description: Album updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumResponse'
+        '201':
+          description: Album created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    delete:
+      operationId: deleteAlbum
+      summary: Delete an album
+      description: >-
+        Deletes the specified album from the catalog. Assets within the album
+        are not deleted; they remain in the catalog.
+      tags:
+        - Albums
+      parameters:
+        - $ref: '#/components/parameters/CatalogId'
+        - $ref: '#/components/parameters/AlbumId'
+        - $ref: '#/components/parameters/XApiKey'
+      responses:
+        '204':
+          description: Album deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /catalogs/{catalog_id}/albums/{album_id}/assets:
+    get:
+      operationId: listAlbumAssets
+      summary: List assets in an album
+      description: >-
+        Retrieves a paginated list of assets belonging to the specified album.
+        Returns the same asset structure as the catalog assets endpoint.
+      tags:
+        - Album Assets
+      parameters:
+        - $ref: '#/components/parameters/CatalogId'
+        - $ref: '#/components/parameters/AlbumId'
+        - $ref: '#/components/parameters/XApiKey'
+        - name: limit
+          in: query
+          description: Maximum number of results
+          schema:
+            type: integer
+            default: 100
+        - name: offset
+          in: query
+          description: Pagination offset
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: Album assets retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetsListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: addAssetsToAlbum
+      summary: Add assets to an album
+      description: >-
+        Adds one or more existing catalog assets to the specified album. Assets
+        must already exist in the catalog. Each asset reference includes an
+        optional sort order.
+      tags:
+        - Album Assets
+      parameters:
+        - $ref: '#/components/parameters/CatalogId'
+        - $ref: '#/components/parameters/AlbumId'
+        - $ref: '#/components/parameters/XApiKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlbumAssetsRequest'
+      responses:
+        '200':
+          description: Assets added to album
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /catalogs/{catalog_id}/albums/{album_id}/assets/{asset_id}:
+    delete:
+      operationId: removeAssetFromAlbum
+      summary: Remove an asset from an album
+      description: >-
+        Removes a specific asset from the album. The asset itself is not
+        deleted from the catalog.
+      tags:
+        - Album Assets
+      parameters:
+        - $ref: '#/components/parameters/CatalogId'
+        - $ref: '#/components/parameters/AlbumId'
+        - name: asset_id
+          in: path
+          required: true
+          description: Asset ID to remove from the album
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XApiKey'
+      responses:
+        '204':
+          description: Asset removed from album
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ims-na1.adobelogin.com/ims/authorize/v2
+          tokenUrl: https://ims-na1.adobelogin.com/ims/token/v3
+          scopes:
+            lr_partner_apis: Access Lightroom partner APIs
+    apiKey:
+      type: apiKey
+      name: X-Api-Key
+      in: header
+  parameters:
+    XApiKey:
+      name: X-Api-Key
+      in: header
+      required: true
+      description: API key from Adobe Developer Console
+      schema:
+        type: string
+    CatalogId:
+      name: catalog_id
+      in: path
+      required: true
+      description: Unique identifier of the Lightroom catalog
+      schema:
+        type: string
+    AlbumId:
+      name: album_id
+      in: path
+      required: true
+      description: Unique identifier of the album (UUID format)
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    AlbumsListResponse:
+      type: object
+      properties:
+        base:
+          type: string
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Album'
+        links:
+          $ref: '#/components/schemas/Links'
+    Album:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Album unique identifier
+        type:
+          type: string
+          const: album
+        subtype:
+          type: string
+          description: Album subtype
+          enum:
+            - collection
+            - collection_set
+            - project
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        payload:
+          $ref: '#/components/schemas/AlbumPayload'
+        links:
+          $ref: '#/components/schemas/Links'
+    AlbumPayload:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Display name of the album
+        userCreated:
+          type: string
+          format: date-time
+          description: When the user created the album
+        userUpdated:
+          type: string
+          format: date-time
+          description: When the user last modified the album
+        cover:
+          type: object
+          description: Cover asset for the album
+          properties:
+            id:
+              type: string
+              description: Asset ID used as cover
+        parent:
+          type: object
+          description: Parent album reference for nested albums
+          properties:
+            id:
+              type: string
+              description: Parent album ID
+    AlbumResponse:
+      type: object
+      properties:
+        base:
+          type: string
+        id:
+          type: string
+        type:
+          type: string
+          const: album
+        subtype:
+          type: string
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        payload:
+          $ref: '#/components/schemas/AlbumPayload'
+        links:
+          $ref: '#/components/schemas/Links'
+    AlbumCreateRequest:
+      type: object
+      required:
+        - subtype
+        - payload
+      properties:
+        subtype:
+          type: string
+          enum:
+            - collection
+            - collection_set
+            - project
+        payload:
+          type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              description: Display name for the album
+            userCreated:
+              type: string
+              format: date-time
+            userUpdated:
+              type: string
+              format: date-time
+            cover:
+              type: object
+              properties:
+                id:
+                  type: string
+            parent:
+              type: object
+              properties:
+                id:
+                  type: string
+    AlbumAssetsRequest:
+      type: object
+      required:
+        - resources
+      properties:
+        resources:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+            properties:
+              id:
+                type: string
+                description: Asset ID to add
+              payload:
+                type: object
+                properties:
+                  order:
+                    type: string
+                    description: Sort order within the album
+    AssetsListResponse:
+      type: object
+      properties:
+        base:
+          type: string
+        resources:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              type:
+                type: string
+                const: asset
+              subtype:
+                type: string
+              created:
+                type: string
+                format: date-time
+              updated:
+                type: string
+                format: date-time
+              payload:
+                type: object
+              links:
+                $ref: '#/components/schemas/Links'
+        links:
+          $ref: '#/components/schemas/Links'
+    Links:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          href:
+            type: string
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        description:
+          type: string
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'

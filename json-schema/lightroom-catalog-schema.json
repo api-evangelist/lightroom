@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lr.adobe.io/schemas/lightroom/catalog.json",
+  "title": "Lightroom Catalog",
+  "description": "Schema for an Adobe Lightroom cloud catalog. Each Lightroom customer has a single catalog that serves as the top-level container for all their assets, albums, and metadata.",
+  "type": "object",
+  "required": [
+    "id",
+    "type"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the catalog"
+    },
+    "type": {
+      "type": "string",
+      "description": "Resource type identifier",
+      "const": "catalog"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Server-side timestamp when the catalog was created"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Server-side timestamp when the catalog was last updated"
+    },
+    "payload": {
+      "type": "object",
+      "description": "Catalog metadata payload",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the catalog"
+        },
+        "userCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "User-side timestamp when the catalog was created"
+        },
+        "userUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "User-side timestamp when the catalog was last updated"
+        }
+      }
+    },
+    "links": {
+      "$ref": "#/$defs/Links"
+    }
+  },
+  "$defs": {
+    "Links": {
+      "type": "object",
+      "description": "HATEOAS navigation links for the catalog resource",
+      "properties": {
+        "self": {
+          "$ref": "#/$defs/Link"
+        },
+        "assets": {
+          "$ref": "#/$defs/Link"
+        },
+        "albums": {
+          "$ref": "#/$defs/Link"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/Link"
+      }
+    },
+    "Link": {
+      "type": "object",
+      "description": "A hyperlink reference to a related resource",
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "URL of the linked resource"
+        }
+      },
+      "required": [
+        "href"
+      ]
+    }
+  }
+}

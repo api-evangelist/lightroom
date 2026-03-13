@@ -1,0 +1,214 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "lr": "https://lr.adobe.io/ns/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "exif": "http://ns.adobe.com/exif/1.0/",
+
+    "Catalog": {
+      "@id": "lr:Catalog",
+      "@context": {
+        "catalogId": "lr:catalogId",
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "created": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "userCreated": {
+          "@id": "lr:userCreated",
+          "@type": "xsd:dateTime"
+        },
+        "userUpdated": {
+          "@id": "lr:userUpdated",
+          "@type": "xsd:dateTime"
+        },
+        "assets": {
+          "@id": "lr:assets",
+          "@type": "@id"
+        },
+        "albums": {
+          "@id": "lr:albums",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Album": {
+      "@id": "lr:Album",
+      "@context": {
+        "albumId": "lr:albumId",
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "subtype": "lr:subtype",
+        "created": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "userCreated": {
+          "@id": "lr:userCreated",
+          "@type": "xsd:dateTime"
+        },
+        "userUpdated": {
+          "@id": "lr:userUpdated",
+          "@type": "xsd:dateTime"
+        },
+        "cover": {
+          "@id": "schema:image",
+          "@type": "@id"
+        },
+        "parent": {
+          "@id": "schema:isPartOf",
+          "@type": "@id"
+        },
+        "assets": {
+          "@id": "schema:hasPart",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Asset": {
+      "@id": "lr:Asset",
+      "@context": {
+        "assetId": "lr:assetId",
+        "subtype": "lr:subtype",
+        "created": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "captureDate": {
+          "@id": "exif:dateTimeOriginal",
+          "@type": "xsd:dateTime"
+        },
+        "fileName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "mimeType": {
+          "@id": "schema:encodingFormat",
+          "@type": "xsd:string"
+        },
+        "fileSize": {
+          "@id": "schema:contentSize",
+          "@type": "xsd:integer"
+        },
+        "rating": {
+          "@id": "schema:ratingValue",
+          "@type": "xsd:integer"
+        },
+        "flag": "lr:flag",
+        "label": "lr:label",
+        "latitude": {
+          "@id": "schema:latitude",
+          "@type": "xsd:decimal"
+        },
+        "longitude": {
+          "@id": "schema:longitude",
+          "@type": "xsd:decimal"
+        },
+        "altitude": {
+          "@id": "schema:elevation",
+          "@type": "xsd:decimal"
+        },
+        "city": {
+          "@id": "schema:addressLocality",
+          "@type": "xsd:string"
+        },
+        "state": {
+          "@id": "schema:addressRegion",
+          "@type": "xsd:string"
+        },
+        "country": {
+          "@id": "schema:addressCountry",
+          "@type": "xsd:string"
+        },
+        "importSource": "lr:importSource",
+        "importedOnDevice": "lr:importedOnDevice",
+        "importTimestamp": {
+          "@id": "lr:importTimestamp",
+          "@type": "xsd:dateTime"
+        },
+        "master": {
+          "@id": "lr:master",
+          "@type": "@id"
+        },
+        "renditions": {
+          "@id": "lr:renditions",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Rendition": {
+      "@id": "lr:Rendition",
+      "@context": {
+        "renditionType": "lr:renditionType",
+        "width": {
+          "@id": "schema:width",
+          "@type": "xsd:integer"
+        },
+        "height": {
+          "@id": "schema:height",
+          "@type": "xsd:integer"
+        },
+        "contentType": {
+          "@id": "schema:encodingFormat",
+          "@type": "xsd:string"
+        },
+        "contentLength": {
+          "@id": "schema:contentSize",
+          "@type": "xsd:integer"
+        },
+        "asset": {
+          "@id": "schema:isBasedOn",
+          "@type": "@id"
+        },
+        "created": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "DevelopSettings": {
+      "@id": "lr:DevelopSettings",
+      "@context": {
+        "exposure": "lr:exposure",
+        "contrast": "lr:contrast",
+        "highlights": "lr:highlights",
+        "shadows": "lr:shadows",
+        "whites": "lr:whites",
+        "blacks": "lr:blacks",
+        "clarity": "lr:clarity",
+        "vibrance": "lr:vibrance",
+        "saturation": "lr:saturation",
+        "temperature": "lr:temperature",
+        "tint": "lr:tint",
+        "whiteBalance": "lr:whiteBalance"
+      }
+    }
+  }
+}

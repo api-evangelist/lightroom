@@ -1,88 +1,170 @@
+specificationVersion: '0.18'
 name: Adobe Lightroom API
-description: APIs for Adobe Lightroom cloud services, enabling developers to access and manipulate photos, albums, and metadata programmatically
+description: >-
+  APIs for Adobe Lightroom cloud services, enabling developers to access and
+  manipulate photos, albums, and metadata programmatically. The Lightroom APIs
+  are also available as part of Adobe Firefly Services for AI-powered image
+  editing operations such as auto tone, auto straighten, and preset application.
 image: https://www.adobe.com/content/dam/cc/icons/lightroom.svg
 url: https://www.adobe.com/products/photoshop-lightroom.html
 created: '2024'
-modified: '2024'
+modified: '2026-03-03'
 tags:
-- photography
-- image editing
-- cloud storage
-- photo management
-- RAW processing
-- metadata
-- albums
+  - Photography
+  - Image Editing
+  - Cloud Storage
+  - Photo Management
+  - RAW Processing
+  - Metadata
+  - Albums
 apis:
-- name: Lightroom Services API
-  description: Core API for accessing Lightroom catalog data, albums, and assets
-  image: https://www.adobe.com/content/dam/cc/icons/lightroom.svg
-  humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/
-  baseURL: https://lr.adobe.io
-  tags:
-  - photos
-  - albums
-  - catalogs
-  - assets
-  properties:
-  - type: Documentation
-    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
-  - type: OpenAPI
-    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+  - name: Lightroom Services API
+    description: >-
+      Core partner API for accessing Lightroom cloud catalog data, albums, and
+      assets. Partner applications authenticate Lightroom customers through Adobe
+      Identity Management System using a standard OAuth 2.0 workflow.
+    image: https://www.adobe.com/content/dam/cc/icons/lightroom.svg
+    humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/
+    baseURL: https://lr.adobe.io
+    tags:
+      - Photos
+      - Albums
+      - Catalogs
+      - Assets
+    properties:
+      - type: Documentation
+        url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+      - type: OpenAPI
+        url: openapi/lightroom-services-openapi.yml
+      - type: Authentication
+        url: https://developer.adobe.com/developer-console/docs/guides/authentication/
+      - type: Getting Started
+        url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
+      - type: Guide
+        url: https://developer.adobe.com/lightroom/lightroom-api-docs/guides/
+      - type: Change Log
+        url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
+      - type: GitHub Organization
+        url: https://github.com/AdobeDocs/lightroom-public-apis
+    contact:
+      - type: Support
+        url: https://community.adobe.com/t5/lightroom/ct-p/ct-lightroom
+      - type: Twitter
+        url: https://twitter.com/Lightroom
+  - name: Lightroom Assets API
+    description: >-
+      API for managing photo assets including upload, download, and metadata
+      operations. Supports creating master assets, reading external develop XMP
+      files, and generating renditions.
+    humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+    baseURL: https://lr.adobe.io/v2
+    tags:
+      - Assets
+      - Upload
+      - Download
+      - Renditions
+    properties:
+      - type: Documentation
+        url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+      - type: OpenAPI
+        url: openapi/lightroom-assets-openapi.yml
+  - name: Lightroom Albums API
+    description: >-
+      API for creating and managing albums and collections within a Lightroom
+      catalog. Enables listing, reading, and organizing assets within albums.
+    humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+    baseURL: https://lr.adobe.io/v2
+    tags:
+      - Albums
+      - Collections
+      - Organization
+    properties:
+      - type: Documentation
+        url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+      - type: OpenAPI
+        url: openapi/lightroom-albums-openapi.yml
+  - name: Lightroom Catalog API
+    description: >-
+      API for accessing catalog information and health status. Provides
+      endpoints for retrieving catalog metadata and managing catalog-level
+      operations.
+    humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+    baseURL: https://lr.adobe.io/v2
+    tags:
+      - Catalog
+      - Metadata
+      - Sync
+    properties:
+      - type: Documentation
+        url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+      - type: OpenAPI
+        url: openapi/lightroom-catalog-openapi.yml
+  - name: Adobe Lightroom API (Firefly Services)
+    description: >-
+      AI-powered image editing API available through Adobe Firefly Services.
+      Provides auto tone, auto straighten, preset application, and
+      programmatic editing capabilities using REST endpoints.
+    humanURL: https://developer.adobe.com/firefly-services/docs/lightroom/
+    baseURL: https://image.adobe.io
+    tags:
+      - Image Editing
+      - Auto Tone
+      - Presets
+      - AI
+      - Firefly Services
+    properties:
+      - type: Documentation
+        url: https://developer.adobe.com/firefly-services/docs/lightroom/
+      - type: OpenAPI
+        url: openapi/lightroom-firefly-services-openapi.yml
+      - type: Reference
+        url: https://developer.adobe.com/firefly-services/docs/lightroom/api/lightroom_autoTone/
+      - type: Getting Started
+        url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
+      - type: Guide
+        url: https://developer.adobe.com/firefly-services/docs/lightroom/guides/
+      - type: Authentication
+        url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
+      - type: SDKs
+        url: https://developer.adobe.com/firefly-services/docs/guides/sdks/
+    contact:
+      - type: Support
+        url: https://community.adobe.com/t5/lightroom/ct-p/ct-lightroom
+common:
   - type: Authentication
     url: https://developer.adobe.com/developer-console/docs/guides/authentication/
-  contact:
-  - type: Support
-    url: https://community.adobe.com/t5/lightroom/ct-p/ct-lightroom
-  - type: Twitter
-    url: https://twitter.com/Lightroom
-- name: Lightroom Assets API
-  description: API for managing photo assets including upload, download, and metadata operations
-  humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
-  baseURL: https://lr.adobe.io/v2
-  tags:
-  - assets
-  - upload
-  - download
-  - renditions
-  properties:
-  - type: Documentation
-    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/assets/
-- name: Lightroom Albums API
-  description: API for creating and managing albums and collections
-  humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
-  baseURL: https://lr.adobe.io/v2
-  tags:
-  - albums
-  - collections
-  - organization
-  properties:
-  - type: Documentation
-    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/albums/
-- name: Lightroom Catalog API
-  description: API for accessing catalog information and health status
-  humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
-  baseURL: https://lr.adobe.io/v2
-  tags:
-  - catalog
-  - metadata
-  - sync
-  properties:
-  - type: Documentation
-    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/catalog/
-common:
-- type: Authentication
-  url: https://developer.adobe.com/developer-console/docs/guides/authentication/
-- type: Getting Started
-  url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
-- type: Developer Console
-  url: https://developer.adobe.com/console
-- type: Terms of Service
-  url: https://www.adobe.com/legal/terms.html
-- type: Privacy Policy
-  url: https://www.adobe.com/privacy.html
-- type: Rate Limits
-  url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/#rate-limiting
-maintainers:
-- name: Adobe Inc.
-  email: lightroom-api@adobe.com
-  url: https://www.adobe.com
+  - type: Getting Started
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
+  - type: Console
+    url: https://developer.adobe.com/console
+  - type: Terms of Service
+    url: https://www.adobe.com/legal/terms.html
+  - type: Privacy Policy
+    url: https://www.adobe.com/privacy/policy.html
+  - type: Rate Limits
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/#rate-limiting
+  - type: Blog
+    url: https://blog.developer.adobe.com/
+  - type: Status
+    url: https://status.adobe.com/
+  - type: SDKs
+    url: https://developer.adobe.com/firefly-services/docs/guides/sdks/
+  - type: Change Log
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
+  - type: Sign Up
+    url: https://developer.adobe.com/console
+  - type: GitHub Organization
+    url: https://github.com/AdobeDocs/lightroom-public-apis
+  - type: JSON-LD
+    url: json-ld/lightroom-context.jsonld
+  - type: JSONSchema
+    url: json-schema/lightroom-catalog-schema.json
+  - type: JSONSchema
+    url: json-schema/lightroom-album-schema.json
+  - type: JSONSchema
+    url: json-schema/lightroom-asset-schema.json
+  - type: JSONSchema
+    url: json-schema/lightroom-rendition-schema.json
+maintainer:
+  - name: Kin Lane
+    email: kin@apievangelist.com

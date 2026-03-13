@@ -1,0 +1,508 @@
+openapi: 3.1.0
+info:
+  title: Lightroom Assets API
+  description: >-
+    API for managing photo assets within an Adobe Lightroom cloud catalog.
+    Supports creating master assets, uploading original files, reading and
+    writing external develop XMP sidecar files, and generating renditions
+    at various sizes. Assets represent individual photos or videos stored
+    in a customer's Lightroom catalog.
+  version: '2'
+  contact:
+    name: Adobe Lightroom Developer Support
+    url: https://community.adobe.com/t5/lightroom/ct-p/ct-lightroom
+  license:
+    name: Adobe Terms of Service
+    url: https://www.adobe.com/legal/terms.html
+  termsOfService: https://www.adobe.com/legal/terms.html
+externalDocs:
+  description: Lightroom Assets API Documentation
+  url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+servers:
+  - url: https://lr.adobe.io/v2
+    description: Lightroom Services Production Server
+tags:
+  - name: Assets
+    description: CRUD operations on photo and video assets
+  - name: Master
+    description: Upload and manage original master files
+  - name: XMP
+    description: Read and write external develop XMP sidecar files
+  - name: Renditions
+    description: Retrieve generated renditions (previews and thumbnails)
+security:
+  - oauth2:
+      - lr_partner_apis
+  - apiKey: []
+paths:
+  /catalogs/{catalog_id}/assets:
+    get:
+      operationId: listAssets
+      summary: List assets in a catalog
+      description: >-
+        Retrieves a paginated list of assets in the specified catalog. Supports
+        filtering by subtype (image or video) and capture date range.
+      tags:
+        - Assets
+      parameters:
+        - $ref: '#/components/parameters/CatalogId'
+        - $ref: '#/components/parameters/XApiKey'
+        - name: subtype
+          in: query
+          description: Filter by asset subtype
+          schema:
+            type: string
+            enum:
+              - image
+              - video
+        - name: captured_after
+          in: query
+          description: Filter assets captured after this ISO 8601 timestamp
+          schema:
+            type: string
+            format: date-time
+        - name: captured_before
+          in: query
+          description: Filter assets captured before this ISO 8601 timestamp
+          schema:
+            type: string
+            format: date-time
+        - name: limit
+          in: query
+          description: Maximum number of results
+          schema:
+            type: integer
+            default: 100
+            minimum: 1
+            maximum: 500
+        - name: offset
+          in: query
+          description: Pagination offset
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: Assets retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetsListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /catalogs/{catalog_id}/assets/{asset_id}:
+    get:
+      operationId: getAsset
+      summary: Get asset metadata
+      description: >-
+        Retrieves complete metadata for a specific asset including EXIF data,
+        capture date, import source, location, develop settings, and links to
+        available renditions.
+      tags:
+        - Assets
+      parameters:
+        - $ref: '#/components/parameters/CatalogId'
+        - $ref: '#/components/parameters/AssetId'
+        - $ref: '#/components/parameters/XApiKey'
+      responses:
+        '200':
+          description: Asset metadata retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: createOrUpdateAsset
+      summary: Create or update an asset
+      description: >-
+        Creates a new asset or updates an existing asset in the catalog. The
+        asset_id should be a client-generated UUID. After creating an asset,
+        upload the master file using the master endpoint.
+      tags:
+        - Assets
+      parameters:
+        - $ref: '#/components/parameters/CatalogId'
+        - $ref: '#/components/parameters/AssetId'
+        - $ref: '#/components/parameters/XApiKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetCreateRequest'
+      responses:
+        '200':
+          description: Asset updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetResponse'
+        '201':
+          description: Asset created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /catalogs/{catalog_id}/assets/{asset_id}/master:
+    put:
+      operationId: uploadMaster
+      summary: Upload the original master file
+      description: >-
+        Uploads the original (master) image or video file for a previously
+        created asset. The Content-Type header must match the file type being
+        uploaded. Supported formats include JPEG, PNG, TIFF, DNG, and MP4.
+      tags:
+        - Master
+      parameters:
+        - $ref: '#/components/parameters/CatalogId'
+        - $ref: '#/components/parameters/AssetId'
+        - $ref: '#/components/parameters/XApiKey'
+        - name: Content-Type
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - image/jpeg
+              - image/png
+              - image/tiff
+              - image/dng
+              - image/x-adobe-dng
+              - video/mp4
+        - name: Content-Length
+          in: header
+          required: true
+          schema:
+            type: integer
+            description: Size of the file in bytes
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Master file uploaded successfully
+        '201':
+          description: Master file created successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '413':
+          description: Request entity too large
+  /catalogs/{catalog_id}/assets/{asset_id}/xmp/develop:
+    get:
+      operationId: getDevelopXmp
+      summary: Get develop settings XMP
+      description: >-
+        Retrieves the external develop XMP sidecar data for the asset. Contains
+        Lightroom develop module settings including exposure, white balance,
+        tone curve, and other adjustments in XMP/RDF format.
+      tags:
+        - XMP
+      parameters:
+        - $ref: '#/components/parameters/CatalogId'
+        - $ref: '#/components/parameters/AssetId'
+        - $ref: '#/components/parameters/XApiKey'
+      responses:
+        '200':
+          description: XMP develop settings retrieved
+          content:
+            application/rdf+xml:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: putDevelopXmp
+      summary: Upload develop settings XMP
+      description: >-
+        Uploads external develop XMP sidecar data for the asset. Applies
+        Lightroom develop settings to the asset.
+      tags:
+        - XMP
+      parameters:
+        - $ref: '#/components/parameters/CatalogId'
+        - $ref: '#/components/parameters/AssetId'
+        - $ref: '#/components/parameters/XApiKey'
+      requestBody:
+        required: true
+        content:
+          application/rdf+xml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: XMP develop settings applied
+        '201':
+          description: XMP develop settings created
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /catalogs/{catalog_id}/assets/{asset_id}/renditions/{rendition_type}:
+    get:
+      operationId: getRendition
+      summary: Get an asset rendition
+      description: >-
+        Retrieves a server-generated rendition of the asset at the specified
+        size. Renditions are JPEG preview images generated from the master
+        file with current develop settings applied.
+      tags:
+        - Renditions
+      parameters:
+        - $ref: '#/components/parameters/CatalogId'
+        - $ref: '#/components/parameters/AssetId'
+        - name: rendition_type
+          in: path
+          required: true
+          description: >-
+            Rendition size type. thumbnail2x is a small thumbnail, numeric
+            values indicate the longest edge in pixels, and fullsize is the
+            maximum resolution available.
+          schema:
+            type: string
+            enum:
+              - thumbnail2x
+              - '640'
+              - '1024'
+              - '2048'
+              - fullsize
+        - $ref: '#/components/parameters/XApiKey'
+      responses:
+        '200':
+          description: Rendition image returned
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ims-na1.adobelogin.com/ims/authorize/v2
+          tokenUrl: https://ims-na1.adobelogin.com/ims/token/v3
+          scopes:
+            lr_partner_apis: Access Lightroom partner APIs
+    apiKey:
+      type: apiKey
+      name: X-Api-Key
+      in: header
+  parameters:
+    XApiKey:
+      name: X-Api-Key
+      in: header
+      required: true
+      description: API key from Adobe Developer Console
+      schema:
+        type: string
+    CatalogId:
+      name: catalog_id
+      in: path
+      required: true
+      description: Unique identifier of the Lightroom catalog
+      schema:
+        type: string
+    AssetId:
+      name: asset_id
+      in: path
+      required: true
+      description: Unique identifier of the asset (UUID format)
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    AssetsListResponse:
+      type: object
+      properties:
+        base:
+          type: string
+          description: Base URL for API
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Asset'
+        links:
+          $ref: '#/components/schemas/Links'
+    Asset:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Asset unique identifier
+        type:
+          type: string
+          const: asset
+        subtype:
+          type: string
+          enum:
+            - image
+            - video
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        revision_ids:
+          type: array
+          items:
+            type: string
+        payload:
+          $ref: '#/components/schemas/AssetPayload'
+        links:
+          $ref: '#/components/schemas/Links'
+    AssetPayload:
+      type: object
+      properties:
+        captureDate:
+          type: string
+          format: date-time
+          description: Date and time the photo was captured
+        userCreated:
+          type: string
+          format: date-time
+        userUpdated:
+          type: string
+          format: date-time
+        importSource:
+          type: object
+          properties:
+            fileName:
+              type: string
+              description: Original file name
+            importedOnDevice:
+              type: string
+              description: Device used for import
+            importTimestamp:
+              type: string
+              format: date-time
+        develop:
+          type: object
+          description: Develop settings snapshot
+        xmp:
+          type: object
+          description: Embedded XMP metadata
+        location:
+          type: object
+          properties:
+            latitude:
+              type: number
+            longitude:
+              type: number
+            altitude:
+              type: number
+            direction:
+              type: number
+    AssetResponse:
+      type: object
+      properties:
+        base:
+          type: string
+        id:
+          type: string
+        type:
+          type: string
+          const: asset
+        subtype:
+          type: string
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        payload:
+          $ref: '#/components/schemas/AssetPayload'
+        links:
+          $ref: '#/components/schemas/Links'
+    AssetCreateRequest:
+      type: object
+      required:
+        - subtype
+        - payload
+      properties:
+        subtype:
+          type: string
+          enum:
+            - image
+            - video
+        payload:
+          type: object
+          properties:
+            captureDate:
+              type: string
+              format: date-time
+            userCreated:
+              type: string
+              format: date-time
+            userUpdated:
+              type: string
+              format: date-time
+            importSource:
+              type: object
+              properties:
+                fileName:
+                  type: string
+                importedOnDevice:
+                  type: string
+                importTimestamp:
+                  type: string
+                  format: date-time
+    Links:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          href:
+            type: string
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        description:
+          type: string
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'

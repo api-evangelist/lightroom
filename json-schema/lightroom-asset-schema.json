@@ -1,0 +1,294 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lr.adobe.io/schemas/lightroom/asset.json",
+  "title": "Lightroom Asset",
+  "description": "Schema for an Adobe Lightroom asset. Assets represent individual photos or videos stored in a customer's Lightroom cloud catalog. Each asset has metadata including capture date, import source, location, and develop settings.",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "subtype"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the asset (UUID format)"
+    },
+    "type": {
+      "type": "string",
+      "description": "Resource type identifier",
+      "const": "asset"
+    },
+    "subtype": {
+      "type": "string",
+      "description": "Asset media type",
+      "enum": [
+        "image",
+        "video"
+      ]
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Server-side timestamp when the asset was created"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Server-side timestamp when the asset was last updated"
+    },
+    "revision_ids": {
+      "type": "array",
+      "description": "List of revision identifiers tracking edit history",
+      "items": {
+        "type": "string"
+      }
+    },
+    "payload": {
+      "type": "object",
+      "description": "Asset metadata payload",
+      "properties": {
+        "captureDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time the photo or video was captured"
+        },
+        "userCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "User-side timestamp when the asset was created"
+        },
+        "userUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "User-side timestamp when the asset was last updated"
+        },
+        "importSource": {
+          "$ref": "#/$defs/ImportSource"
+        },
+        "develop": {
+          "$ref": "#/$defs/DevelopSettings"
+        },
+        "xmp": {
+          "type": "object",
+          "description": "Embedded XMP metadata from the original file",
+          "additionalProperties": true
+        },
+        "location": {
+          "$ref": "#/$defs/Location"
+        },
+        "rating": {
+          "type": "integer",
+          "description": "User-assigned star rating",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "flag": {
+          "type": "string",
+          "description": "Flag status of the asset",
+          "enum": [
+            "flagged",
+            "rejected",
+            "unflagged"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "description": "Color label applied to the asset",
+          "examples": [
+            "Red",
+            "Yellow",
+            "Green",
+            "Blue",
+            "Purple"
+          ]
+        }
+      }
+    },
+    "links": {
+      "$ref": "#/$defs/Links"
+    }
+  },
+  "$defs": {
+    "ImportSource": {
+      "type": "object",
+      "description": "Information about how the asset was imported into Lightroom",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "Original file name at time of import"
+        },
+        "fileSize": {
+          "type": "integer",
+          "description": "Original file size in bytes",
+          "minimum": 0
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "MIME type of the original file",
+          "examples": [
+            "image/jpeg",
+            "image/png",
+            "image/tiff",
+            "image/dng",
+            "image/x-adobe-dng",
+            "video/mp4"
+          ]
+        },
+        "importedOnDevice": {
+          "type": "string",
+          "description": "Name or identifier of the device used for import"
+        },
+        "importedBy": {
+          "type": "string",
+          "description": "Application that performed the import"
+        },
+        "importTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the asset was imported"
+        }
+      }
+    },
+    "DevelopSettings": {
+      "type": "object",
+      "description": "Non-destructive develop settings applied to the asset",
+      "properties": {
+        "crsVersion": {
+          "type": "string",
+          "description": "Camera Raw settings version"
+        },
+        "processVersion": {
+          "type": "string",
+          "description": "Process version for the develop engine"
+        },
+        "whiteBalance": {
+          "type": "string",
+          "description": "White balance mode"
+        },
+        "temperature": {
+          "type": "integer",
+          "description": "Color temperature in Kelvin"
+        },
+        "tint": {
+          "type": "integer",
+          "description": "Tint adjustment"
+        },
+        "exposure": {
+          "type": "number",
+          "description": "Exposure adjustment in stops"
+        },
+        "contrast": {
+          "type": "integer",
+          "description": "Contrast adjustment"
+        },
+        "highlights": {
+          "type": "integer",
+          "description": "Highlights recovery"
+        },
+        "shadows": {
+          "type": "integer",
+          "description": "Shadow recovery"
+        },
+        "whites": {
+          "type": "integer",
+          "description": "White point adjustment"
+        },
+        "blacks": {
+          "type": "integer",
+          "description": "Black point adjustment"
+        },
+        "clarity": {
+          "type": "integer",
+          "description": "Clarity (midtone contrast)"
+        },
+        "vibrance": {
+          "type": "integer",
+          "description": "Vibrance adjustment"
+        },
+        "saturation": {
+          "type": "integer",
+          "description": "Saturation adjustment"
+        }
+      }
+    },
+    "Location": {
+      "type": "object",
+      "description": "GPS location data for the asset",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "description": "GPS latitude in decimal degrees",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "longitude": {
+          "type": "number",
+          "description": "GPS longitude in decimal degrees",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "altitude": {
+          "type": "number",
+          "description": "GPS altitude in meters"
+        },
+        "direction": {
+          "type": "number",
+          "description": "Direction the camera was facing in degrees",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "city": {
+          "type": "string",
+          "description": "City name from reverse geocoding"
+        },
+        "state": {
+          "type": "string",
+          "description": "State or province from reverse geocoding"
+        },
+        "country": {
+          "type": "string",
+          "description": "Country name from reverse geocoding"
+        },
+        "isoCountryCode": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 country code",
+          "pattern": "^[A-Z]{2}$"
+        }
+      }
+    },
+    "Links": {
+      "type": "object",
+      "description": "HATEOAS navigation links",
+      "properties": {
+        "self": {
+          "$ref": "#/$defs/Link"
+        },
+        "master": {
+          "$ref": "#/$defs/Link"
+        },
+        "xmp": {
+          "$ref": "#/$defs/Link"
+        },
+        "renditions": {
+          "$ref": "#/$defs/Link"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/Link"
+      }
+    },
+    "Link": {
+      "type": "object",
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "URL of the linked resource"
+        }
+      },
+      "required": [
+        "href"
+      ]
+    }
+  }
+}

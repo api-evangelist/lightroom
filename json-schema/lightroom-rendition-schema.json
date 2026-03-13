@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lr.adobe.io/schemas/lightroom/rendition.json",
+  "title": "Lightroom Rendition",
+  "description": "Schema for an Adobe Lightroom asset rendition. Renditions are server-generated preview images derived from the master file with current develop settings applied. Available in multiple sizes from small thumbnails to full-resolution exports.",
+  "type": "object",
+  "required": [
+    "type",
+    "rendition_type"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Resource type identifier",
+      "const": "rendition"
+    },
+    "rendition_type": {
+      "type": "string",
+      "description": "Size classification of the rendition. thumbnail2x is a small thumbnail, numeric values indicate the longest edge in pixels, and fullsize is the maximum available resolution.",
+      "enum": [
+        "thumbnail2x",
+        "640",
+        "1024",
+        "2048",
+        "fullsize"
+      ]
+    },
+    "asset_id": {
+      "type": "string",
+      "description": "Unique identifier of the source asset"
+    },
+    "catalog_id": {
+      "type": "string",
+      "description": "Unique identifier of the catalog containing the source asset"
+    },
+    "width": {
+      "type": "integer",
+      "description": "Width of the rendition in pixels",
+      "minimum": 1
+    },
+    "height": {
+      "type": "integer",
+      "description": "Height of the rendition in pixels",
+      "minimum": 1
+    },
+    "contentType": {
+      "type": "string",
+      "description": "MIME type of the rendition image",
+      "const": "image/jpeg"
+    },
+    "contentLength": {
+      "type": "integer",
+      "description": "Size of the rendition file in bytes",
+      "minimum": 0
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the rendition was generated"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the rendition was last regenerated"
+    },
+    "links": {
+      "$ref": "#/$defs/Links"
+    }
+  },
+  "$defs": {
+    "Links": {
+      "type": "object",
+      "description": "HATEOAS navigation links",
+      "properties": {
+        "self": {
+          "$ref": "#/$defs/Link"
+        },
+        "asset": {
+          "$ref": "#/$defs/Link"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/Link"
+      }
+    },
+    "Link": {
+      "type": "object",
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "URL of the linked resource"
+        }
+      },
+      "required": [
+        "href"
+      ]
+    }
+  }
+}

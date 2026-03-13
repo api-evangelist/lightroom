@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lr.adobe.io/schemas/lightroom/album.json",
+  "title": "Lightroom Album",
+  "description": "Schema for an Adobe Lightroom album. Albums organize assets into user-defined collections within a catalog. Albums can be regular collections, collection sets (folders containing other albums), or projects.",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "subtype"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the album (UUID format)"
+    },
+    "type": {
+      "type": "string",
+      "description": "Resource type identifier",
+      "const": "album"
+    },
+    "subtype": {
+      "type": "string",
+      "description": "Album subtype determining its organizational role",
+      "enum": [
+        "collection",
+        "collection_set",
+        "project"
+      ]
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Server-side timestamp when the album was created"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Server-side timestamp when the album was last updated"
+    },
+    "payload": {
+      "type": "object",
+      "description": "Album metadata payload",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the album"
+        },
+        "userCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "User-side timestamp when the album was created"
+        },
+        "userUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "User-side timestamp when the album was last updated"
+        },
+        "cover": {
+          "$ref": "#/$defs/CoverAsset"
+        },
+        "parent": {
+          "$ref": "#/$defs/ParentAlbum"
+        }
+      }
+    },
+    "links": {
+      "$ref": "#/$defs/Links"
+    }
+  },
+  "$defs": {
+    "CoverAsset": {
+      "type": "object",
+      "description": "Reference to the asset used as the album cover image",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Asset ID of the cover image"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ParentAlbum": {
+      "type": "object",
+      "description": "Reference to the parent album for nested album organization",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Parent album ID (must be a collection_set)"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "Links": {
+      "type": "object",
+      "description": "HATEOAS navigation links",
+      "properties": {
+        "self": {
+          "$ref": "#/$defs/Link"
+        },
+        "assets": {
+          "$ref": "#/$defs/Link"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/Link"
+      }
+    },
+    "Link": {
+      "type": "object",
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "URL of the linked resource"
+        }
+      },
+      "required": [
+        "href"
+      ]
+    }
+  }
+}
