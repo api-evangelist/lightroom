@@ -1,5 +1,5 @@
 aid: lightroom
-name: Adobe Lightroom API
+name: Adobe Lightroom
 description: >-
   APIs for Adobe Lightroom cloud services, enabling developers to access and
   manipulate photos, albums, and metadata programmatically. The Lightroom APIs
