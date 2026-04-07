@@ -23,14 +23,14 @@ servers:
   - url: https://image.adobe.io
     description: Adobe Firefly Services Production Server
 tags:
-  - name: Auto Tone
-    description: Automatically adjust tonal values for optimal exposure and contrast
   - name: Auto Straighten
     description: Automatically detect and correct image horizon alignment
-  - name: Presets
-    description: Apply Lightroom presets (XMP develop settings) to images
+  - name: Auto Tone
+    description: Automatically adjust tonal values for optimal exposure and contrast
   - name: Edit Image
     description: Apply custom Lightroom edit settings to images
+  - name: Presets
+    description: Apply Lightroom presets (XMP develop settings) to images
 security:
   - oauth2:
       - firefly_api

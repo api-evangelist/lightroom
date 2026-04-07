@@ -21,10 +21,10 @@ servers:
   - url: https://lr.adobe.io/v2
     description: Lightroom Services Production Server
 tags:
-  - name: Health
-    description: API health and availability checks
   - name: Catalog
     description: Catalog metadata and configuration
+  - name: Health
+    description: API health and availability checks
 security:
   - oauth2:
       - lr_partner_apis

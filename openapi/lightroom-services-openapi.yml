@@ -22,16 +22,16 @@ servers:
   - url: https://lr.adobe.io/v2
     description: Lightroom Services Production Server
 tags:
-  - name: Health
-    description: API health check endpoints
-  - name: Catalog
-    description: Operations on the customer's Lightroom catalog
+  - name: Albums
+    description: Operations on albums and album assets
   - name: Assets
     description: >-
       Operations on photo assets including upload, download, metadata, and
       renditions
-  - name: Albums
-    description: Operations on albums and album assets
+  - name: Catalog
+    description: Operations on the customer's Lightroom catalog
+  - name: Health
+    description: API health check endpoints
   - name: Renditions
     description: Operations on asset renditions (thumbnails and previews)
 security:

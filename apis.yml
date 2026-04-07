@@ -8,11 +8,11 @@ description: >-
 type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Photography
-  - Image Editing
   - Cloud Storage
-  - Photo Management
+  - Image Editing
   - Metadata
+  - Photo Management
+  - Photography
 url: https://raw.githubusercontent.com/api-evangelist/lightroom/refs/heads/main/apis.yml
 created: '2024-01-01'
 modified: '2026-03-16'
@@ -26,10 +26,10 @@ apis:
       Identity Management System using a standard OAuth 2.0 workflow.
     humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/
     tags:
-      - Photos
       - Albums
-      - Catalogs
       - Assets
+      - Catalogs
+      - Photos
     properties:
       - type: Documentation
         url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
@@ -47,10 +47,10 @@ apis:
       programmatic editing capabilities using REST endpoints.
     humanURL: https://developer.adobe.com/firefly-services/docs/lightroom/
     tags:
-      - Image Editing
-      - Auto Tone
-      - Presets
       - AI
+      - Auto Tone
+      - Image Editing
+      - Presets
     properties:
       - type: Documentation
         url: https://developer.adobe.com/firefly-services/docs/lightroom/

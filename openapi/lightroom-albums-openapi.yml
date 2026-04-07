@@ -21,10 +21,10 @@ servers:
   - url: https://lr.adobe.io/v2
     description: Lightroom Services Production Server
 tags:
-  - name: Albums
-    description: CRUD operations on albums
   - name: Album Assets
     description: Manage assets within albums
+  - name: Albums
+    description: CRUD operations on albums
 security:
   - oauth2:
       - lr_partner_apis

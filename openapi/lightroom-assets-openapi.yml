@@ -26,10 +26,10 @@ tags:
     description: CRUD operations on photo and video assets
   - name: Master
     description: Upload and manage original master files
-  - name: XMP
-    description: Read and write external develop XMP sidecar files
   - name: Renditions
     description: Retrieve generated renditions (previews and thumbnails)
+  - name: XMP
+    description: Read and write external develop XMP sidecar files
 security:
   - oauth2:
       - lr_partner_apis
