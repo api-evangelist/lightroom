@@ -39,7 +39,7 @@ paths:
   /lrService/autoTone:
     post:
       operationId: autoTone
-      summary: Apply auto tone adjustments
+      summary: Adobe Lightroom Apply auto tone adjustments
       description: >-
         Automatically adjusts the tonal values of an image for optimal
         exposure, contrast, highlights, shadows, whites, blacks, and
@@ -82,7 +82,7 @@ paths:
   /lrService/autoStraighten:
     post:
       operationId: autoStraighten
-      summary: Automatically straighten an image
+      summary: Adobe Lightroom Automatically straighten an image
       description: >-
         Detects the horizon or dominant lines in an image and applies a
         rotation correction to straighten it. Uses AI analysis to determine
@@ -123,7 +123,7 @@ paths:
   /lrService/presets:
     post:
       operationId: applyPresets
-      summary: Apply Lightroom presets to an image
+      summary: Adobe Lightroom Apply Lightroom presets to an image
       description: >-
         Applies one or more Lightroom presets (XMP develop settings files) to
         an image. Presets are provided as references to XMP files stored in
@@ -164,7 +164,7 @@ paths:
   /lrService/edit:
     post:
       operationId: editImage
-      summary: Apply custom edit settings to an image
+      summary: Adobe Lightroom Apply custom edit settings to an image
       description: >-
         Applies custom Lightroom develop settings to an image. Accepts a
         comprehensive set of editing parameters covering white balance,

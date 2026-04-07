@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Lightroom Services API
+  title: Adobe Lightroom Lightroom Services API
   description: >-
     Core partner API for accessing Adobe Lightroom cloud catalog data, albums,
     and assets. Partner applications authenticate Lightroom customers through
@@ -42,7 +42,7 @@ paths:
   /health:
     get:
       operationId: getHealthCheck
-      summary: Get API health status
+      summary: Adobe Lightroom Get API health status
       description: >-
         Returns the health status of the Lightroom Services API. This endpoint
         does not require authentication and can be used to verify API
@@ -60,7 +60,7 @@ paths:
   /catalog:
     get:
       operationId: getCatalog
-      summary: Get the customer's catalog
+      summary: Adobe Lightroom Get the customer's catalog
       description: >-
         Retrieves the catalog metadata for the authenticated Lightroom customer.
         Each customer has a single catalog that contains all their assets and
@@ -84,7 +84,7 @@ paths:
   /catalogs/{catalog_id}:
     get:
       operationId: getCatalogById
-      summary: Get catalog by ID
+      summary: Adobe Lightroom Get catalog by ID
       description: >-
         Retrieves catalog metadata for a specific catalog by its identifier.
       tags:
@@ -108,7 +108,7 @@ paths:
   /catalogs/{catalog_id}/assets:
     get:
       operationId: listCatalogAssets
-      summary: List assets in a catalog
+      summary: Adobe Lightroom List assets in a catalog
       description: >-
         Retrieves a paginated list of assets in the specified catalog. Assets
         represent individual photos or videos. Results can be filtered by
@@ -139,7 +139,7 @@ paths:
   /catalogs/{catalog_id}/assets/{asset_id}:
     get:
       operationId: getAsset
-      summary: Get a specific asset
+      summary: Adobe Lightroom Get a specific asset
       description: >-
         Retrieves metadata for a specific asset including EXIF data, develop
         settings, and available renditions.
@@ -164,7 +164,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: createRevisionForAsset
-      summary: Create or update an asset
+      summary: Adobe Lightroom Create or update an asset
       description: >-
         Creates a new asset revision or updates an existing asset in the
         catalog. Used to upload new photos or update metadata on existing ones.
@@ -200,7 +200,7 @@ paths:
   /catalogs/{catalog_id}/assets/{asset_id}/master:
     put:
       operationId: uploadMasterAsset
-      summary: Upload the master (original) file for an asset
+      summary: Adobe Lightroom Upload the master (original) file for an asset
       description: >-
         Uploads the original master file for a previously created asset. The
         asset must already exist in the catalog. The request body should contain
@@ -250,7 +250,7 @@ paths:
   /catalogs/{catalog_id}/assets/{asset_id}/xmp/develop:
     get:
       operationId: getAssetDevelopXmp
-      summary: Get the develop settings XMP for an asset
+      summary: Adobe Lightroom Get the develop settings XMP for an asset
       description: >-
         Retrieves the external develop XMP sidecar file for the specified asset.
         Contains Lightroom develop settings as XMP metadata.
@@ -273,7 +273,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: putAssetDevelopXmp
-      summary: Upload develop settings XMP for an asset
+      summary: Adobe Lightroom Upload develop settings XMP for an asset
       description: >-
         Uploads an external develop XMP sidecar file for the specified asset,
         applying Lightroom develop settings.
@@ -301,7 +301,7 @@ paths:
   /catalogs/{catalog_id}/assets/{asset_id}/renditions/{rendition_type}:
     get:
       operationId: getAssetRendition
-      summary: Get an asset rendition
+      summary: Adobe Lightroom Get an asset rendition
       description: >-
         Retrieves a generated rendition (preview image) for the specified asset.
         The rendition_type parameter specifies the size and format. Renditions
@@ -328,7 +328,7 @@ paths:
   /catalogs/{catalog_id}/albums:
     get:
       operationId: listAlbums
-      summary: List albums in a catalog
+      summary: Adobe Lightroom List albums in a catalog
       description: >-
         Retrieves a paginated list of albums in the specified catalog. Albums
         are collections of assets organized by the user.
@@ -355,7 +355,7 @@ paths:
   /catalogs/{catalog_id}/albums/{album_id}:
     get:
       operationId: getAlbum
-      summary: Get a specific album
+      summary: Adobe Lightroom Get a specific album
       description: >-
         Retrieves metadata for a specific album including its name, cover
         asset, creation date, and update timestamps.
@@ -380,7 +380,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: createOrUpdateAlbum
-      summary: Create or update an album
+      summary: Adobe Lightroom Create or update an album
       description: >-
         Creates a new album or updates an existing album in the catalog.
       tags:
@@ -414,7 +414,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     delete:
       operationId: deleteAlbum
-      summary: Delete an album
+      summary: Adobe Lightroom Delete an album
       description: >-
         Deletes the specified album from the catalog. This does not delete the
         assets within the album.
@@ -436,7 +436,7 @@ paths:
   /catalogs/{catalog_id}/albums/{album_id}/assets:
     get:
       operationId: listAlbumAssets
-      summary: List assets in an album
+      summary: Adobe Lightroom List assets in an album
       description: >-
         Retrieves a paginated list of assets contained within the specified
         album.
@@ -463,7 +463,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: addAssetsToAlbum
-      summary: Add assets to an album
+      summary: Adobe Lightroom Add assets to an album
       description: >-
         Adds one or more existing assets to the specified album. The assets
         must already exist in the catalog.

@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Lightroom Catalog API
+  title: Adobe Lightroom Lightroom Catalog API
   description: >-
     API for accessing catalog information and health status for Adobe Lightroom
     cloud services. Each Lightroom customer has a single catalog that serves as
@@ -33,7 +33,7 @@ paths:
   /health:
     get:
       operationId: getHealthCheck
-      summary: Check API health
+      summary: Adobe Lightroom Check API health
       description: >-
         Returns the current health status of the Lightroom Services API.
         This endpoint does not require authentication and is intended for
@@ -59,7 +59,7 @@ paths:
   /catalog:
     get:
       operationId: getCatalog
-      summary: Get the authenticated user's catalog
+      summary: Adobe Lightroom Get the authenticated user's catalog
       description: >-
         Retrieves the catalog for the currently authenticated Lightroom
         customer. Each customer has exactly one catalog. The catalog ID
@@ -83,7 +83,7 @@ paths:
   /catalogs/{catalog_id}:
     get:
       operationId: getCatalogById
-      summary: Get a catalog by ID
+      summary: Adobe Lightroom Get a catalog by ID
       description: >-
         Retrieves catalog metadata for the specified catalog. Returns the
         catalog name, creation timestamp, and links to child resources

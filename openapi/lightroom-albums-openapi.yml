@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Lightroom Albums API
+  title: Adobe Lightroom Lightroom Albums API
   description: >-
     API for creating and managing albums and collections within an Adobe
     Lightroom cloud catalog. Albums organize assets into user-defined
@@ -33,7 +33,7 @@ paths:
   /catalogs/{catalog_id}/albums:
     get:
       operationId: listAlbums
-      summary: List albums in a catalog
+      summary: Adobe Lightroom List albums in a catalog
       description: >-
         Retrieves a paginated list of all albums in the specified catalog.
         Albums may be of subtype collection, collection_set, or project.
@@ -81,7 +81,7 @@ paths:
   /catalogs/{catalog_id}/albums/{album_id}:
     get:
       operationId: getAlbum
-      summary: Get album details
+      summary: Adobe Lightroom Get album details
       description: >-
         Retrieves detailed metadata for a specific album including its name,
         subtype, cover asset reference, parent album reference, and timestamps.
@@ -104,7 +104,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: createOrUpdateAlbum
-      summary: Create or update an album
+      summary: Adobe Lightroom Create or update an album
       description: >-
         Creates a new album or updates an existing album. The album_id should
         be a client-generated UUID for new albums. Set the subtype to
@@ -141,7 +141,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     delete:
       operationId: deleteAlbum
-      summary: Delete an album
+      summary: Adobe Lightroom Delete an album
       description: >-
         Deletes the specified album from the catalog. Assets within the album
         are not deleted; they remain in the catalog.
@@ -161,7 +161,7 @@ paths:
   /catalogs/{catalog_id}/albums/{album_id}/assets:
     get:
       operationId: listAlbumAssets
-      summary: List assets in an album
+      summary: Adobe Lightroom List assets in an album
       description: >-
         Retrieves a paginated list of assets belonging to the specified album.
         Returns the same asset structure as the catalog assets endpoint.
@@ -196,7 +196,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: addAssetsToAlbum
-      summary: Add assets to an album
+      summary: Adobe Lightroom Add assets to an album
       description: >-
         Adds one or more existing catalog assets to the specified album. Assets
         must already exist in the catalog. Each asset reference includes an
@@ -225,7 +225,7 @@ paths:
   /catalogs/{catalog_id}/albums/{album_id}/assets/{asset_id}:
     delete:
       operationId: removeAssetFromAlbum
-      summary: Remove an asset from an album
+      summary: Adobe Lightroom Remove an asset from an album
       description: >-
         Removes a specific asset from the album. The asset itself is not
         deleted from the catalog.

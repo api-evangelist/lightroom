@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Lightroom Assets API
+  title: Adobe Lightroom Lightroom Assets API
   description: >-
     API for managing photo assets within an Adobe Lightroom cloud catalog.
     Supports creating master assets, uploading original files, reading and
@@ -38,7 +38,7 @@ paths:
   /catalogs/{catalog_id}/assets:
     get:
       operationId: listAssets
-      summary: List assets in a catalog
+      summary: Adobe Lightroom List assets in a catalog
       description: >-
         Retrieves a paginated list of assets in the specified catalog. Supports
         filtering by subtype (image or video) and capture date range.
@@ -97,7 +97,7 @@ paths:
   /catalogs/{catalog_id}/assets/{asset_id}:
     get:
       operationId: getAsset
-      summary: Get asset metadata
+      summary: Adobe Lightroom Get asset metadata
       description: >-
         Retrieves complete metadata for a specific asset including EXIF data,
         capture date, import source, location, develop settings, and links to
@@ -121,7 +121,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: createOrUpdateAsset
-      summary: Create or update an asset
+      summary: Adobe Lightroom Create or update an asset
       description: >-
         Creates a new asset or updates an existing asset in the catalog. The
         asset_id should be a client-generated UUID. After creating an asset,
@@ -158,7 +158,7 @@ paths:
   /catalogs/{catalog_id}/assets/{asset_id}/master:
     put:
       operationId: uploadMaster
-      summary: Upload the original master file
+      summary: Adobe Lightroom Upload the original master file
       description: >-
         Uploads the original (master) image or video file for a previously
         created asset. The Content-Type header must match the file type being
@@ -208,7 +208,7 @@ paths:
   /catalogs/{catalog_id}/assets/{asset_id}/xmp/develop:
     get:
       operationId: getDevelopXmp
-      summary: Get develop settings XMP
+      summary: Adobe Lightroom Get develop settings XMP
       description: >-
         Retrieves the external develop XMP sidecar data for the asset. Contains
         Lightroom develop module settings including exposure, white balance,
@@ -232,7 +232,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: putDevelopXmp
-      summary: Upload develop settings XMP
+      summary: Adobe Lightroom Upload develop settings XMP
       description: >-
         Uploads external develop XMP sidecar data for the asset. Applies
         Lightroom develop settings to the asset.
@@ -260,7 +260,7 @@ paths:
   /catalogs/{catalog_id}/assets/{asset_id}/renditions/{rendition_type}:
     get:
       operationId: getRendition
-      summary: Get an asset rendition
+      summary: Adobe Lightroom Get an asset rendition
       description: >-
         Retrieves a server-generated rendition of the asset at the specified
         size. Renditions are JPEG preview images generated from the master
