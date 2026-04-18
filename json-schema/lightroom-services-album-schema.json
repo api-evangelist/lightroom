@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Album",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier of the album"
+    },
+    "type": {
+      "type": "string",
+      "description": "Resource type"
+    },
+    "subtype": {
+      "type": "string",
+      "description": "Album subtype"
+    },
+    "created": {
+      "type": "string",
+      "description": "Album creation timestamp"
+    },
+    "updated": {
+      "type": "string",
+      "description": "Album last updated timestamp"
+    },
+    "payload": {
+      "type": "object",
+      "description": "Album payload data"
+    }
+  }
+}

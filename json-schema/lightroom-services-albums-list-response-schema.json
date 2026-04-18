@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AlbumsListResponse",
+  "type": "object",
+  "properties": {
+    "base": {
+      "type": "string"
+    },
+    "resources": {
+      "type": "array",
+      "description": "List of album resources"
+    }
+  }
+}

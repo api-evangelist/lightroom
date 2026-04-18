@@ -1,0 +1,223 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Adobe Lightroom API (Firefly Services)"
+  description: "AI-powered image editing API providing auto tone, auto straighten, preset application, and programmatic editing via Adobe Firefly Services."
+  tags:
+    - Adobe
+    - Lightroom
+    - Firefly
+    - AI Image Editing
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      ADOBE_OAUTH_TOKEN: ADOBE_OAUTH_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: firefly-services
+      baseUri: https://image.adobe.io
+      description: "Adobe Firefly Services Lightroom API for AI-powered image editing."
+      authentication:
+        type: bearer
+        token: "{{ADOBE_OAUTH_TOKEN}}"
+      resources:
+        - name: editing
+          path: /lrService
+          description: "AI-powered image editing operations."
+          operations:
+            - name: auto-tone
+              method: POST
+              description: "Automatically adjust tonal values for optimal exposure and contrast."
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  inputs:
+                    href: "{{tools.input_href}}"
+                    storage: "{{tools.input_storage}}"
+                  outputs:
+                    - href: "{{tools.output_href}}"
+                      storage: "{{tools.output_storage}}"
+                      type: "{{tools.output_type}}"
+
+            - name: auto-straighten
+              method: POST
+              description: "Automatically detect and correct image horizon alignment."
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  inputs:
+                    href: "{{tools.input_href}}"
+                    storage: "{{tools.input_storage}}"
+                  outputs:
+                    - href: "{{tools.output_href}}"
+                      storage: "{{tools.output_storage}}"
+                      type: "{{tools.output_type}}"
+
+            - name: apply-presets
+              method: POST
+              description: "Apply Lightroom presets to an image."
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  inputs:
+                    href: "{{tools.input_href}}"
+                    storage: "{{tools.input_storage}}"
+                  outputs:
+                    - href: "{{tools.output_href}}"
+                      storage: "{{tools.output_storage}}"
+                      type: "{{tools.output_type}}"
+
+            - name: edit-image
+              method: POST
+              description: "Apply programmatic edits to an image."
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  inputs:
+                    href: "{{tools.input_href}}"
+                    storage: "{{tools.input_storage}}"
+                  outputs:
+                    - href: "{{tools.output_href}}"
+                      storage: "{{tools.output_storage}}"
+                      type: "{{tools.output_type}}"
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: firefly-services-api
+      resources:
+        - path: /v1/auto-tone
+          name: auto-tone
+          description: "Auto tone adjustment."
+          operations:
+            - method: POST
+              name: auto-tone
+              description: "Apply auto tone."
+              call: "firefly-services.auto-tone"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/auto-straighten
+          name: auto-straighten
+          description: "Auto straighten."
+          operations:
+            - method: POST
+              name: auto-straighten
+              description: "Apply auto straighten."
+              call: "firefly-services.auto-straighten"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/presets
+          name: presets
+          description: "Preset application."
+          operations:
+            - method: POST
+              name: apply-presets
+              description: "Apply presets."
+              call: "firefly-services.apply-presets"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/edit
+          name: edit
+          description: "Image editing."
+          operations:
+            - method: POST
+              name: edit-image
+              description: "Edit an image."
+              call: "firefly-services.edit-image"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: firefly-services-mcp
+      transport: http
+      tools:
+        - name: auto-tone
+          description: "Automatically adjust tonal values for optimal exposure."
+          hints:
+            readOnly: false
+          call: "firefly-services.auto-tone"
+          with:
+            input_href: "tools.input_href"
+            input_storage: "tools.input_storage"
+            output_href: "tools.output_href"
+            output_storage: "tools.output_storage"
+            output_type: "tools.output_type"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: auto-straighten
+          description: "Automatically correct image horizon alignment."
+          hints:
+            readOnly: false
+          call: "firefly-services.auto-straighten"
+          with:
+            input_href: "tools.input_href"
+            input_storage: "tools.input_storage"
+            output_href: "tools.output_href"
+            output_storage: "tools.output_storage"
+            output_type: "tools.output_type"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: apply-presets
+          description: "Apply Lightroom presets to an image."
+          hints:
+            readOnly: false
+          call: "firefly-services.apply-presets"
+          with:
+            input_href: "tools.input_href"
+            input_storage: "tools.input_storage"
+            output_href: "tools.output_href"
+            output_storage: "tools.output_storage"
+            output_type: "tools.output_type"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: edit-image
+          description: "Apply programmatic edits to an image."
+          hints:
+            readOnly: false
+          call: "firefly-services.edit-image"
+          with:
+            input_href: "tools.input_href"
+            input_storage: "tools.input_storage"
+            output_href: "tools.output_href"
+            output_storage: "tools.output_storage"
+            output_type: "tools.output_type"
+          outputParameters:
+            - type: object
+              mapping: "$."

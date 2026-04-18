@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "EditImageRequest",
+  "type": "object",
+  "properties": {
+    "inputs": {
+      "type": "object"
+    },
+    "outputs": {
+      "type": "array"
+    },
+    "options": {
+      "type": "object"
+    }
+  }
+}

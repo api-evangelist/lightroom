@@ -19,36 +19,36 @@ externalDocs:
   description: Lightroom Services API Documentation
   url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
 servers:
-  - url: https://lr.adobe.io/v2
-    description: Lightroom Services Production Server
+- url: https://lr.adobe.io/v2
+  description: Lightroom Services Production Server
 tags:
-  - name: Albums
-    description: Operations on albums and album assets
-  - name: Assets
-    description: >-
-      Operations on photo assets including upload, download, metadata, and
-      renditions
-  - name: Catalog
-    description: Operations on the customer's Lightroom catalog
-  - name: Health
-    description: API health check endpoints
-  - name: Renditions
-    description: Operations on asset renditions (thumbnails and previews)
+- name: Albums
+  description: Operations on albums and album assets
+- name: Assets
+  description: >-
+    Operations on photo assets including upload, download, metadata, and
+    renditions
+- name: Catalog
+  description: Operations on the customer's Lightroom catalog
+- name: Health
+  description: API health check endpoints
+- name: Renditions
+  description: Operations on asset renditions (thumbnails and previews)
 security:
-  - oauth2:
-      - lr_partner_apis
-  - apiKey: []
+- oauth2:
+  - lr_partner_apis
+- apiKey: []
 paths:
   /health:
     get:
       operationId: getHealthCheck
-      summary: Adobe Lightroom Get API health status
+      summary: Adobe Lightroom Get Api Health Status
       description: >-
         Returns the health status of the Lightroom Services API. This endpoint
         does not require authentication and can be used to verify API
         availability.
       tags:
-        - Health
+      - Health
       security: []
       responses:
         '200':
@@ -57,19 +57,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthResponse'
+              examples:
+                Gethealthcheck200Example:
+                  summary: Default getHealthCheck 200 response
+                  x-microcks-default: true
+                  value:
+                    status: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalog:
     get:
       operationId: getCatalog
-      summary: Adobe Lightroom Get the customer's catalog
+      summary: Adobe Lightroom Get the Customer's Catalog
       description: >-
         Retrieves the catalog metadata for the authenticated Lightroom customer.
         Each customer has a single catalog that contains all their assets and
         albums. The catalog_id returned is used as a path parameter in most
         other API calls.
       tags:
-        - Catalog
+      - Catalog
       parameters:
-        - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/XApiKey'
       responses:
         '200':
           description: Catalog retrieved successfully
@@ -77,21 +86,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CatalogResponse'
+              examples:
+                Getcatalog200Example:
+                  summary: Default getCatalog 200 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    id: abc123
+                    type: example_value
+                    created: '2026-01-15T10:30:00Z'
+                    updated: '2026-01-15T10:30:00Z'
+                    payload:
+                      name: Example Title
+                      userCreated: '2026-01-15T10:30:00Z'
+                      userUpdated: '2026-01-15T10:30:00Z'
+                    links: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalog_id}:
     get:
       operationId: getCatalogById
-      summary: Adobe Lightroom Get catalog by ID
+      summary: Adobe Lightroom Get Catalog by Id
       description: >-
         Retrieves catalog metadata for a specific catalog by its identifier.
       tags:
-        - Catalog
+      - Catalog
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/XApiKey'
       responses:
         '200':
           description: Catalog retrieved successfully
@@ -99,30 +126,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CatalogResponse'
+              examples:
+                Getcatalogbyid200Example:
+                  summary: Default getCatalogById 200 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    id: abc123
+                    type: example_value
+                    created: '2026-01-15T10:30:00Z'
+                    updated: '2026-01-15T10:30:00Z'
+                    payload:
+                      name: Example Title
+                      userCreated: '2026-01-15T10:30:00Z'
+                      userUpdated: '2026-01-15T10:30:00Z'
+                    links: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalog_id}/assets:
     get:
       operationId: listCatalogAssets
-      summary: Adobe Lightroom List assets in a catalog
+      summary: Adobe Lightroom List Assets in a Catalog
       description: >-
         Retrieves a paginated list of assets in the specified catalog. Assets
         represent individual photos or videos. Results can be filtered by
         subtype and capture date.
       tags:
-        - Assets
+      - Assets
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/XApiKey'
-        - $ref: '#/components/parameters/SubtypeFilter'
-        - $ref: '#/components/parameters/CapturedAfter'
-        - $ref: '#/components/parameters/CapturedBefore'
-        - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/SubtypeFilter'
+      - $ref: '#/components/parameters/CapturedAfter'
+      - $ref: '#/components/parameters/CapturedBefore'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
       responses:
         '200':
           description: Assets retrieved successfully
@@ -130,25 +175,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AssetsListResponse'
+              examples:
+                Listcatalogassets200Example:
+                  summary: Default listCatalogAssets 200 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    resources:
+                    - id: abc123
+                      type: example_value
+                      subtype: image
+                      created: '2026-01-15T10:30:00Z'
+                      updated: '2026-01-15T10:30:00Z'
+                      revision_ids: {}
+                      payload: {}
+                    links: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalog_id}/assets/{asset_id}:
     get:
       operationId: getAsset
-      summary: Adobe Lightroom Get a specific asset
+      summary: Adobe Lightroom Get a Specific Asset
       description: >-
         Retrieves metadata for a specific asset including EXIF data, develop
         settings, and available renditions.
       tags:
-        - Assets
+      - Assets
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/AssetId'
-        - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AssetId'
+      - $ref: '#/components/parameters/XApiKey'
       responses:
         '200':
           description: Asset retrieved successfully
@@ -156,30 +219,60 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AssetResponse'
+              examples:
+                Getasset200Example:
+                  summary: Default getAsset 200 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    id: abc123
+                    type: example_value
+                    subtype: example_value
+                    created: '2026-01-15T10:30:00Z'
+                    updated: '2026-01-15T10:30:00Z'
+                    payload: example_value
+                    links: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: createRevisionForAsset
-      summary: Adobe Lightroom Create or update an asset
+      summary: Adobe Lightroom Create or Update an Asset
       description: >-
         Creates a new asset revision or updates an existing asset in the
         catalog. Used to upload new photos or update metadata on existing ones.
       tags:
-        - Assets
+      - Assets
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/AssetId'
-        - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AssetId'
+      - $ref: '#/components/parameters/XApiKey'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AssetRevisionRequest'
+            examples:
+              CreaterevisionforassetRequestExample:
+                summary: Default createRevisionForAsset request
+                x-microcks-default: true
+                value:
+                  subtype: image
+                  payload:
+                    captureDate: '2026-01-15T10:30:00Z'
+                    userCreated: '2026-01-15T10:30:00Z'
+                    userUpdated: '2026-01-15T10:30:00Z'
+                    importSource:
+                      fileName: example_value
+                      importedOnDevice: example_value
+                      importTimestamp: '2026-01-15T10:30:00Z'
       responses:
         '200':
           description: Asset updated successfully
@@ -187,46 +280,77 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AssetResponse'
+              examples:
+                Createrevisionforasset200Example:
+                  summary: Default createRevisionForAsset 200 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    id: abc123
+                    type: example_value
+                    subtype: example_value
+                    created: '2026-01-15T10:30:00Z'
+                    updated: '2026-01-15T10:30:00Z'
+                    payload: example_value
+                    links: {}
         '201':
           description: Asset created successfully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AssetResponse'
+              examples:
+                Createrevisionforasset201Example:
+                  summary: Default createRevisionForAsset 201 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    id: abc123
+                    type: example_value
+                    subtype: example_value
+                    created: '2026-01-15T10:30:00Z'
+                    updated: '2026-01-15T10:30:00Z'
+                    payload: example_value
+                    links: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalog_id}/assets/{asset_id}/master:
     put:
       operationId: uploadMasterAsset
-      summary: Adobe Lightroom Upload the master (original) file for an asset
+      summary: Adobe Lightroom Upload the Master (original) File for an Asset
       description: >-
         Uploads the original master file for a previously created asset. The
         asset must already exist in the catalog. The request body should contain
         the binary image data.
       tags:
-        - Assets
+      - Assets
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/AssetId'
-        - $ref: '#/components/parameters/XApiKey'
-        - name: Content-Type
-          in: header
-          required: true
-          schema:
-            type: string
-            enum:
-              - image/jpeg
-              - image/png
-              - image/tiff
-              - image/dng
-              - video/mp4
-        - name: Content-Length
-          in: header
-          required: true
-          schema:
-            type: integer
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AssetId'
+      - $ref: '#/components/parameters/XApiKey'
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - image/jpeg
+          - image/png
+          - image/tiff
+          - image/dng
+          - video/mp4
+        example: image/jpeg
+      - name: Content-Length
+        in: header
+        required: true
+        schema:
+          type: integer
+        example: 10
       requestBody:
         required: true
         content:
@@ -234,6 +358,11 @@ paths:
             schema:
               type: string
               format: binary
+            examples:
+              UploadmasterassetRequestExample:
+                summary: Default uploadMasterAsset request
+                x-microcks-default: true
+                value: example_value
       responses:
         '200':
           description: Master file uploaded successfully
@@ -247,19 +376,22 @@ paths:
           $ref: '#/components/responses/NotFound'
         '413':
           description: File too large
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalog_id}/assets/{asset_id}/xmp/develop:
     get:
       operationId: getAssetDevelopXmp
-      summary: Adobe Lightroom Get the develop settings XMP for an asset
+      summary: Adobe Lightroom Get the Develop Settings Xmp for an Asset
       description: >-
         Retrieves the external develop XMP sidecar file for the specified asset.
         Contains Lightroom develop settings as XMP metadata.
       tags:
-        - Assets
+      - Assets
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/AssetId'
-        - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AssetId'
+      - $ref: '#/components/parameters/XApiKey'
       responses:
         '200':
           description: XMP develop settings retrieved successfully
@@ -267,28 +399,41 @@ paths:
             application/rdf+xml:
               schema:
                 type: string
+              examples:
+                Getassetdevelopxmp200Example:
+                  summary: Default getAssetDevelopXmp 200 response
+                  x-microcks-default: true
+                  value: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: putAssetDevelopXmp
-      summary: Adobe Lightroom Upload develop settings XMP for an asset
+      summary: Adobe Lightroom Upload Develop Settings Xmp for an Asset
       description: >-
         Uploads an external develop XMP sidecar file for the specified asset,
         applying Lightroom develop settings.
       tags:
-        - Assets
+      - Assets
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/AssetId'
-        - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AssetId'
+      - $ref: '#/components/parameters/XApiKey'
       requestBody:
         required: true
         content:
           application/rdf+xml:
             schema:
               type: string
+            examples:
+              PutassetdevelopxmpRequestExample:
+                summary: Default putAssetDevelopXmp request
+                x-microcks-default: true
+                value: example_value
       responses:
         '200':
           description: XMP develop settings updated successfully
@@ -298,21 +443,24 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalog_id}/assets/{asset_id}/renditions/{rendition_type}:
     get:
       operationId: getAssetRendition
-      summary: Adobe Lightroom Get an asset rendition
+      summary: Adobe Lightroom Get an Asset Rendition
       description: >-
         Retrieves a generated rendition (preview image) for the specified asset.
         The rendition_type parameter specifies the size and format. Renditions
         are generated server-side from the master file.
       tags:
-        - Renditions
+      - Renditions
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/AssetId'
-        - $ref: '#/components/parameters/RenditionType'
-        - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AssetId'
+      - $ref: '#/components/parameters/RenditionType'
+      - $ref: '#/components/parameters/XApiKey'
       responses:
         '200':
           description: Rendition retrieved successfully
@@ -321,24 +469,32 @@ paths:
               schema:
                 type: string
                 format: binary
+              examples:
+                Getassetrendition200Example:
+                  summary: Default getAssetRendition 200 response
+                  x-microcks-default: true
+                  value: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalog_id}/albums:
     get:
       operationId: listAlbums
-      summary: Adobe Lightroom List albums in a catalog
+      summary: Adobe Lightroom List Albums in a Catalog
       description: >-
         Retrieves a paginated list of albums in the specified catalog. Albums
         are collections of assets organized by the user.
       tags:
-        - Albums
+      - Albums
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/XApiKey'
-        - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
       responses:
         '200':
           description: Albums retrieved successfully
@@ -346,25 +502,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AlbumsListResponse'
+              examples:
+                Listalbums200Example:
+                  summary: Default listAlbums 200 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    resources:
+                    - id: abc123
+                      type: example_value
+                      subtype: collection
+                      created: '2026-01-15T10:30:00Z'
+                      updated: '2026-01-15T10:30:00Z'
+                      payload: {}
+                    links: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalog_id}/albums/{album_id}:
     get:
       operationId: getAlbum
-      summary: Adobe Lightroom Get a specific album
+      summary: Adobe Lightroom Get a Specific Album
       description: >-
         Retrieves metadata for a specific album including its name, cover
         asset, creation date, and update timestamps.
       tags:
-        - Albums
+      - Albums
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/AlbumId'
-        - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AlbumId'
+      - $ref: '#/components/parameters/XApiKey'
       responses:
         '200':
           description: Album retrieved successfully
@@ -372,29 +545,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AlbumResponse'
+              examples:
+                Getalbum200Example:
+                  summary: Default getAlbum 200 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    id: abc123
+                    type: example_value
+                    subtype: example_value
+                    created: '2026-01-15T10:30:00Z'
+                    updated: '2026-01-15T10:30:00Z'
+                    payload: example_value
+                    links: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: createOrUpdateAlbum
-      summary: Adobe Lightroom Create or update an album
+      summary: Adobe Lightroom Create or Update an Album
       description: >-
         Creates a new album or updates an existing album in the catalog.
       tags:
-        - Albums
+      - Albums
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/AlbumId'
-        - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AlbumId'
+      - $ref: '#/components/parameters/XApiKey'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AlbumCreateRequest'
+            examples:
+              CreateorupdatealbumRequestExample:
+                summary: Default createOrUpdateAlbum request
+                x-microcks-default: true
+                value:
+                  subtype: collection
+                  payload:
+                    name: Example Title
+                    userCreated: '2026-01-15T10:30:00Z'
+                    userUpdated: '2026-01-15T10:30:00Z'
+                    parent:
+                      id: abc123
       responses:
         '200':
           description: Album updated successfully
@@ -402,28 +603,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AlbumResponse'
+              examples:
+                Createorupdatealbum200Example:
+                  summary: Default createOrUpdateAlbum 200 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    id: abc123
+                    type: example_value
+                    subtype: example_value
+                    created: '2026-01-15T10:30:00Z'
+                    updated: '2026-01-15T10:30:00Z'
+                    payload: example_value
+                    links: {}
         '201':
           description: Album created successfully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AlbumResponse'
+              examples:
+                Createorupdatealbum201Example:
+                  summary: Default createOrUpdateAlbum 201 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    id: abc123
+                    type: example_value
+                    subtype: example_value
+                    created: '2026-01-15T10:30:00Z'
+                    updated: '2026-01-15T10:30:00Z'
+                    payload: example_value
+                    links: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteAlbum
-      summary: Adobe Lightroom Delete an album
+      summary: Adobe Lightroom Delete an Album
       description: >-
         Deletes the specified album from the catalog. This does not delete the
         assets within the album.
       tags:
-        - Albums
+      - Albums
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/AlbumId'
-        - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AlbumId'
+      - $ref: '#/components/parameters/XApiKey'
       responses:
         '204':
           description: Album deleted successfully
@@ -433,21 +663,24 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalog_id}/albums/{album_id}/assets:
     get:
       operationId: listAlbumAssets
-      summary: Adobe Lightroom List assets in an album
+      summary: Adobe Lightroom List Assets in an Album
       description: >-
         Retrieves a paginated list of assets contained within the specified
         album.
       tags:
-        - Albums
+      - Albums
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/AlbumId'
-        - $ref: '#/components/parameters/XApiKey'
-        - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AlbumId'
+      - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
       responses:
         '200':
           description: Album assets retrieved successfully
@@ -455,30 +688,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AssetsListResponse'
+              examples:
+                Listalbumassets200Example:
+                  summary: Default listAlbumAssets 200 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    resources:
+                    - id: abc123
+                      type: example_value
+                      subtype: image
+                      created: '2026-01-15T10:30:00Z'
+                      updated: '2026-01-15T10:30:00Z'
+                      revision_ids: {}
+                      payload: {}
+                    links: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: addAssetsToAlbum
-      summary: Adobe Lightroom Add assets to an album
+      summary: Adobe Lightroom Add Assets to an Album
       description: >-
         Adds one or more existing assets to the specified album. The assets
         must already exist in the catalog.
       tags:
-        - Albums
+      - Albums
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/AlbumId'
-        - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AlbumId'
+      - $ref: '#/components/parameters/XApiKey'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AlbumAssetsRequest'
+            examples:
+              AddassetstoalbumRequestExample:
+                summary: Default addAssetsToAlbum request
+                x-microcks-default: true
+                value:
+                  resources:
+                  - id: abc123
+                    payload:
+                      order: example_value
       responses:
         '200':
           description: Assets added to album successfully
@@ -488,6 +748,9 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     oauth2:
@@ -549,11 +812,11 @@ components:
       schema:
         type: string
         enum:
-          - thumbnail2x
-          - 640
-          - 1024
-          - 2048
-          - fullsize
+        - thumbnail2x
+        - 640
+        - 1024
+        - 2048
+        - fullsize
     SubtypeFilter:
       name: subtype
       in: query
@@ -562,8 +825,8 @@ components:
       schema:
         type: string
         enum:
-          - image
-          - video
+        - image
+        - video
     CapturedAfter:
       name: captured_after
       in: query
@@ -607,28 +870,33 @@ components:
           type: string
           description: Health status of the API
           examples:
-            - available
+          - available
     CatalogResponse:
       type: object
       properties:
         base:
           type: string
           description: Base URL for the API
+          example: example_value
         id:
           type: string
           description: Unique identifier of the catalog
+          example: abc123
         type:
           type: string
           description: Resource type
           const: catalog
+          example: example_value
         created:
           type: string
           format: date-time
           description: Catalog creation timestamp
+          example: '2026-01-15T10:30:00Z'
         updated:
           type: string
           format: date-time
           description: Catalog last updated timestamp
+          example: '2026-01-15T10:30:00Z'
         payload:
           type: object
           description: Catalog payload data
@@ -644,6 +912,7 @@ components:
               type: string
               format: date-time
               description: When the user last updated the catalog
+          example: example_value
         links:
           $ref: '#/components/schemas/Links'
     AssetsListResponse:
@@ -652,11 +921,13 @@ components:
         base:
           type: string
           description: Base URL for the API
+          example: example_value
         resources:
           type: array
           description: List of asset resources
           items:
             $ref: '#/components/schemas/Asset'
+          example: []
         links:
           $ref: '#/components/schemas/Links'
     Asset:
@@ -665,29 +936,35 @@ components:
         id:
           type: string
           description: Unique identifier of the asset
+          example: abc123
         type:
           type: string
           description: Resource type
           const: asset
+          example: example_value
         subtype:
           type: string
           description: Asset subtype
           enum:
-            - image
-            - video
+          - image
+          - video
+          example: image
         created:
           type: string
           format: date-time
           description: Asset creation timestamp
+          example: '2026-01-15T10:30:00Z'
         updated:
           type: string
           format: date-time
           description: Asset last updated timestamp
+          example: '2026-01-15T10:30:00Z'
         revision_ids:
           type: array
           description: List of revision identifiers
           items:
             type: string
+          example: []
         payload:
           type: object
           description: Asset payload containing metadata
@@ -740,6 +1017,7 @@ components:
                 direction:
                   type: number
                   description: Direction the camera was facing
+          example: example_value
         links:
           $ref: '#/components/schemas/Links'
     AssetResponse:
@@ -747,35 +1025,43 @@ components:
       properties:
         base:
           type: string
+          example: example_value
         id:
           type: string
+          example: abc123
         type:
           type: string
           const: asset
+          example: example_value
         subtype:
           type: string
+          example: example_value
         created:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         updated:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         payload:
           type: object
+          example: example_value
         links:
           $ref: '#/components/schemas/Links'
     AssetRevisionRequest:
       type: object
       required:
-        - subtype
-        - payload
+      - subtype
+      - payload
       properties:
         subtype:
           type: string
           description: Asset subtype
           enum:
-            - image
-            - video
+          - image
+          - video
+          example: image
         payload:
           type: object
           description: Asset metadata payload
@@ -799,16 +1085,19 @@ components:
                 importTimestamp:
                   type: string
                   format: date-time
+          example: example_value
     AlbumsListResponse:
       type: object
       properties:
         base:
           type: string
+          example: example_value
         resources:
           type: array
           description: List of album resources
           items:
             $ref: '#/components/schemas/Album'
+          example: []
         links:
           $ref: '#/components/schemas/Links'
     Album:
@@ -817,25 +1106,30 @@ components:
         id:
           type: string
           description: Unique identifier of the album
+          example: abc123
         type:
           type: string
           description: Resource type
           const: album
+          example: example_value
         subtype:
           type: string
           description: Album subtype
           enum:
-            - collection
-            - collection_set
-            - project
+          - collection
+          - collection_set
+          - project
+          example: collection
         created:
           type: string
           format: date-time
           description: Album creation timestamp
+          example: '2026-01-15T10:30:00Z'
         updated:
           type: string
           format: date-time
           description: Album last updated timestamp
+          example: '2026-01-15T10:30:00Z'
         payload:
           type: object
           description: Album payload data
@@ -865,6 +1159,7 @@ components:
                 id:
                   type: string
                   description: Parent album ID
+          example: example_value
         links:
           $ref: '#/components/schemas/Links'
     AlbumResponse:
@@ -872,40 +1167,48 @@ components:
       properties:
         base:
           type: string
+          example: example_value
         id:
           type: string
+          example: abc123
         type:
           type: string
           const: album
+          example: example_value
         subtype:
           type: string
+          example: example_value
         created:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         updated:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         payload:
           type: object
+          example: example_value
         links:
           $ref: '#/components/schemas/Links'
     AlbumCreateRequest:
       type: object
       required:
-        - subtype
-        - payload
+      - subtype
+      - payload
       properties:
         subtype:
           type: string
           description: Album subtype
           enum:
-            - collection
-            - collection_set
-            - project
+          - collection
+          - collection_set
+          - project
+          example: collection
         payload:
           type: object
           required:
-            - name
+          - name
           properties:
             name:
               type: string
@@ -922,10 +1225,11 @@ components:
                 id:
                   type: string
                   description: Parent album ID for nesting
+          example: example_value
     AlbumAssetsRequest:
       type: object
       required:
-        - resources
+      - resources
       properties:
         resources:
           type: array
@@ -933,7 +1237,7 @@ components:
           items:
             type: object
             required:
-              - id
+            - id
             properties:
               id:
                 type: string
@@ -944,6 +1248,7 @@ components:
                   order:
                     type: string
                     description: Sort order within the album
+          example: []
     Links:
       type: object
       description: HATEOAS links for resource navigation
@@ -959,9 +1264,11 @@ components:
         code:
           type: integer
           description: HTTP status code
+          example: 10
         description:
           type: string
           description: Error description
+          example: A sample description.
         errors:
           type: array
           items:
@@ -971,6 +1278,7 @@ components:
                 type: string
               field:
                 type: string
+          example: []
   responses:
     Unauthorized:
       description: Authentication required or invalid credentials

@@ -1,0 +1,349 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Adobe Lightroom Photo Management"
+  description: "Unified workflow combining Lightroom cloud services for catalog, asset, and album management with Firefly Services AI-powered editing. Used by photographers and creative developers to manage and enhance photos programmatically."
+  tags:
+    - Adobe
+    - Lightroom
+    - Photography
+    - AI Image Editing
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      ADOBE_OAUTH_TOKEN: ADOBE_OAUTH_TOKEN
+      ADOBE_API_KEY: ADOBE_API_KEY
+
+capability:
+  consumes:
+    - import: lightroom-services
+      location: ./shared/lightroom-services.yaml
+    - import: firefly-services
+      location: ./shared/firefly-services.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: photo-management-api
+      description: "Unified REST API for Lightroom photo management and AI editing."
+      resources:
+        - path: /v1/catalog
+          name: catalog
+          description: "Lightroom catalog."
+          operations:
+            - method: GET
+              name: get-catalog
+              description: "Get the user's catalog."
+              call: "lightroom-services.get-catalog"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/assets
+          name: assets
+          description: "Photo assets."
+          operations:
+            - method: GET
+              name: list-assets
+              description: "List assets in a catalog."
+              call: "lightroom-services.list-assets"
+              with:
+                catalog_id: "rest.catalog_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/assets/{asset_id}
+          name: asset-detail
+          description: "Specific asset operations."
+          operations:
+            - method: GET
+              name: get-asset
+              description: "Get asset details."
+              call: "lightroom-services.get-asset"
+              with:
+                catalog_id: "rest.catalog_id"
+                asset_id: "rest.asset_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/assets/{asset_id}/renditions/{rendition_type}
+          name: renditions
+          description: "Asset renditions."
+          operations:
+            - method: GET
+              name: get-rendition
+              description: "Get a rendition."
+              call: "lightroom-services.get-rendition"
+              with:
+                catalog_id: "rest.catalog_id"
+                asset_id: "rest.asset_id"
+                rendition_type: "rest.rendition_type"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/albums
+          name: albums
+          description: "Photo albums."
+          operations:
+            - method: GET
+              name: list-albums
+              description: "List albums."
+              call: "lightroom-services.list-albums"
+              with:
+                catalog_id: "rest.catalog_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/albums/{album_id}/assets
+          name: album-assets
+          description: "Album assets."
+          operations:
+            - method: GET
+              name: list-album-assets
+              description: "List assets in an album."
+              call: "lightroom-services.list-album-assets"
+              with:
+                catalog_id: "rest.catalog_id"
+                album_id: "rest.album_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/auto-tone
+          name: auto-tone
+          description: "AI auto tone."
+          operations:
+            - method: POST
+              name: auto-tone
+              description: "Apply auto tone."
+              call: "firefly-services.auto-tone"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/auto-straighten
+          name: auto-straighten
+          description: "AI auto straighten."
+          operations:
+            - method: POST
+              name: auto-straighten
+              description: "Apply auto straighten."
+              call: "firefly-services.auto-straighten"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/presets
+          name: presets
+          description: "Preset application."
+          operations:
+            - method: POST
+              name: apply-presets
+              description: "Apply presets."
+              call: "firefly-services.apply-presets"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/edit
+          name: edit
+          description: "Image editing."
+          operations:
+            - method: POST
+              name: edit-image
+              description: "Edit an image."
+              call: "firefly-services.edit-image"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9080
+      namespace: photo-management-mcp
+      transport: http
+      description: "MCP server for AI-assisted photo management and editing."
+      tools:
+        - name: get-catalog
+          description: "Get the Lightroom catalog."
+          hints:
+            readOnly: true
+          call: "lightroom-services.get-catalog"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-assets
+          description: "List photo assets in a catalog."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "lightroom-services.list-assets"
+          with:
+            catalog_id: "tools.catalog_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-asset
+          description: "Get a specific photo asset."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "lightroom-services.get-asset"
+          with:
+            catalog_id: "tools.catalog_id"
+            asset_id: "tools.asset_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: upload-master
+          description: "Upload an original master file."
+          hints:
+            readOnly: false
+          call: "lightroom-services.upload-master"
+          with:
+            catalog_id: "tools.catalog_id"
+            asset_id: "tools.asset_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-develop-xmp
+          description: "Get XMP develop settings."
+          hints:
+            readOnly: true
+          call: "lightroom-services.get-develop-xmp"
+          with:
+            catalog_id: "tools.catalog_id"
+            asset_id: "tools.asset_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-rendition
+          description: "Get a rendered version of an asset."
+          hints:
+            readOnly: true
+          call: "lightroom-services.get-rendition"
+          with:
+            catalog_id: "tools.catalog_id"
+            asset_id: "tools.asset_id"
+            rendition_type: "tools.rendition_type"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-albums
+          description: "List photo albums."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "lightroom-services.list-albums"
+          with:
+            catalog_id: "tools.catalog_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-album
+          description: "Get a specific album."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "lightroom-services.get-album"
+          with:
+            catalog_id: "tools.catalog_id"
+            album_id: "tools.album_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-or-update-album
+          description: "Create or update an album."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "lightroom-services.create-or-update-album"
+          with:
+            catalog_id: "tools.catalog_id"
+            album_id: "tools.album_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-album
+          description: "Delete an album."
+          hints:
+            readOnly: false
+            destructive: true
+          call: "lightroom-services.delete-album"
+          with:
+            catalog_id: "tools.catalog_id"
+            album_id: "tools.album_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-album-assets
+          description: "List assets in an album."
+          hints:
+            readOnly: true
+          call: "lightroom-services.list-album-assets"
+          with:
+            catalog_id: "tools.catalog_id"
+            album_id: "tools.album_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: add-assets-to-album
+          description: "Add assets to an album."
+          hints:
+            readOnly: false
+          call: "lightroom-services.add-assets-to-album"
+          with:
+            catalog_id: "tools.catalog_id"
+            album_id: "tools.album_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: auto-tone
+          description: "Apply AI auto tone adjustment."
+          hints:
+            readOnly: false
+          call: "firefly-services.auto-tone"
+          with:
+            input_href: "tools.input_href"
+            input_storage: "tools.input_storage"
+            output_href: "tools.output_href"
+            output_storage: "tools.output_storage"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: auto-straighten
+          description: "Apply AI auto straighten."
+          hints:
+            readOnly: false
+          call: "firefly-services.auto-straighten"
+          with:
+            input_href: "tools.input_href"
+            input_storage: "tools.input_storage"
+            output_href: "tools.output_href"
+            output_storage: "tools.output_storage"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: apply-presets
+          description: "Apply Lightroom presets to an image."
+          hints:
+            readOnly: false
+          call: "firefly-services.apply-presets"
+          with:
+            input_href: "tools.input_href"
+            input_storage: "tools.input_storage"
+            output_href: "tools.output_href"
+            output_storage: "tools.output_storage"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: edit-image
+          description: "Apply programmatic edits to an image."
+          hints:
+            readOnly: false
+          call: "firefly-services.edit-image"
+          with:
+            input_href: "tools.input_href"
+            input_storage: "tools.input_storage"
+            output_href: "tools.output_href"
+            output_storage: "tools.output_storage"
+          outputParameters:
+            - type: object
+              mapping: "$."

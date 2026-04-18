@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AssetCreateRequest",
+  "type": "object",
+  "properties": {
+    "subtype": {
+      "type": "string"
+    },
+    "payload": {
+      "type": "object"
+    }
+  }
+}

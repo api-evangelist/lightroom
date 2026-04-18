@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "StorageOutput",
+  "type": "object",
+  "properties": {
+    "href": {
+      "type": "string"
+    },
+    "storage": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "overwrite": {
+      "type": "boolean"
+    },
+    "quality": {
+      "type": "integer"
+    }
+  }
+}

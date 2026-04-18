@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Album",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Album unique identifier"
+    },
+    "type": {
+      "type": "string"
+    },
+    "subtype": {
+      "type": "string",
+      "description": "Album subtype"
+    },
+    "created": {
+      "type": "string"
+    },
+    "updated": {
+      "type": "string"
+    }
+  }
+}

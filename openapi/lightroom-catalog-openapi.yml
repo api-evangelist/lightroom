@@ -18,28 +18,28 @@ externalDocs:
   description: Lightroom Catalog API Documentation
   url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
 servers:
-  - url: https://lr.adobe.io/v2
-    description: Lightroom Services Production Server
+- url: https://lr.adobe.io/v2
+  description: Lightroom Services Production Server
 tags:
-  - name: Catalog
-    description: Catalog metadata and configuration
-  - name: Health
-    description: API health and availability checks
+- name: Catalog
+  description: Catalog metadata and configuration
+- name: Health
+  description: API health and availability checks
 security:
-  - oauth2:
-      - lr_partner_apis
-  - apiKey: []
+- oauth2:
+  - lr_partner_apis
+- apiKey: []
 paths:
   /health:
     get:
       operationId: getHealthCheck
-      summary: Adobe Lightroom Check API health
+      summary: Adobe Lightroom Check Api Health
       description: >-
         Returns the current health status of the Lightroom Services API.
         This endpoint does not require authentication and is intended for
         monitoring and uptime verification.
       tags:
-        - Health
+      - Health
       security: []
       responses:
         '200':
@@ -53,22 +53,31 @@ paths:
                     type: string
                     description: Health status
                     examples:
-                      - available
+                    - available
+              examples:
+                Gethealthcheck200Example:
+                  summary: Default getHealthCheck 200 response
+                  x-microcks-default: true
+                  value:
+                    status: example_value
         '503':
           description: API is unavailable
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalog:
     get:
       operationId: getCatalog
-      summary: Adobe Lightroom Get the authenticated user's catalog
+      summary: Adobe Lightroom Get the Authenticated User's Catalog
       description: >-
         Retrieves the catalog for the currently authenticated Lightroom
         customer. Each customer has exactly one catalog. The catalog ID
         returned in the response is required as a path parameter for asset,
         album, and other catalog-scoped API calls.
       tags:
-        - Catalog
+      - Catalog
       parameters:
-        - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/XApiKey'
       responses:
         '200':
           description: Catalog retrieved successfully
@@ -76,23 +85,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CatalogResponse'
+              examples:
+                Getcatalog200Example:
+                  summary: Default getCatalog 200 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    id: abc123
+                    type: example_value
+                    created: '2026-01-15T10:30:00Z'
+                    updated: '2026-01-15T10:30:00Z'
+                    payload:
+                      name: Example Title
+                      userCreated: '2026-01-15T10:30:00Z'
+                      userUpdated: '2026-01-15T10:30:00Z'
+                    links:
+                      self:
+                        href: example_value
+                      assets:
+                        href: example_value
+                      albums:
+                        href: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalog_id}:
     get:
       operationId: getCatalogById
-      summary: Adobe Lightroom Get a catalog by ID
+      summary: Adobe Lightroom Get a Catalog by Id
       description: >-
         Retrieves catalog metadata for the specified catalog. Returns the
         catalog name, creation timestamp, and links to child resources
         such as assets and albums.
       tags:
-        - Catalog
+      - Catalog
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/XApiKey'
       responses:
         '200':
           description: Catalog retrieved successfully
@@ -100,12 +133,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CatalogResponse'
+              examples:
+                Getcatalogbyid200Example:
+                  summary: Default getCatalogById 200 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    id: abc123
+                    type: example_value
+                    created: '2026-01-15T10:30:00Z'
+                    updated: '2026-01-15T10:30:00Z'
+                    payload:
+                      name: Example Title
+                      userCreated: '2026-01-15T10:30:00Z'
+                      userUpdated: '2026-01-15T10:30:00Z'
+                    links:
+                      self:
+                        href: example_value
+                      assets:
+                        href: example_value
+                      albums:
+                        href: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     oauth2:
@@ -142,21 +199,26 @@ components:
         base:
           type: string
           description: Base URL for the API
+          example: example_value
         id:
           type: string
           description: Unique catalog identifier
+          example: abc123
         type:
           type: string
           description: Resource type
           const: catalog
+          example: example_value
         created:
           type: string
           format: date-time
           description: Server-side creation timestamp
+          example: '2026-01-15T10:30:00Z'
         updated:
           type: string
           format: date-time
           description: Server-side last updated timestamp
+          example: '2026-01-15T10:30:00Z'
         payload:
           type: object
           description: Catalog metadata
@@ -172,6 +234,7 @@ components:
               type: string
               format: date-time
               description: User-side last updated timestamp
+          example: example_value
         links:
           type: object
           description: HATEOAS links to related resources
@@ -196,13 +259,16 @@ components:
             properties:
               href:
                 type: string
+          example: example_value
     ErrorResponse:
       type: object
       properties:
         code:
           type: integer
+          example: 10
         description:
           type: string
+          example: A sample description.
   responses:
     Unauthorized:
       description: Authentication required

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CatalogResponse",
+  "type": "object",
+  "properties": {
+    "base": {
+      "type": "string",
+      "description": "Base URL for the API"
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique catalog identifier"
+    },
+    "type": {
+      "type": "string",
+      "description": "Resource type"
+    },
+    "created": {
+      "type": "string",
+      "description": "Server-side creation timestamp"
+    },
+    "updated": {
+      "type": "string",
+      "description": "Server-side last updated timestamp"
+    },
+    "payload": {
+      "type": "object",
+      "description": "Catalog metadata"
+    },
+    "links": {
+      "type": "object",
+      "description": "HATEOAS links to related resources"
+    }
+  }
+}

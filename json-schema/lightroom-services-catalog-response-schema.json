@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CatalogResponse",
+  "type": "object",
+  "properties": {
+    "base": {
+      "type": "string",
+      "description": "Base URL for the API"
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier of the catalog"
+    },
+    "type": {
+      "type": "string",
+      "description": "Resource type"
+    },
+    "created": {
+      "type": "string",
+      "description": "Catalog creation timestamp"
+    },
+    "updated": {
+      "type": "string",
+      "description": "Catalog last updated timestamp"
+    },
+    "payload": {
+      "type": "object",
+      "description": "Catalog payload data"
+    }
+  }
+}

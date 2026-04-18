@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "JobResponse",
+  "type": "object",
+  "properties": {
+    "jobId": {
+      "type": "string",
+      "description": "Unique job identifier for tracking"
+    },
+    "created": {
+      "type": "string",
+      "description": "Job creation timestamp"
+    },
+    "modified": {
+      "type": "string",
+      "description": "Job last modified timestamp"
+    },
+    "outputs": {
+      "type": "array"
+    },
+    "_links": {
+      "type": "object"
+    }
+  }
+}

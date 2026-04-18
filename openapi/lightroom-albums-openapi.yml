@@ -18,53 +18,56 @@ externalDocs:
   description: Lightroom Albums API Documentation
   url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
 servers:
-  - url: https://lr.adobe.io/v2
-    description: Lightroom Services Production Server
+- url: https://lr.adobe.io/v2
+  description: Lightroom Services Production Server
 tags:
-  - name: Album Assets
-    description: Manage assets within albums
-  - name: Albums
-    description: CRUD operations on albums
+- name: Album Assets
+  description: Manage assets within albums
+- name: Albums
+  description: CRUD operations on albums
 security:
-  - oauth2:
-      - lr_partner_apis
-  - apiKey: []
+- oauth2:
+  - lr_partner_apis
+- apiKey: []
 paths:
   /catalogs/{catalog_id}/albums:
     get:
       operationId: listAlbums
-      summary: Adobe Lightroom List albums in a catalog
+      summary: Adobe Lightroom List Albums in a Catalog
       description: >-
         Retrieves a paginated list of all albums in the specified catalog.
         Albums may be of subtype collection, collection_set, or project.
       tags:
-        - Albums
+      - Albums
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/XApiKey'
-        - name: subtype
-          in: query
-          description: Filter albums by subtype
-          schema:
-            type: string
-            enum:
-              - collection
-              - collection_set
-              - project
-        - name: limit
-          in: query
-          description: Maximum number of results
-          schema:
-            type: integer
-            default: 100
-            minimum: 1
-            maximum: 500
-        - name: offset
-          in: query
-          description: Pagination offset
-          schema:
-            type: integer
-            default: 0
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/XApiKey'
+      - name: subtype
+        in: query
+        description: Filter albums by subtype
+        schema:
+          type: string
+          enum:
+          - collection
+          - collection_set
+          - project
+        example: collection
+      - name: limit
+        in: query
+        description: Maximum number of results
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+          maximum: 500
+        example: 10
+      - name: offset
+        in: query
+        description: Pagination offset
+        schema:
+          type: integer
+          default: 0
+        example: 10
       responses:
         '200':
           description: Albums retrieved successfully
@@ -72,25 +75,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AlbumsListResponse'
+              examples:
+                Listalbums200Example:
+                  summary: Default listAlbums 200 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    resources:
+                    - id: abc123
+                      type: example_value
+                      subtype: collection
+                      created: '2026-01-15T10:30:00Z'
+                      updated: '2026-01-15T10:30:00Z'
+                    links: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalog_id}/albums/{album_id}:
     get:
       operationId: getAlbum
-      summary: Adobe Lightroom Get album details
+      summary: Adobe Lightroom Get Album Details
       description: >-
         Retrieves detailed metadata for a specific album including its name,
         subtype, cover asset reference, parent album reference, and timestamps.
       tags:
-        - Albums
+      - Albums
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/AlbumId'
-        - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AlbumId'
+      - $ref: '#/components/parameters/XApiKey'
       responses:
         '200':
           description: Album retrieved successfully
@@ -98,30 +117,67 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AlbumResponse'
+              examples:
+                Getalbum200Example:
+                  summary: Default getAlbum 200 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    id: abc123
+                    type: example_value
+                    subtype: example_value
+                    created: '2026-01-15T10:30:00Z'
+                    updated: '2026-01-15T10:30:00Z'
+                    payload:
+                      name: Example Title
+                      userCreated: '2026-01-15T10:30:00Z'
+                      userUpdated: '2026-01-15T10:30:00Z'
+                      cover:
+                        id: abc123
+                      parent:
+                        id: abc123
+                    links: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: createOrUpdateAlbum
-      summary: Adobe Lightroom Create or update an album
+      summary: Adobe Lightroom Create or Update an Album
       description: >-
         Creates a new album or updates an existing album. The album_id should
         be a client-generated UUID for new albums. Set the subtype to
         collection for a regular album, collection_set for a folder that
         contains other albums, or project for a managed project.
       tags:
-        - Albums
+      - Albums
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/AlbumId'
-        - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AlbumId'
+      - $ref: '#/components/parameters/XApiKey'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AlbumCreateRequest'
+            examples:
+              CreateorupdatealbumRequestExample:
+                summary: Default createOrUpdateAlbum request
+                x-microcks-default: true
+                value:
+                  subtype: collection
+                  payload:
+                    name: Example Title
+                    userCreated: '2026-01-15T10:30:00Z'
+                    userUpdated: '2026-01-15T10:30:00Z'
+                    cover:
+                      id: abc123
+                    parent:
+                      id: abc123
       responses:
         '200':
           description: Album updated
@@ -129,28 +185,71 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AlbumResponse'
+              examples:
+                Createorupdatealbum200Example:
+                  summary: Default createOrUpdateAlbum 200 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    id: abc123
+                    type: example_value
+                    subtype: example_value
+                    created: '2026-01-15T10:30:00Z'
+                    updated: '2026-01-15T10:30:00Z'
+                    payload:
+                      name: Example Title
+                      userCreated: '2026-01-15T10:30:00Z'
+                      userUpdated: '2026-01-15T10:30:00Z'
+                      cover:
+                        id: abc123
+                      parent:
+                        id: abc123
+                    links: {}
         '201':
           description: Album created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AlbumResponse'
+              examples:
+                Createorupdatealbum201Example:
+                  summary: Default createOrUpdateAlbum 201 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    id: abc123
+                    type: example_value
+                    subtype: example_value
+                    created: '2026-01-15T10:30:00Z'
+                    updated: '2026-01-15T10:30:00Z'
+                    payload:
+                      name: Example Title
+                      userCreated: '2026-01-15T10:30:00Z'
+                      userUpdated: '2026-01-15T10:30:00Z'
+                      cover:
+                        id: abc123
+                      parent:
+                        id: abc123
+                    links: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteAlbum
-      summary: Adobe Lightroom Delete an album
+      summary: Adobe Lightroom Delete an Album
       description: >-
         Deletes the specified album from the catalog. Assets within the album
         are not deleted; they remain in the catalog.
       tags:
-        - Albums
+      - Albums
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/AlbumId'
-        - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AlbumId'
+      - $ref: '#/components/parameters/XApiKey'
       responses:
         '204':
           description: Album deleted successfully
@@ -158,31 +257,36 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalog_id}/albums/{album_id}/assets:
     get:
       operationId: listAlbumAssets
-      summary: Adobe Lightroom List assets in an album
+      summary: Adobe Lightroom List Assets in an Album
       description: >-
         Retrieves a paginated list of assets belonging to the specified album.
         Returns the same asset structure as the catalog assets endpoint.
       tags:
-        - Album Assets
+      - Album Assets
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/AlbumId'
-        - $ref: '#/components/parameters/XApiKey'
-        - name: limit
-          in: query
-          description: Maximum number of results
-          schema:
-            type: integer
-            default: 100
-        - name: offset
-          in: query
-          description: Pagination offset
-          schema:
-            type: integer
-            default: 0
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AlbumId'
+      - $ref: '#/components/parameters/XApiKey'
+      - name: limit
+        in: query
+        description: Maximum number of results
+        schema:
+          type: integer
+          default: 100
+        example: 10
+      - name: offset
+        in: query
+        description: Pagination offset
+        schema:
+          type: integer
+          default: 0
+        example: 10
       responses:
         '200':
           description: Album assets retrieved
@@ -190,29 +294,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AssetsListResponse'
+              examples:
+                Listalbumassets200Example:
+                  summary: Default listAlbumAssets 200 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    resources:
+                    - id: abc123
+                      type: example_value
+                      subtype: example_value
+                      created: '2026-01-15T10:30:00Z'
+                      updated: '2026-01-15T10:30:00Z'
+                      payload: example_value
+                    links: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: addAssetsToAlbum
-      summary: Adobe Lightroom Add assets to an album
+      summary: Adobe Lightroom Add Assets to an Album
       description: >-
         Adds one or more existing catalog assets to the specified album. Assets
         must already exist in the catalog. Each asset reference includes an
         optional sort order.
       tags:
-        - Album Assets
+      - Album Assets
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/AlbumId'
-        - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AlbumId'
+      - $ref: '#/components/parameters/XApiKey'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AlbumAssetsRequest'
+            examples:
+              AddassetstoalbumRequestExample:
+                summary: Default addAssetsToAlbum request
+                x-microcks-default: true
+                value:
+                  resources:
+                  - id: abc123
+                    payload:
+                      order: example_value
       responses:
         '200':
           description: Assets added to album
@@ -222,25 +352,29 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalog_id}/albums/{album_id}/assets/{asset_id}:
     delete:
       operationId: removeAssetFromAlbum
-      summary: Adobe Lightroom Remove an asset from an album
+      summary: Adobe Lightroom Remove an Asset From an Album
       description: >-
         Removes a specific asset from the album. The asset itself is not
         deleted from the catalog.
       tags:
-        - Album Assets
+      - Album Assets
       parameters:
-        - $ref: '#/components/parameters/CatalogId'
-        - $ref: '#/components/parameters/AlbumId'
-        - name: asset_id
-          in: path
-          required: true
-          description: Asset ID to remove from the album
-          schema:
-            type: string
-        - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AlbumId'
+      - name: asset_id
+        in: path
+        required: true
+        description: Asset ID to remove from the album
+        schema:
+          type: string
+        example: '500123'
+      - $ref: '#/components/parameters/XApiKey'
       responses:
         '204':
           description: Asset removed from album
@@ -248,6 +382,9 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     oauth2:
@@ -291,10 +428,12 @@ components:
       properties:
         base:
           type: string
+          example: example_value
         resources:
           type: array
           items:
             $ref: '#/components/schemas/Album'
+          example: []
         links:
           $ref: '#/components/schemas/Links'
     Album:
@@ -303,22 +442,27 @@ components:
         id:
           type: string
           description: Album unique identifier
+          example: abc123
         type:
           type: string
           const: album
+          example: example_value
         subtype:
           type: string
           description: Album subtype
           enum:
-            - collection
-            - collection_set
-            - project
+          - collection
+          - collection_set
+          - project
+          example: collection
         created:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         updated:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         payload:
           $ref: '#/components/schemas/AlbumPayload'
         links:
@@ -329,14 +473,17 @@ components:
         name:
           type: string
           description: Display name of the album
+          example: Example Title
         userCreated:
           type: string
           format: date-time
           description: When the user created the album
+          example: '2026-01-15T10:30:00Z'
         userUpdated:
           type: string
           format: date-time
           description: When the user last modified the album
+          example: '2026-01-15T10:30:00Z'
         cover:
           type: object
           description: Cover asset for the album
@@ -344,6 +491,7 @@ components:
             id:
               type: string
               description: Asset ID used as cover
+          example: example_value
         parent:
           type: object
           description: Parent album reference for nested albums
@@ -351,24 +499,31 @@ components:
             id:
               type: string
               description: Parent album ID
+          example: example_value
     AlbumResponse:
       type: object
       properties:
         base:
           type: string
+          example: example_value
         id:
           type: string
+          example: abc123
         type:
           type: string
           const: album
+          example: example_value
         subtype:
           type: string
+          example: example_value
         created:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         updated:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         payload:
           $ref: '#/components/schemas/AlbumPayload'
         links:
@@ -376,19 +531,20 @@ components:
     AlbumCreateRequest:
       type: object
       required:
-        - subtype
-        - payload
+      - subtype
+      - payload
       properties:
         subtype:
           type: string
           enum:
-            - collection
-            - collection_set
-            - project
+          - collection
+          - collection_set
+          - project
+          example: collection
         payload:
           type: object
           required:
-            - name
+          - name
           properties:
             name:
               type: string
@@ -409,17 +565,18 @@ components:
               properties:
                 id:
                   type: string
+          example: example_value
     AlbumAssetsRequest:
       type: object
       required:
-        - resources
+      - resources
       properties:
         resources:
           type: array
           items:
             type: object
             required:
-              - id
+            - id
             properties:
               id:
                 type: string
@@ -430,11 +587,13 @@ components:
                   order:
                     type: string
                     description: Sort order within the album
+          example: []
     AssetsListResponse:
       type: object
       properties:
         base:
           type: string
+          example: example_value
         resources:
           type: array
           items:
@@ -457,6 +616,7 @@ components:
                 type: object
               links:
                 $ref: '#/components/schemas/Links'
+          example: []
         links:
           $ref: '#/components/schemas/Links'
     Links:
@@ -471,8 +631,10 @@ components:
       properties:
         code:
           type: integer
+          example: 10
         description:
           type: string
+          example: A sample description.
   responses:
     Unauthorized:
       description: Authentication required

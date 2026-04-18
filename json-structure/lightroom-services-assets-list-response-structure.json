@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "AssetsListResponse",
+  "type": "object",
+  "properties": {
+    "base": {
+      "type": "string"
+    },
+    "resources": {
+      "type": "array"
+    }
+  }
+}

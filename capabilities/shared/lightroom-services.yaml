@@ -1,0 +1,513 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Adobe Lightroom Services API"
+  description: "Core partner API for accessing Lightroom cloud catalog data, albums, and assets including photos, metadata, renditions, and XMP develop settings."
+  tags:
+    - Adobe
+    - Lightroom
+    - Photography
+    - Cloud Storage
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      ADOBE_OAUTH_TOKEN: ADOBE_OAUTH_TOKEN
+      ADOBE_API_KEY: ADOBE_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: lightroom-services
+      baseUri: https://lr.adobe.io/v2
+      description: "Adobe Lightroom Services API for cloud catalog, assets, and albums."
+      authentication:
+        type: bearer
+        token: "{{ADOBE_OAUTH_TOKEN}}"
+      resources:
+        - name: catalog
+          path: /catalog
+          description: "Lightroom catalog operations."
+          operations:
+            - name: get-health-check
+              method: GET
+              description: "Check API health status."
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: get-catalog
+              method: GET
+              description: "Get the current user's catalog."
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: get-catalog-by-id
+              method: GET
+              description: "Get a catalog by ID."
+              inputParameters:
+                - name: catalog_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Catalog ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: assets
+          path: /catalogs/{catalog_id}/assets
+          description: "Photo and video asset operations."
+          operations:
+            - name: list-assets
+              method: GET
+              description: "List assets in a catalog."
+              inputParameters:
+                - name: catalog_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Catalog ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: get-asset
+              method: GET
+              description: "Get a specific asset."
+              inputParameters:
+                - name: catalog_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Catalog ID"
+                - name: asset_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Asset ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: create-or-update-asset
+              method: PUT
+              description: "Create or update an asset revision."
+              inputParameters:
+                - name: catalog_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Catalog ID"
+                - name: asset_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Asset ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: upload-master
+              method: PUT
+              description: "Upload the master (original) file for an asset."
+              inputParameters:
+                - name: catalog_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Catalog ID"
+                - name: asset_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Asset ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: get-develop-xmp
+              method: GET
+              description: "Get the XMP develop settings for an asset."
+              inputParameters:
+                - name: catalog_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Catalog ID"
+                - name: asset_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Asset ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: put-develop-xmp
+              method: PUT
+              description: "Set the XMP develop settings for an asset."
+              inputParameters:
+                - name: catalog_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Catalog ID"
+                - name: asset_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Asset ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: get-rendition
+              method: GET
+              description: "Get a rendition of an asset."
+              inputParameters:
+                - name: catalog_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Catalog ID"
+                - name: asset_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Asset ID"
+                - name: rendition_type
+                  in: path
+                  type: string
+                  required: true
+                  description: "Rendition type (thumbnail2x, 640, 1024, 2048, fullsize)"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: albums
+          path: /catalogs/{catalog_id}/albums
+          description: "Album management."
+          operations:
+            - name: list-albums
+              method: GET
+              description: "List albums in a catalog."
+              inputParameters:
+                - name: catalog_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Catalog ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: get-album
+              method: GET
+              description: "Get a specific album."
+              inputParameters:
+                - name: catalog_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Catalog ID"
+                - name: album_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Album ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: create-or-update-album
+              method: PUT
+              description: "Create or update an album."
+              inputParameters:
+                - name: catalog_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Catalog ID"
+                - name: album_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Album ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: delete-album
+              method: DELETE
+              description: "Delete an album."
+              inputParameters:
+                - name: catalog_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Catalog ID"
+                - name: album_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Album ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: list-album-assets
+              method: GET
+              description: "List assets in an album."
+              inputParameters:
+                - name: catalog_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Catalog ID"
+                - name: album_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Album ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: add-assets-to-album
+              method: PUT
+              description: "Add assets to an album."
+              inputParameters:
+                - name: catalog_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Catalog ID"
+                - name: album_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Album ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: lightroom-services-api
+      resources:
+        - path: /v1/catalog
+          name: catalog
+          description: "Lightroom catalog."
+          operations:
+            - method: GET
+              name: get-catalog
+              description: "Get the user's catalog."
+              call: "lightroom-services.get-catalog"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/assets
+          name: assets
+          description: "Photo assets."
+          operations:
+            - method: GET
+              name: list-assets
+              description: "List assets."
+              call: "lightroom-services.list-assets"
+              with:
+                catalog_id: "rest.catalog_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/albums
+          name: albums
+          description: "Photo albums."
+          operations:
+            - method: GET
+              name: list-albums
+              description: "List albums."
+              call: "lightroom-services.list-albums"
+              with:
+                catalog_id: "rest.catalog_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: lightroom-services-mcp
+      transport: http
+      tools:
+        - name: get-catalog
+          description: "Get the Lightroom catalog for the current user."
+          hints:
+            readOnly: true
+          call: "lightroom-services.get-catalog"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-assets
+          description: "List photo assets in a catalog."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "lightroom-services.list-assets"
+          with:
+            catalog_id: "tools.catalog_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-asset
+          description: "Get a specific photo asset."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "lightroom-services.get-asset"
+          with:
+            catalog_id: "tools.catalog_id"
+            asset_id: "tools.asset_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: upload-master
+          description: "Upload an original master file."
+          hints:
+            readOnly: false
+          call: "lightroom-services.upload-master"
+          with:
+            catalog_id: "tools.catalog_id"
+            asset_id: "tools.asset_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-develop-xmp
+          description: "Get XMP develop settings for an asset."
+          hints:
+            readOnly: true
+          call: "lightroom-services.get-develop-xmp"
+          with:
+            catalog_id: "tools.catalog_id"
+            asset_id: "tools.asset_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-rendition
+          description: "Get a rendered version of an asset."
+          hints:
+            readOnly: true
+          call: "lightroom-services.get-rendition"
+          with:
+            catalog_id: "tools.catalog_id"
+            asset_id: "tools.asset_id"
+            rendition_type: "tools.rendition_type"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-albums
+          description: "List photo albums."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "lightroom-services.list-albums"
+          with:
+            catalog_id: "tools.catalog_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-album
+          description: "Get a specific album."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "lightroom-services.get-album"
+          with:
+            catalog_id: "tools.catalog_id"
+            album_id: "tools.album_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-or-update-album
+          description: "Create or update an album."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "lightroom-services.create-or-update-album"
+          with:
+            catalog_id: "tools.catalog_id"
+            album_id: "tools.album_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-album
+          description: "Delete an album."
+          hints:
+            readOnly: false
+            destructive: true
+          call: "lightroom-services.delete-album"
+          with:
+            catalog_id: "tools.catalog_id"
+            album_id: "tools.album_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-album-assets
+          description: "List assets in an album."
+          hints:
+            readOnly: true
+          call: "lightroom-services.list-album-assets"
+          with:
+            catalog_id: "tools.catalog_id"
+            album_id: "tools.album_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: add-assets-to-album
+          description: "Add assets to an album."
+          hints:
+            readOnly: false
+          call: "lightroom-services.add-assets-to-album"
+          with:
+            catalog_id: "tools.catalog_id"
+            album_id: "tools.album_id"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -15,7 +15,7 @@ tags:
   - Photography
 url: https://raw.githubusercontent.com/api-evangelist/lightroom/refs/heads/main/apis.yml
 created: '2024-01-01'
-modified: '2026-03-16'
+modified: '2026-04-18'
 specificationVersion: '0.19'
 apis:
   - aid: lightroom:lightroom-services-api
@@ -39,6 +39,8 @@ apis:
         url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
       - type: ChangeLog
         url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
+      - type: OpenAPI
+        url: openapi/lightroom-services-openapi.yml
   - aid: lightroom:lightroom-firefly-services-api
     name: Adobe Lightroom API (Firefly Services)
     description: >-
@@ -56,7 +58,15 @@ apis:
         url: https://developer.adobe.com/firefly-services/docs/lightroom/
       - type: GettingStarted
         url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
+      - type: OpenAPI
+        url: openapi/lightroom-firefly-services-openapi.yml
 common:
+  - url: https://developer.adobe.com/firefly-services/docs/lightroom/
+    type: Features
+  - url: https://developer.adobe.com/lightroom/lightroom-api-docs/
+    type: UseCases
+  - url: https://developer.adobe.com/firefly-services/docs/lightroom/
+    type: Integrations
   - url: https://developer.adobe.com/lightroom/lightroom-api-docs/
     type: Documentation
   - url: https://developer.adobe.com/developer-console/docs/guides/authentication/
@@ -66,7 +76,7 @@ common:
   - url: https://developer.adobe.com/console
     type: SignUp
   - url: https://status.adobe.com/
-    type: Status
+    type: StatusPage
   - url: https://blog.developer.adobe.com/
     type: Blog
   - url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
@@ -76,7 +86,11 @@ common:
   - url: https://www.adobe.com/privacy/policy.html
     type: PrivacyPolicy
   - url: https://github.com/AdobeDocs/lightroom-public-apis
+    type: GitHubRepository
+  - url: https://github.com/AdobeDocs
     type: GitHubOrganization
+  - url: https://developer.adobe.com/firefly-services/docs/lightroom/
+    type: SDK
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

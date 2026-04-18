@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StorageOutput",
+  "type": "object",
+  "description": "Reference to the output destination in cloud storage",
+  "properties": {
+    "href": {
+      "type": "string",
+      "description": "URL or path for the output file"
+    },
+    "storage": {
+      "type": "string",
+      "description": "Storage type for the output"
+    },
+    "type": {
+      "type": "string",
+      "description": "Output image format"
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "Whether to overwrite existing files"
+    },
+    "quality": {
+      "type": "integer",
+      "description": "JPEG quality (1-12) when output type is image/jpeg"
+    }
+  }
+}

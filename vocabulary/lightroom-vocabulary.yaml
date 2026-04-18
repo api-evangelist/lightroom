@@ -1,0 +1,19 @@
+name: lightroom API Vocabulary
+provider: lightroom
+created: '2026-04-18'
+modified: '2026-04-18'
+operations: 37
+schemas: 39
+tags:
+- Album Assets
+- Albums
+- Assets
+- Auto Straighten
+- Auto Tone
+- Catalog
+- Edit Image
+- Health
+- Master
+- Presets
+- Renditions
+- XMP

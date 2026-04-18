@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Asset",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier of the asset"
+    },
+    "type": {
+      "type": "string",
+      "description": "Resource type"
+    },
+    "subtype": {
+      "type": "string",
+      "description": "Asset subtype"
+    },
+    "created": {
+      "type": "string",
+      "description": "Asset creation timestamp"
+    },
+    "updated": {
+      "type": "string",
+      "description": "Asset last updated timestamp"
+    },
+    "revision_ids": {
+      "type": "array",
+      "description": "List of revision identifiers"
+    },
+    "payload": {
+      "type": "object",
+      "description": "Asset payload containing metadata"
+    }
+  }
+}

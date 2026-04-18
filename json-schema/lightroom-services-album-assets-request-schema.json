@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AlbumAssetsRequest",
+  "type": "object",
+  "properties": {
+    "resources": {
+      "type": "array",
+      "description": "List of asset references to add to the album"
+    }
+  }
+}

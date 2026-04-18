@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "AlbumPayload",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "userCreated": {
+      "type": "string"
+    },
+    "userUpdated": {
+      "type": "string"
+    },
+    "cover": {
+      "type": "object"
+    },
+    "parent": {
+      "type": "object"
+    }
+  }
+}

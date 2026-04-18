@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "AssetPayload",
+  "type": "object",
+  "properties": {
+    "captureDate": {
+      "type": "string"
+    },
+    "userCreated": {
+      "type": "string"
+    },
+    "userUpdated": {
+      "type": "string"
+    },
+    "importSource": {
+      "type": "object"
+    },
+    "develop": {
+      "type": "object"
+    },
+    "xmp": {
+      "type": "object"
+    },
+    "location": {
+      "type": "object"
+    }
+  }
+}

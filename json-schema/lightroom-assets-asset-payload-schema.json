@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AssetPayload",
+  "type": "object",
+  "properties": {
+    "captureDate": {
+      "type": "string",
+      "description": "Date and time the photo was captured"
+    },
+    "userCreated": {
+      "type": "string"
+    },
+    "userUpdated": {
+      "type": "string"
+    },
+    "importSource": {
+      "type": "object"
+    },
+    "develop": {
+      "type": "object",
+      "description": "Develop settings snapshot"
+    },
+    "xmp": {
+      "type": "object",
+      "description": "Embedded XMP metadata"
+    },
+    "location": {
+      "type": "object"
+    }
+  }
+}

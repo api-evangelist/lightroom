@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AlbumPayload",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Display name of the album"
+    },
+    "userCreated": {
+      "type": "string",
+      "description": "When the user created the album"
+    },
+    "userUpdated": {
+      "type": "string",
+      "description": "When the user last modified the album"
+    },
+    "cover": {
+      "type": "object",
+      "description": "Cover asset for the album"
+    },
+    "parent": {
+      "type": "object",
+      "description": "Parent album reference for nested albums"
+    }
+  }
+}

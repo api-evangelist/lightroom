@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AssetRevisionRequest",
+  "type": "object",
+  "properties": {
+    "subtype": {
+      "type": "string",
+      "description": "Asset subtype"
+    },
+    "payload": {
+      "type": "object",
+      "description": "Asset metadata payload"
+    }
+  }
+}

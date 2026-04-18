@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "StorageInput",
+  "type": "object",
+  "properties": {
+    "href": {
+      "type": "string"
+    },
+    "storage": {
+      "type": "string"
+    }
+  }
+}
