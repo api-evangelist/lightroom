@@ -1,0 +1,183 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Lightroom Lightroom Albums API — Albums
+  description: 'Adobe Lightroom Lightroom Albums API — Albums. 4 operations. Lead operation: Adobe Lightroom List Albums in
+    a Catalog. Self-contained Naftiko capability covering one Lightroom business surface.'
+  tags:
+  - Lightroom
+  - Albums
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    LIGHTROOM_API_KEY: LIGHTROOM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: albums-albums
+    baseUri: https://lr.adobe.io/v2
+    description: Adobe Lightroom Lightroom Albums API — Albums business capability. Self-contained, no shared references.
+    resources:
+    - name: catalogs-catalog_id-albums
+      path: /catalogs/{catalog_id}/albums
+      operations:
+      - name: listalbums
+        method: GET
+        description: Adobe Lightroom List Albums in a Catalog
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: subtype
+          in: query
+          type: string
+          description: Filter albums by subtype
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          description: Pagination offset
+    - name: catalogs-catalog_id-albums-album_id
+      path: /catalogs/{catalog_id}/albums/{album_id}
+      operations:
+      - name: getalbum
+        method: GET
+        description: Adobe Lightroom Get Album Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createorupdatealbum
+        method: PUT
+        description: Adobe Lightroom Create or Update an Album
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletealbum
+        method: DELETE
+        description: Adobe Lightroom Delete an Album
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.LIGHTROOM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: albums-albums-rest
+    port: 8080
+    description: REST adapter for Adobe Lightroom Lightroom Albums API — Albums. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/catalogs/{catalog-id}/albums
+      name: catalogs-catalog-id-albums
+      description: REST surface for catalogs-catalog_id-albums.
+      operations:
+      - method: GET
+        name: listalbums
+        description: Adobe Lightroom List Albums in a Catalog
+        call: albums-albums.listalbums
+        with:
+          subtype: rest.subtype
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/catalogs/{catalog-id}/albums/{album-id}
+      name: catalogs-catalog-id-albums-album-id
+      description: REST surface for catalogs-catalog_id-albums-album_id.
+      operations:
+      - method: GET
+        name: getalbum
+        description: Adobe Lightroom Get Album Details
+        call: albums-albums.getalbum
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: createorupdatealbum
+        description: Adobe Lightroom Create or Update an Album
+        call: albums-albums.createorupdatealbum
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletealbum
+        description: Adobe Lightroom Delete an Album
+        call: albums-albums.deletealbum
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: albums-albums-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Lightroom Lightroom Albums API — Albums. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: adobe-lightroom-list-albums-catalog
+      description: Adobe Lightroom List Albums in a Catalog
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: albums-albums.listalbums
+      with:
+        subtype: tools.subtype
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-lightroom-get-album-details
+      description: Adobe Lightroom Get Album Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: albums-albums.getalbum
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-lightroom-create-update-album
+      description: Adobe Lightroom Create or Update an Album
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: albums-albums.createorupdatealbum
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-lightroom-delete-album
+      description: Adobe Lightroom Delete an Album
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: albums-albums.deletealbum
+      outputParameters:
+      - type: object
+        mapping: $.

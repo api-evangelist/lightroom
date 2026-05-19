@@ -1,0 +1,170 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Lightroom Lightroom Assets API — Assets
+  description: 'Adobe Lightroom Lightroom Assets API — Assets. 3 operations. Lead operation: Adobe Lightroom List Assets in
+    a Catalog. Self-contained Naftiko capability covering one Lightroom business surface.'
+  tags:
+  - Lightroom
+  - Assets
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    LIGHTROOM_API_KEY: LIGHTROOM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: assets-assets
+    baseUri: https://lr.adobe.io/v2
+    description: Adobe Lightroom Lightroom Assets API — Assets business capability. Self-contained, no shared references.
+    resources:
+    - name: catalogs-catalog_id-assets
+      path: /catalogs/{catalog_id}/assets
+      operations:
+      - name: listassets
+        method: GET
+        description: Adobe Lightroom List Assets in a Catalog
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: subtype
+          in: query
+          type: string
+          description: Filter by asset subtype
+        - name: captured_after
+          in: query
+          type: string
+          description: Filter assets captured after this ISO 8601 timestamp
+        - name: captured_before
+          in: query
+          type: string
+          description: Filter assets captured before this ISO 8601 timestamp
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          description: Pagination offset
+    - name: catalogs-catalog_id-assets-asset_id
+      path: /catalogs/{catalog_id}/assets/{asset_id}
+      operations:
+      - name: getasset
+        method: GET
+        description: Adobe Lightroom Get Asset Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createorupdateasset
+        method: PUT
+        description: Adobe Lightroom Create or Update an Asset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.LIGHTROOM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: assets-assets-rest
+    port: 8080
+    description: REST adapter for Adobe Lightroom Lightroom Assets API — Assets. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/catalogs/{catalog-id}/assets
+      name: catalogs-catalog-id-assets
+      description: REST surface for catalogs-catalog_id-assets.
+      operations:
+      - method: GET
+        name: listassets
+        description: Adobe Lightroom List Assets in a Catalog
+        call: assets-assets.listassets
+        with:
+          subtype: rest.subtype
+          captured_after: rest.captured_after
+          captured_before: rest.captured_before
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/catalogs/{catalog-id}/assets/{asset-id}
+      name: catalogs-catalog-id-assets-asset-id
+      description: REST surface for catalogs-catalog_id-assets-asset_id.
+      operations:
+      - method: GET
+        name: getasset
+        description: Adobe Lightroom Get Asset Metadata
+        call: assets-assets.getasset
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: createorupdateasset
+        description: Adobe Lightroom Create or Update an Asset
+        call: assets-assets.createorupdateasset
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: assets-assets-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Lightroom Lightroom Assets API — Assets. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: adobe-lightroom-list-assets-catalog
+      description: Adobe Lightroom List Assets in a Catalog
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: assets-assets.listassets
+      with:
+        subtype: tools.subtype
+        captured_after: tools.captured_after
+        captured_before: tools.captured_before
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-lightroom-get-asset-metadata
+      description: Adobe Lightroom Get Asset Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: assets-assets.getasset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-lightroom-create-update-asset
+      description: Adobe Lightroom Create or Update an Asset
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: assets-assets.createorupdateasset
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

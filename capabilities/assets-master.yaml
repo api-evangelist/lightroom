@@ -1,0 +1,92 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Lightroom Lightroom Assets API — Master
+  description: 'Adobe Lightroom Lightroom Assets API — Master. 1 operations. Lead operation: Adobe Lightroom Upload the Original
+    Master File. Self-contained Naftiko capability covering one Lightroom business surface.'
+  tags:
+  - Lightroom
+  - Master
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    LIGHTROOM_API_KEY: LIGHTROOM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: assets-master
+    baseUri: https://lr.adobe.io/v2
+    description: Adobe Lightroom Lightroom Assets API — Master business capability. Self-contained, no shared references.
+    resources:
+    - name: catalogs-catalog_id-assets-asset_id-master
+      path: /catalogs/{catalog_id}/assets/{asset_id}/master
+      operations:
+      - name: uploadmaster
+        method: PUT
+        description: Adobe Lightroom Upload the Original Master File
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Content-Type
+          in: header
+          type: string
+          required: true
+        - name: Content-Length
+          in: header
+          type: integer
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.LIGHTROOM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: assets-master-rest
+    port: 8080
+    description: REST adapter for Adobe Lightroom Lightroom Assets API — Master. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/catalogs/{catalog-id}/assets/{asset-id}/master
+      name: catalogs-catalog-id-assets-asset-id-master
+      description: REST surface for catalogs-catalog_id-assets-asset_id-master.
+      operations:
+      - method: PUT
+        name: uploadmaster
+        description: Adobe Lightroom Upload the Original Master File
+        call: assets-master.uploadmaster
+        with:
+          Content-Type: rest.Content-Type
+          Content-Length: rest.Content-Length
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: assets-master-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Lightroom Lightroom Assets API — Master. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: adobe-lightroom-upload-original-master
+      description: Adobe Lightroom Upload the Original Master File
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: assets-master.uploadmaster
+      with:
+        Content-Type: tools.Content-Type
+        Content-Length: tools.Content-Length
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
