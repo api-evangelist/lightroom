@@ -1,0 +1,313 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Lightroom Lightroom Assets API",
+    "version": "2"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://ims-na1.adobelogin.com/ims/authorize/v2",
+      "accessTokenUrl": "https://ims-na1.adobelogin.com/ims/token/v3",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Assets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom List Assets in a Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/assets",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "subtype",
+                "value": "image",
+                "type": "query",
+                "description": "Filter by asset subtype"
+              },
+              {
+                "name": "captured_after",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "Filter assets captured after this ISO 8601 timestamp"
+              },
+              {
+                "name": "captured_before",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "Filter assets captured before this ISO 8601 timestamp"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of results"
+              },
+              {
+                "name": "offset",
+                "value": "10",
+                "type": "query",
+                "description": "Pagination offset"
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of assets in the specified catalog. Supports filtering by subtype (image or video) and capture date range."
+        },
+        {
+          "info": {
+            "name": "Adobe Lightroom Get Asset Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/assets/:asset_id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset (UUID format)"
+              }
+            ]
+          },
+          "docs": "Retrieves complete metadata for a specific asset including EXIF data, capture date, import source, location, develop settings, and links to available renditions."
+        },
+        {
+          "info": {
+            "name": "Adobe Lightroom Create or Update an Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/assets/:asset_id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset (UUID format)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new asset or updates an existing asset in the catalog. The asset_id should be a client-generated UUID. After creating an asset, upload the master file using the master endpoint."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Master",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom Upload the Original Master File",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/assets/:asset_id/master",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": "image/jpeg"
+              },
+              {
+                "name": "Content-Length",
+                "value": "10"
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset (UUID format)"
+              }
+            ]
+          },
+          "docs": "Uploads the original (master) image or video file for a previously created asset. The Content-Type header must match the file type being uploaded. Supported formats include JPEG, PNG, TIFF, DNG, and MP4."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "XMP",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom Get Develop Settings Xmp",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/assets/:asset_id/xmp/develop",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset (UUID format)"
+              }
+            ]
+          },
+          "docs": "Retrieves the external develop XMP sidecar data for the asset. Contains Lightroom develop module settings including exposure, white balance, tone curve, and other adjustments in XMP/RDF format."
+        },
+        {
+          "info": {
+            "name": "Adobe Lightroom Upload Develop Settings Xmp",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/assets/:asset_id/xmp/develop",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset (UUID format)"
+              }
+            ]
+          },
+          "docs": "Uploads external develop XMP sidecar data for the asset. Applies Lightroom develop settings to the asset."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Renditions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom Get an Asset Rendition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/assets/:asset_id/renditions/:rendition_type",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset (UUID format)"
+              },
+              {
+                "name": "rendition_type",
+                "value": "thumbnail2x",
+                "type": "path",
+                "description": "Rendition size type. thumbnail2x is a small thumbnail, numeric values indicate the longest edge in pixels, and fullsize is the maximum resolution available."
+              }
+            ]
+          },
+          "docs": "Retrieves a server-generated rendition of the asset at the specified size. Renditions are JPEG preview images generated from the master file with current develop settings applied."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

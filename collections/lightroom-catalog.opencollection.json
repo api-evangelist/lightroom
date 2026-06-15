@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Lightroom Lightroom Catalog API",
+    "version": "2"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://ims-na1.adobelogin.com/ims/authorize/v2",
+      "accessTokenUrl": "https://ims-na1.adobelogin.com/ims/token/v3",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom Check Api Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/health"
+          },
+          "docs": "Returns the current health status of the Lightroom Services API. This endpoint does not require authentication and is intended for monitoring and uptime verification."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom Get the Authenticated User's Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/catalog",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves the catalog for the currently authenticated Lightroom customer. Each customer has exactly one catalog. The catalog ID returned in the response is required as a path parameter for asset, album, and other catalog-scoped API calls."
+        },
+        {
+          "info": {
+            "name": "Adobe Lightroom Get a Catalog by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              }
+            ]
+          },
+          "docs": "Retrieves catalog metadata for the specified catalog. Returns the catalog name, creation timestamp, and links to child resources such as assets and albums."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

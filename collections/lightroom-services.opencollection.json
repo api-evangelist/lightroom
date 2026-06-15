@@ -1,0 +1,586 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Lightroom Lightroom Services API",
+    "version": "2"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://ims-na1.adobelogin.com/ims/authorize/v2",
+      "accessTokenUrl": "https://ims-na1.adobelogin.com/ims/token/v3",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom Get Api Health Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/health"
+          },
+          "docs": "Returns the health status of the Lightroom Services API. This endpoint does not require authentication and can be used to verify API availability."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom Get the Customer's Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/catalog",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves the catalog metadata for the authenticated Lightroom customer. Each customer has a single catalog that contains all their assets and albums. The catalog_id returned is used as a path parameter in most other API calls."
+        },
+        {
+          "info": {
+            "name": "Adobe Lightroom Get Catalog by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              }
+            ]
+          },
+          "docs": "Retrieves catalog metadata for a specific catalog by its identifier."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Assets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom List Assets in a Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/assets",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "subtype",
+                "value": "",
+                "type": "query",
+                "description": "Filter assets by subtype"
+              },
+              {
+                "name": "captured_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter assets captured after this ISO 8601 timestamp"
+              },
+              {
+                "name": "captured_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter assets captured before this ISO 8601 timestamp"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of assets in the specified catalog. Assets represent individual photos or videos. Results can be filtered by subtype and capture date."
+        },
+        {
+          "info": {
+            "name": "Adobe Lightroom Get a Specific Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/assets/:asset_id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset"
+              }
+            ]
+          },
+          "docs": "Retrieves metadata for a specific asset including EXIF data, develop settings, and available renditions."
+        },
+        {
+          "info": {
+            "name": "Adobe Lightroom Create or Update an Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/assets/:asset_id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new asset revision or updates an existing asset in the catalog. Used to upload new photos or update metadata on existing ones."
+        },
+        {
+          "info": {
+            "name": "Adobe Lightroom Upload the Master (original) File for an Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/assets/:asset_id/master",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": "image/jpeg"
+              },
+              {
+                "name": "Content-Length",
+                "value": "10"
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset"
+              }
+            ]
+          },
+          "docs": "Uploads the original master file for a previously created asset. The asset must already exist in the catalog. The request body should contain the binary image data."
+        },
+        {
+          "info": {
+            "name": "Adobe Lightroom Get the Develop Settings Xmp for an Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/assets/:asset_id/xmp/develop",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset"
+              }
+            ]
+          },
+          "docs": "Retrieves the external develop XMP sidecar file for the specified asset. Contains Lightroom develop settings as XMP metadata."
+        },
+        {
+          "info": {
+            "name": "Adobe Lightroom Upload Develop Settings Xmp for an Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/assets/:asset_id/xmp/develop",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset"
+              }
+            ]
+          },
+          "docs": "Uploads an external develop XMP sidecar file for the specified asset, applying Lightroom develop settings."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Renditions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom Get an Asset Rendition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/assets/:asset_id/renditions/:rendition_type",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset"
+              },
+              {
+                "name": "rendition_type",
+                "value": "",
+                "type": "path",
+                "description": "Type of rendition to retrieve. Specifies the size of the generated preview image."
+              }
+            ]
+          },
+          "docs": "Retrieves a generated rendition (preview image) for the specified asset. The rendition_type parameter specifies the size and format. Renditions are generated server-side from the master file."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Albums",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom List Albums in a Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/albums",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of albums in the specified catalog. Albums are collections of assets organized by the user."
+        },
+        {
+          "info": {
+            "name": "Adobe Lightroom Get a Specific Album",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/albums/:album_id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "album_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the album"
+              }
+            ]
+          },
+          "docs": "Retrieves metadata for a specific album including its name, cover asset, creation date, and update timestamps."
+        },
+        {
+          "info": {
+            "name": "Adobe Lightroom Create or Update an Album",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/albums/:album_id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "album_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the album"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new album or updates an existing album in the catalog."
+        },
+        {
+          "info": {
+            "name": "Adobe Lightroom Delete an Album",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/albums/:album_id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "album_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the album"
+              }
+            ]
+          },
+          "docs": "Deletes the specified album from the catalog. This does not delete the assets within the album."
+        },
+        {
+          "info": {
+            "name": "Adobe Lightroom List Assets in an Album",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/albums/:album_id/assets",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "album_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the album"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of assets contained within the specified album."
+        },
+        {
+          "info": {
+            "name": "Adobe Lightroom Add Assets to an Album",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/albums/:album_id/assets",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "album_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the album"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds one or more existing assets to the specified album. The assets must already exist in the catalog."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1902 @@
+{
+  "item": [
+    {
+      "id": "0b6ee9b7-b478-4c9b-a968-c51a6ba7ab03",
+      "name": "Auto Straighten",
+      "description": {
+        "content": "Automatically detect and correct image horizon alignment",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b373cce0-eca5-4de9-b9c3-2abd0e314350",
+          "name": "Adobe Lightroom Automatically Straighten an Image",
+          "request": {
+            "name": "Adobe Lightroom Automatically Straighten an Image",
+            "description": {
+              "content": "Detects the horizon or dominant lines in an image and applies a rotation correction to straighten it. Uses AI analysis to determine the appropriate rotation angle, similar to Lightroom's auto straighten feature in the Crop & Rotate tool.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lrService",
+                "autoStraighten"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API key (client_id) from Adobe Developer Console",
+                "key": "X-Api-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"<string>\",\n      \"storage\": \"<string>\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"<string>\",\n      \"type\": \"<string>\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"<string>\",\n      \"type\": \"<string>\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1e652397-e122-4d47-bc64-207d6de1c4ea",
+              "name": "Auto straighten applied successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "autoStraighten"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"500123\",\n  \"created\": \"2026-01-15T10:30:00Z\",\n  \"modified\": \"2026-01-15T10:30:00Z\",\n  \"outputs\": [\n    {\n      \"input\": \"example_value\",\n      \"status\": \"pending\",\n      \"href\": \"example_value\",\n      \"errors\": {\n        \"type\": \"example_value\",\n        \"title\": \"Example Title\",\n        \"code\": 10\n      }\n    }\n  ],\n  \"_links\": {\n    \"self\": {\n      \"href\": \"example_value\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97506e63-591c-45bb-920f-dc7b68b32396",
+              "name": "Job accepted and processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "autoStraighten"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"500123\",\n  \"created\": \"2026-01-15T10:30:00Z\",\n  \"modified\": \"2026-01-15T10:30:00Z\",\n  \"outputs\": [\n    {\n      \"input\": \"example_value\",\n      \"status\": \"pending\",\n      \"href\": \"example_value\",\n      \"errors\": {\n        \"type\": \"example_value\",\n        \"title\": \"Example Title\",\n        \"code\": 10\n      }\n    }\n  ],\n  \"_links\": {\n    \"self\": {\n      \"href\": \"example_value\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4834473-4482-4dfc-9cfd-b6f6adccda67",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "autoStraighten"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"code\": 10,\n  \"detail\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a947803d-0eee-4ff5-9388-2b0d52987be6",
+              "name": "Authentication required or invalid token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "autoStraighten"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"code\": 10,\n  \"detail\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6fc17b9-95c2-48c6-86ae-681399b5aecf",
+              "name": "Insufficient permissions or quota exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "autoStraighten"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"code\": 10,\n  \"detail\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4270e16-fc0d-4e35-a971-fc99210452b6",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "autoStraighten"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"code\": 10,\n  \"detail\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f5eaba29-1bde-4fac-9e5a-e16bb0dbfc7e",
+      "name": "Auto Tone",
+      "description": {
+        "content": "Automatically adjust tonal values for optimal exposure and contrast",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "554bfe13-f5ec-44e1-9e93-fd6da1959525",
+          "name": "Adobe Lightroom Apply Auto Tone Adjustments",
+          "request": {
+            "name": "Adobe Lightroom Apply Auto Tone Adjustments",
+            "description": {
+              "content": "Automatically adjusts the tonal values of an image for optimal exposure, contrast, highlights, shadows, whites, blacks, and vibrance. The AI analyzes the image content and applies appropriate adjustments similar to the Auto button in Lightroom's Basic panel.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lrService",
+                "autoTone"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API key (client_id) from Adobe Developer Console",
+                "key": "X-Api-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"<string>\",\n      \"storage\": \"<string>\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"<string>\",\n      \"type\": \"<string>\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"<string>\",\n      \"type\": \"<string>\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bf3f9a89-4db6-45ec-834a-825ab13b8c37",
+              "name": "Auto tone applied successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "autoTone"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"500123\",\n  \"created\": \"2026-01-15T10:30:00Z\",\n  \"modified\": \"2026-01-15T10:30:00Z\",\n  \"outputs\": [\n    {\n      \"input\": \"example_value\",\n      \"status\": \"pending\",\n      \"href\": \"example_value\",\n      \"errors\": {\n        \"type\": \"example_value\",\n        \"title\": \"Example Title\",\n        \"code\": 10\n      }\n    }\n  ],\n  \"_links\": {\n    \"self\": {\n      \"href\": \"example_value\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83935616-f438-468e-b008-9666fa47a893",
+              "name": "Job accepted and processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "autoTone"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"500123\",\n  \"created\": \"2026-01-15T10:30:00Z\",\n  \"modified\": \"2026-01-15T10:30:00Z\",\n  \"outputs\": [\n    {\n      \"input\": \"example_value\",\n      \"status\": \"pending\",\n      \"href\": \"example_value\",\n      \"errors\": {\n        \"type\": \"example_value\",\n        \"title\": \"Example Title\",\n        \"code\": 10\n      }\n    }\n  ],\n  \"_links\": {\n    \"self\": {\n      \"href\": \"example_value\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4adc7fe9-9537-4646-bdfb-780d0e00bbf3",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "autoTone"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"code\": 10,\n  \"detail\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b28d62f8-17db-4864-aacb-9a6c29cab759",
+              "name": "Authentication required or invalid token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "autoTone"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"code\": 10,\n  \"detail\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f7a198f-433b-4eb1-ab50-21cea163f078",
+              "name": "Insufficient permissions or quota exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "autoTone"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"code\": 10,\n  \"detail\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2269b9df-ff3a-4f25-af04-68ed595f70f5",
+              "name": "Input file format not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "autoTone"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"code\": 10,\n  \"detail\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8fbbe7a-215b-49bd-ba62-756aa989b830",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "autoTone"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"code\": 10,\n  \"detail\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "40e8af6a-a0c7-4791-b15e-72a534afb898",
+      "name": "Edit Image",
+      "description": {
+        "content": "Apply custom Lightroom edit settings to images",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4eae6811-288c-424e-9ee7-5d60a9471cf0",
+          "name": "Adobe Lightroom Apply Custom Edit Settings to an Image",
+          "request": {
+            "name": "Adobe Lightroom Apply Custom Edit Settings to an Image",
+            "description": {
+              "content": "Applies custom Lightroom develop settings to an image. Accepts a comprehensive set of editing parameters covering white balance, exposure, contrast, highlights, shadows, tone curve, HSL, split toning, sharpening, noise reduction, lens corrections, and more. Provides the full range of non-destructive editing capabilities available in the Lightroom develop module.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lrService",
+                "edit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API key (client_id) from Adobe Developer Console",
+                "key": "X-Api-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"<string>\",\n      \"storage\": \"<string>\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"<string>\",\n      \"type\": \"<string>\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"<string>\",\n      \"type\": \"<string>\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    }\n  ],\n  \"options\": {\n    \"Exposure\": \"<number>\",\n    \"Contrast\": \"<integer>\",\n    \"Highlights\": \"<integer>\",\n    \"Shadows\": \"<integer>\",\n    \"Whites\": \"<integer>\",\n    \"Blacks\": \"<integer>\",\n    \"Clarity\": \"<integer>\",\n    \"Dehaze\": \"<integer>\",\n    \"Vibrance\": \"<integer>\",\n    \"Saturation\": \"<integer>\",\n    \"WhiteBalance\": \"<string>\",\n    \"Temperature\": \"<integer>\",\n    \"Tint\": \"<integer>\",\n    \"Sharpness\": \"<integer>\",\n    \"SharpenRadius\": \"<number>\",\n    \"SharpenDetail\": \"<integer>\",\n    \"NoiseReduction\": \"<integer>\",\n    \"ColorNoiseReduction\": \"<integer>\",\n    \"VignetteAmount\": \"<integer>\",\n    \"GrainAmount\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "816eca23-51a8-49b7-a8e6-3ef56c0dbd5f",
+              "name": "Edit applied successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "edit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ],\n  \"options\": {\n    \"Exposure\": 42.5,\n    \"Contrast\": 10,\n    \"Highlights\": 10,\n    \"Shadows\": 10,\n    \"Whites\": 10,\n    \"Blacks\": 10,\n    \"Clarity\": 10,\n    \"Dehaze\": 10,\n    \"Vibrance\": 10,\n    \"Saturation\": 10,\n    \"WhiteBalance\": \"As Shot\",\n    \"Temperature\": 10,\n    \"Tint\": 10,\n    \"Sharpness\": 10,\n    \"SharpenRadius\": 42.5,\n    \"SharpenDetail\": 10,\n    \"NoiseReduction\": 10,\n    \"ColorNoiseReduction\": 10,\n    \"VignetteAmount\": 10,\n    \"GrainAmount\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"500123\",\n  \"created\": \"2026-01-15T10:30:00Z\",\n  \"modified\": \"2026-01-15T10:30:00Z\",\n  \"outputs\": [\n    {\n      \"input\": \"example_value\",\n      \"status\": \"pending\",\n      \"href\": \"example_value\",\n      \"errors\": {\n        \"type\": \"example_value\",\n        \"title\": \"Example Title\",\n        \"code\": 10\n      }\n    }\n  ],\n  \"_links\": {\n    \"self\": {\n      \"href\": \"example_value\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54cb7937-abd1-4ecd-84df-0dbb51cdfce7",
+              "name": "Job accepted and processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "edit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ],\n  \"options\": {\n    \"Exposure\": 42.5,\n    \"Contrast\": 10,\n    \"Highlights\": 10,\n    \"Shadows\": 10,\n    \"Whites\": 10,\n    \"Blacks\": 10,\n    \"Clarity\": 10,\n    \"Dehaze\": 10,\n    \"Vibrance\": 10,\n    \"Saturation\": 10,\n    \"WhiteBalance\": \"As Shot\",\n    \"Temperature\": 10,\n    \"Tint\": 10,\n    \"Sharpness\": 10,\n    \"SharpenRadius\": 42.5,\n    \"SharpenDetail\": 10,\n    \"NoiseReduction\": 10,\n    \"ColorNoiseReduction\": 10,\n    \"VignetteAmount\": 10,\n    \"GrainAmount\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"500123\",\n  \"created\": \"2026-01-15T10:30:00Z\",\n  \"modified\": \"2026-01-15T10:30:00Z\",\n  \"outputs\": [\n    {\n      \"input\": \"example_value\",\n      \"status\": \"pending\",\n      \"href\": \"example_value\",\n      \"errors\": {\n        \"type\": \"example_value\",\n        \"title\": \"Example Title\",\n        \"code\": 10\n      }\n    }\n  ],\n  \"_links\": {\n    \"self\": {\n      \"href\": \"example_value\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "985f9c8c-6ac2-4681-bcd4-bb6a4c9d90fc",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "edit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ],\n  \"options\": {\n    \"Exposure\": 42.5,\n    \"Contrast\": 10,\n    \"Highlights\": 10,\n    \"Shadows\": 10,\n    \"Whites\": 10,\n    \"Blacks\": 10,\n    \"Clarity\": 10,\n    \"Dehaze\": 10,\n    \"Vibrance\": 10,\n    \"Saturation\": 10,\n    \"WhiteBalance\": \"As Shot\",\n    \"Temperature\": 10,\n    \"Tint\": 10,\n    \"Sharpness\": 10,\n    \"SharpenRadius\": 42.5,\n    \"SharpenDetail\": 10,\n    \"NoiseReduction\": 10,\n    \"ColorNoiseReduction\": 10,\n    \"VignetteAmount\": 10,\n    \"GrainAmount\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"code\": 10,\n  \"detail\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fc5233c-72c3-4de2-9bab-b383227e064c",
+              "name": "Authentication required or invalid token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "edit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ],\n  \"options\": {\n    \"Exposure\": 42.5,\n    \"Contrast\": 10,\n    \"Highlights\": 10,\n    \"Shadows\": 10,\n    \"Whites\": 10,\n    \"Blacks\": 10,\n    \"Clarity\": 10,\n    \"Dehaze\": 10,\n    \"Vibrance\": 10,\n    \"Saturation\": 10,\n    \"WhiteBalance\": \"As Shot\",\n    \"Temperature\": 10,\n    \"Tint\": 10,\n    \"Sharpness\": 10,\n    \"SharpenRadius\": 42.5,\n    \"SharpenDetail\": 10,\n    \"NoiseReduction\": 10,\n    \"ColorNoiseReduction\": 10,\n    \"VignetteAmount\": 10,\n    \"GrainAmount\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"code\": 10,\n  \"detail\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "823f2054-4a75-432d-a665-77e32f6c94cd",
+              "name": "Insufficient permissions or quota exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "edit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ],\n  \"options\": {\n    \"Exposure\": 42.5,\n    \"Contrast\": 10,\n    \"Highlights\": 10,\n    \"Shadows\": 10,\n    \"Whites\": 10,\n    \"Blacks\": 10,\n    \"Clarity\": 10,\n    \"Dehaze\": 10,\n    \"Vibrance\": 10,\n    \"Saturation\": 10,\n    \"WhiteBalance\": \"As Shot\",\n    \"Temperature\": 10,\n    \"Tint\": 10,\n    \"Sharpness\": 10,\n    \"SharpenRadius\": 42.5,\n    \"SharpenDetail\": 10,\n    \"NoiseReduction\": 10,\n    \"ColorNoiseReduction\": 10,\n    \"VignetteAmount\": 10,\n    \"GrainAmount\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"code\": 10,\n  \"detail\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "291ca8c8-6aee-46f9-b0a8-32432979dcd2",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "edit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ],\n  \"options\": {\n    \"Exposure\": 42.5,\n    \"Contrast\": 10,\n    \"Highlights\": 10,\n    \"Shadows\": 10,\n    \"Whites\": 10,\n    \"Blacks\": 10,\n    \"Clarity\": 10,\n    \"Dehaze\": 10,\n    \"Vibrance\": 10,\n    \"Saturation\": 10,\n    \"WhiteBalance\": \"As Shot\",\n    \"Temperature\": 10,\n    \"Tint\": 10,\n    \"Sharpness\": 10,\n    \"SharpenRadius\": 42.5,\n    \"SharpenDetail\": 10,\n    \"NoiseReduction\": 10,\n    \"ColorNoiseReduction\": 10,\n    \"VignetteAmount\": 10,\n    \"GrainAmount\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"code\": 10,\n  \"detail\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "759296f7-9803-4d64-81a2-21a4cff420d2",
+      "name": "Presets",
+      "description": {
+        "content": "Apply Lightroom presets (XMP develop settings) to images",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a644697a-30dd-4282-a6ef-1f4e24c4fdc1",
+          "name": "Adobe Lightroom Apply Lightroom Presets to an Image",
+          "request": {
+            "name": "Adobe Lightroom Apply Lightroom Presets to an Image",
+            "description": {
+              "content": "Applies one or more Lightroom presets (XMP develop settings files) to an image. Presets are provided as references to XMP files stored in cloud storage. Multiple presets can be applied in sequence, with later presets overriding earlier settings where they overlap.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lrService",
+                "presets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API key (client_id) from Adobe Developer Console",
+                "key": "X-Api-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"<string>\",\n      \"storage\": \"<string>\"\n    },\n    \"presets\": [\n      {\n        \"href\": \"<string>\",\n        \"storage\": \"<string>\"\n      },\n      {\n        \"href\": \"<string>\",\n        \"storage\": \"<string>\"\n      }\n    ]\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"<string>\",\n      \"type\": \"<string>\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"<string>\",\n      \"type\": \"<string>\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d3dbe21d-6ddb-4d02-831a-baf91a5aa767",
+              "name": "Presets applied successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "presets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    },\n    \"presets\": [\n      {}\n    ]\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"500123\",\n  \"created\": \"2026-01-15T10:30:00Z\",\n  \"modified\": \"2026-01-15T10:30:00Z\",\n  \"outputs\": [\n    {\n      \"input\": \"example_value\",\n      \"status\": \"pending\",\n      \"href\": \"example_value\",\n      \"errors\": {\n        \"type\": \"example_value\",\n        \"title\": \"Example Title\",\n        \"code\": 10\n      }\n    }\n  ],\n  \"_links\": {\n    \"self\": {\n      \"href\": \"example_value\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b28c68c-0c99-4c2f-a406-13654766f866",
+              "name": "Job accepted and processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "presets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    },\n    \"presets\": [\n      {}\n    ]\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"500123\",\n  \"created\": \"2026-01-15T10:30:00Z\",\n  \"modified\": \"2026-01-15T10:30:00Z\",\n  \"outputs\": [\n    {\n      \"input\": \"example_value\",\n      \"status\": \"pending\",\n      \"href\": \"example_value\",\n      \"errors\": {\n        \"type\": \"example_value\",\n        \"title\": \"Example Title\",\n        \"code\": 10\n      }\n    }\n  ],\n  \"_links\": {\n    \"self\": {\n      \"href\": \"example_value\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "885fbe51-fe8f-4ab2-9b2b-2595631c954d",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "presets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    },\n    \"presets\": [\n      {}\n    ]\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"code\": 10,\n  \"detail\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83fa8e43-3b6e-403a-b741-9c2380690fa6",
+              "name": "Authentication required or invalid token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "presets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    },\n    \"presets\": [\n      {}\n    ]\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"code\": 10,\n  \"detail\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6fdc652e-1a03-4585-844e-ed30798ab15b",
+              "name": "Insufficient permissions or quota exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "presets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    },\n    \"presets\": [\n      {}\n    ]\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"code\": 10,\n  \"detail\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e2022f6-0775-42f2-9477-f46f0b5c24e2",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lrService",
+                    "presets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token from Adobe IMS",
+                    "key": "Authorization",
+                    "value": "Bearer e4e"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\"\n    },\n    \"presets\": [\n      {}\n    ]\n  },\n  \"outputs\": [\n    {\n      \"href\": \"example_value\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": 10\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"code\": 10,\n  \"detail\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://image.adobe.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "firefly_api openid"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://ims-na1.adobelogin.com/ims/token/v3"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6e14e017-b196-4ac5-8729-1e5c929cd1e7",
+    "name": "Adobe Lightroom API (Firefly Services)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "AI-powered image editing API available through Adobe Firefly Services. Provides programmatic access to Lightroom editing capabilities including auto tone, auto straighten, preset application, and image editing operations. All operations accept cloud-stored images and return processed results to cloud storage. Supports Adobe Creative Cloud, Amazon S3, Azure Blob Storage, and Dropbox as storage backends.\n\nContact Support:\n Name: Adobe Firefly Services Support",
+      "type": "text/plain"
+    }
+  }
+}

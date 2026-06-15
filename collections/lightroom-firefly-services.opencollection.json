@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Lightroom API (Firefly Services)",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://ims-na1.adobelogin.com/ims/token/v3",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auto Tone",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom Apply Auto Tone Adjustments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://image.adobe.io/lrService/autoTone",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Automatically adjusts the tonal values of an image for optimal exposure, contrast, highlights, shadows, whites, blacks, and vibrance. The AI analyzes the image content and applies appropriate adjustments similar to the Auto button in Lightroom's Basic panel."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Auto Straighten",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom Automatically Straighten an Image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://image.adobe.io/lrService/autoStraighten",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Detects the horizon or dominant lines in an image and applies a rotation correction to straighten it. Uses AI analysis to determine the appropriate rotation angle, similar to Lightroom's auto straighten feature in the Crop & Rotate tool."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Presets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom Apply Lightroom Presets to an Image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://image.adobe.io/lrService/presets",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Applies one or more Lightroom presets (XMP develop settings files) to an image. Presets are provided as references to XMP files stored in cloud storage. Multiple presets can be applied in sequence, with later presets overriding earlier settings where they overlap."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Edit Image",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom Apply Custom Edit Settings to an Image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://image.adobe.io/lrService/edit",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Applies custom Lightroom develop settings to an image. Accepts a comprehensive set of editing parameters covering white balance, exposure, contrast, highlights, shadows, tone curve, HSL, split toning, sharpening, noise reduction, lens corrections, and more. Provides the full range of non-destructive editing capabilities available in the Lightroom develop module."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
