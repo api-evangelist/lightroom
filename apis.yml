@@ -5,7 +5,7 @@ description: >-
   programmatically. The Lightroom APIs are also available as part of Adobe Firefly Services for AI-powered image editing
   operations such as auto tone, auto straighten, and preset application.
 kind: contract
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Cloud Storage
   - Image Editing
