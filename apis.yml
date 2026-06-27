@@ -71,7 +71,7 @@ common:
   - url: https://developer.adobe.com/console
     type: Console
   - url: https://developer.adobe.com/console
-    type: SignUp
+    type: Signup
   - url: https://status.adobe.com/
     type: StatusPage
   - url: https://blog.developer.adobe.com/
@@ -87,7 +87,7 @@ common:
   - url: https://github.com/AdobeDocs
     type: GitHubOrganization
   - url: https://developer.adobe.com/firefly-services/docs/lightroom/
-    type: SDK
+    type: SDKs
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
