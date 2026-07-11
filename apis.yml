@@ -58,6 +58,12 @@ apis:
       - type: OpenAPI
         url: openapi/lightroom-firefly-services-openapi.yml
 common:
+  - type: VulnerabilityDisclosure
+    url: security/lightroom-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/lightroom-domain-security.yml
+  - type: Authentication
+    url: authentication/lightroom-authentication.yml
   - type: OAuthScopes
     url: scopes/lightroom-scopes.yml
   - url: https://developer.adobe.com/firefly-services/docs/lightroom/
