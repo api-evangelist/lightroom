@@ -1,0 +1,61 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/lightroom-albums-openapi.yml, openapi/lightroom-assets-openapi.yml, openapi/lightroom-catalog-openapi.yml,
+  openapi/lightroom-firefly-services-openapi.yml, openapi/lightroom-services-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/lightroom-albums-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://ims-na1.adobelogin.com/ims/authorize/v2
+    tokenUrl: https://ims-na1.adobelogin.com/ims/token/v3
+- name: oauth2
+  source: openapi/lightroom-assets-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://ims-na1.adobelogin.com/ims/authorize/v2
+    tokenUrl: https://ims-na1.adobelogin.com/ims/token/v3
+- name: oauth2
+  source: openapi/lightroom-catalog-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://ims-na1.adobelogin.com/ims/authorize/v2
+    tokenUrl: https://ims-na1.adobelogin.com/ims/token/v3
+- name: oauth2
+  source: openapi/lightroom-firefly-services-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://ims-na1.adobelogin.com/ims/token/v3
+  description: OAuth 2.0 via Adobe IMS for Firefly Services
+- name: oauth2
+  source: openapi/lightroom-services-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://ims-na1.adobelogin.com/ims/authorize/v2
+    tokenUrl: https://ims-na1.adobelogin.com/ims/token/v3
+  description: OAuth 2.0 authorization code flow via Adobe Identity Management System (IMS).
+    Partner applications must be registered in the Adobe Developer Console.
+scopes:
+- scope: firefly_api
+  description: Access Firefly Services APIs
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/lightroom-firefly-services-openapi.yml
+- scope: lr_partner_apis
+  description: Access Lightroom partner APIs
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lightroom-albums-openapi.yml
+  - openapi/lightroom-assets-openapi.yml
+  - openapi/lightroom-catalog-openapi.yml
+  - openapi/lightroom-services-openapi.yml
+- scope: openid
+  description: OpenID Connect
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/lightroom-firefly-services-openapi.yml
+  - openapi/lightroom-services-openapi.yml
