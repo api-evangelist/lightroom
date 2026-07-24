@@ -1,0 +1,143 @@
+openapi: 3.1.0
+info:
+  title: Adobe Lightroom Lightroom Albums Album Assets Master API
+  description: API for creating and managing albums and collections within an Adobe Lightroom cloud catalog. Albums organize assets into user-defined collections. Supports listing, creating, updating, and deleting albums as well as managing the assets within each album.
+  version: '2'
+  contact:
+    name: Adobe Lightroom Developer Support
+    url: https://community.adobe.com/t5/lightroom/ct-p/ct-lightroom
+  license:
+    name: Adobe Terms of Service
+    url: https://www.adobe.com/legal/terms.html
+  termsOfService: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://lr.adobe.io/v2
+  description: Lightroom Services Production Server
+security:
+- oauth2:
+  - lr_partner_apis
+- apiKey: []
+tags:
+- name: Master
+  description: Upload and manage original master files
+paths:
+  /catalogs/{catalog_id}/assets/{asset_id}/master:
+    put:
+      operationId: uploadMaster
+      summary: Adobe Lightroom Upload the Original Master File
+      description: Uploads the original (master) image or video file for a previously created asset. The Content-Type header must match the file type being uploaded. Supported formats include JPEG, PNG, TIFF, DNG, and MP4.
+      tags:
+      - Master
+      parameters:
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AssetId'
+      - $ref: '#/components/parameters/XApiKey'
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - image/jpeg
+          - image/png
+          - image/tiff
+          - image/dng
+          - image/x-adobe-dng
+          - video/mp4
+        example: image/jpeg
+      - name: Content-Length
+        in: header
+        required: true
+        schema:
+          type: integer
+          description: Size of the file in bytes
+        example: 10
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+            examples:
+              UploadmasterRequestExample:
+                summary: Default uploadMaster request
+                x-microcks-default: true
+                value: example_value
+      responses:
+        '200':
+          description: Master file uploaded successfully
+        '201':
+          description: Master file created successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '413':
+          description: Request entity too large
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    AssetId:
+      name: asset_id
+      in: path
+      required: true
+      description: Unique identifier of the asset (UUID format)
+      schema:
+        type: string
+        format: uuid
+    CatalogId:
+      name: catalog_id
+      in: path
+      required: true
+      description: Unique identifier of the Lightroom catalog
+      schema:
+        type: string
+    XApiKey:
+      name: X-Api-Key
+      in: header
+      required: true
+      description: API key from Adobe Developer Console
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 10
+        description:
+          type: string
+          example: A sample description.
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ims-na1.adobelogin.com/ims/authorize/v2
+          tokenUrl: https://ims-na1.adobelogin.com/ims/token/v3
+          scopes:
+            lr_partner_apis: Access Lightroom partner APIs
+    apiKey:
+      type: apiKey
+      name: X-Api-Key
+      in: header
+externalDocs:
+  description: Lightroom Albums API Documentation
+  url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/

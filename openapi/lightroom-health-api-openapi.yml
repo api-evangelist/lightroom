@@ -1,0 +1,72 @@
+openapi: 3.1.0
+info:
+  title: Adobe Lightroom Lightroom Albums Album Assets Health API
+  description: API for creating and managing albums and collections within an Adobe Lightroom cloud catalog. Albums organize assets into user-defined collections. Supports listing, creating, updating, and deleting albums as well as managing the assets within each album.
+  version: '2'
+  contact:
+    name: Adobe Lightroom Developer Support
+    url: https://community.adobe.com/t5/lightroom/ct-p/ct-lightroom
+  license:
+    name: Adobe Terms of Service
+    url: https://www.adobe.com/legal/terms.html
+  termsOfService: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://lr.adobe.io/v2
+  description: Lightroom Services Production Server
+security:
+- oauth2:
+  - lr_partner_apis
+- apiKey: []
+tags:
+- name: Health
+  description: API health and availability checks
+paths:
+  /health:
+    get:
+      operationId: getHealthCheck
+      summary: Adobe Lightroom Check Api Health
+      description: Returns the current health status of the Lightroom Services API. This endpoint does not require authentication and is intended for monitoring and uptime verification.
+      tags:
+      - Health
+      security: []
+      responses:
+        '200':
+          description: API is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Health status
+                    examples:
+                    - available
+              examples:
+                Gethealthcheck200Example:
+                  summary: Default getHealthCheck 200 response
+                  x-microcks-default: true
+                  value:
+                    status: example_value
+        '503':
+          description: API is unavailable
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ims-na1.adobelogin.com/ims/authorize/v2
+          tokenUrl: https://ims-na1.adobelogin.com/ims/token/v3
+          scopes:
+            lr_partner_apis: Access Lightroom partner APIs
+    apiKey:
+      type: apiKey
+      name: X-Api-Key
+      in: header
+externalDocs:
+  description: Lightroom Albums API Documentation
+  url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/

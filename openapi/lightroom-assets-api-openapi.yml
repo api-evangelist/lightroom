@@ -1,12 +1,7 @@
 openapi: 3.1.0
 info:
-  title: Adobe Lightroom Lightroom Assets API
-  description: >-
-    API for managing photo assets within an Adobe Lightroom cloud catalog.
-    Supports creating master assets, uploading original files, reading and
-    writing external develop XMP sidecar files, and generating renditions
-    at various sizes. Assets represent individual photos or videos stored
-    in a customer's Lightroom catalog.
+  title: Adobe Lightroom Lightroom Albums Album Assets API
+  description: API for creating and managing albums and collections within an Adobe Lightroom cloud catalog. Albums organize assets into user-defined collections. Supports listing, creating, updating, and deleting albums as well as managing the assets within each album.
   version: '2'
   contact:
     name: Adobe Lightroom Developer Support
@@ -15,33 +10,22 @@ info:
     name: Adobe Terms of Service
     url: https://www.adobe.com/legal/terms.html
   termsOfService: https://www.adobe.com/legal/terms.html
-externalDocs:
-  description: Lightroom Assets API Documentation
-  url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
 servers:
 - url: https://lr.adobe.io/v2
   description: Lightroom Services Production Server
-tags:
-- name: Assets
-  description: CRUD operations on photo and video assets
-- name: Master
-  description: Upload and manage original master files
-- name: Renditions
-  description: Retrieve generated renditions (previews and thumbnails)
-- name: XMP
-  description: Read and write external develop XMP sidecar files
 security:
 - oauth2:
   - lr_partner_apis
 - apiKey: []
+tags:
+- name: Assets
+  description: CRUD operations on photo and video assets
 paths:
   /catalogs/{catalog_id}/assets:
     get:
       operationId: listAssets
       summary: Adobe Lightroom List Assets in a Catalog
-      description: >-
-        Retrieves a paginated list of assets in the specified catalog. Supports
-        filtering by subtype (image or video) and capture date range.
+      description: Retrieves a paginated list of assets in the specified catalog. Supports filtering by subtype (image or video) and capture date range.
       tags:
       - Assets
       parameters:
@@ -120,10 +104,7 @@ paths:
     get:
       operationId: getAsset
       summary: Adobe Lightroom Get Asset Metadata
-      description: >-
-        Retrieves complete metadata for a specific asset including EXIF data,
-        capture date, import source, location, develop settings, and links to
-        available renditions.
+      description: Retrieves complete metadata for a specific asset including EXIF data, capture date, import source, location, develop settings, and links to available renditions.
       tags:
       - Assets
       parameters:
@@ -174,10 +155,7 @@ paths:
     put:
       operationId: createOrUpdateAsset
       summary: Adobe Lightroom Create or Update an Asset
-      description: >-
-        Creates a new asset or updates an existing asset in the catalog. The
-        asset_id should be a client-generated UUID. After creating an asset,
-        upload the master file using the master endpoint.
+      description: Creates a new asset or updates an existing asset in the catalog. The asset_id should be a client-generated UUID. After creating an asset, upload the master file using the master endpoint.
       tags:
       - Assets
       parameters:
@@ -280,18 +258,15 @@ paths:
         dispatcher: FALLBACK
   /catalogs/{catalog_id}/assets/{asset_id}/master:
     put:
-      operationId: uploadMaster
-      summary: Adobe Lightroom Upload the Original Master File
-      description: >-
-        Uploads the original (master) image or video file for a previously
-        created asset. The Content-Type header must match the file type being
-        uploaded. Supported formats include JPEG, PNG, TIFF, DNG, and MP4.
+      operationId: uploadMasterAsset
+      summary: Adobe Lightroom Upload the Master (original) File for an Asset
+      description: Uploads the original master file for a previously created asset. The asset must already exist in the catalog. The request body should contain the binary image data.
       tags:
-      - Master
+      - Assets
       parameters:
       - $ref: '#/components/parameters/CatalogId'
-      - $ref: '#/components/parameters/AssetId'
-      - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/AssetId_2'
+      - $ref: '#/components/parameters/XApiKey_2'
       - name: Content-Type
         in: header
         required: true
@@ -302,7 +277,6 @@ paths:
           - image/png
           - image/tiff
           - image/dng
-          - image/x-adobe-dng
           - video/mp4
         example: image/jpeg
       - name: Content-Length
@@ -310,7 +284,6 @@ paths:
         required: true
         schema:
           type: integer
-          description: Size of the file in bytes
         example: 10
       requestBody:
         required: true
@@ -320,8 +293,8 @@ paths:
               type: string
               format: binary
             examples:
-              UploadmasterRequestExample:
-                summary: Default uploadMaster request
+              UploadmasterassetRequestExample:
+                summary: Default uploadMasterAsset request
                 x-microcks-default: true
                 value: example_value
       responses:
@@ -330,59 +303,56 @@ paths:
         '201':
           description: Master file created successfully
         '401':
-          $ref: '#/components/responses/Unauthorized'
+          $ref: '#/components/responses/Unauthorized_2'
+        '403':
+          $ref: '#/components/responses/Forbidden_2'
         '404':
-          $ref: '#/components/responses/NotFound'
+          $ref: '#/components/responses/NotFound_2'
         '413':
-          description: Request entity too large
+          description: File too large
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
   /catalogs/{catalog_id}/assets/{asset_id}/xmp/develop:
     get:
-      operationId: getDevelopXmp
-      summary: Adobe Lightroom Get Develop Settings Xmp
-      description: >-
-        Retrieves the external develop XMP sidecar data for the asset. Contains
-        Lightroom develop module settings including exposure, white balance,
-        tone curve, and other adjustments in XMP/RDF format.
+      operationId: getAssetDevelopXmp
+      summary: Adobe Lightroom Get the Develop Settings Xmp for an Asset
+      description: Retrieves the external develop XMP sidecar file for the specified asset. Contains Lightroom develop settings as XMP metadata.
       tags:
-      - XMP
+      - Assets
       parameters:
       - $ref: '#/components/parameters/CatalogId'
-      - $ref: '#/components/parameters/AssetId'
-      - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/AssetId_2'
+      - $ref: '#/components/parameters/XApiKey_2'
       responses:
         '200':
-          description: XMP develop settings retrieved
+          description: XMP develop settings retrieved successfully
           content:
             application/rdf+xml:
               schema:
                 type: string
               examples:
-                Getdevelopxmp200Example:
-                  summary: Default getDevelopXmp 200 response
+                Getassetdevelopxmp200Example:
+                  summary: Default getAssetDevelopXmp 200 response
                   x-microcks-default: true
                   value: example_value
         '401':
-          $ref: '#/components/responses/Unauthorized'
+          $ref: '#/components/responses/Unauthorized_2'
         '404':
-          $ref: '#/components/responses/NotFound'
+          $ref: '#/components/responses/NotFound_2'
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
     put:
-      operationId: putDevelopXmp
-      summary: Adobe Lightroom Upload Develop Settings Xmp
-      description: >-
-        Uploads external develop XMP sidecar data for the asset. Applies
-        Lightroom develop settings to the asset.
+      operationId: putAssetDevelopXmp
+      summary: Adobe Lightroom Upload Develop Settings Xmp for an Asset
+      description: Uploads an external develop XMP sidecar file for the specified asset, applying Lightroom develop settings.
       tags:
-      - XMP
+      - Assets
       parameters:
       - $ref: '#/components/parameters/CatalogId'
-      - $ref: '#/components/parameters/AssetId'
-      - $ref: '#/components/parameters/XApiKey'
+      - $ref: '#/components/parameters/AssetId_2'
+      - $ref: '#/components/parameters/XApiKey_2'
       requestBody:
         required: true
         content:
@@ -390,101 +360,24 @@ paths:
             schema:
               type: string
             examples:
-              PutdevelopxmpRequestExample:
-                summary: Default putDevelopXmp request
+              PutassetdevelopxmpRequestExample:
+                summary: Default putAssetDevelopXmp request
                 x-microcks-default: true
                 value: example_value
       responses:
         '200':
-          description: XMP develop settings applied
+          description: XMP develop settings updated successfully
         '201':
-          description: XMP develop settings created
+          description: XMP develop settings created successfully
         '401':
-          $ref: '#/components/responses/Unauthorized'
+          $ref: '#/components/responses/Unauthorized_2'
         '404':
-          $ref: '#/components/responses/NotFound'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /catalogs/{catalog_id}/assets/{asset_id}/renditions/{rendition_type}:
-    get:
-      operationId: getRendition
-      summary: Adobe Lightroom Get an Asset Rendition
-      description: >-
-        Retrieves a server-generated rendition of the asset at the specified
-        size. Renditions are JPEG preview images generated from the master
-        file with current develop settings applied.
-      tags:
-      - Renditions
-      parameters:
-      - $ref: '#/components/parameters/CatalogId'
-      - $ref: '#/components/parameters/AssetId'
-      - name: rendition_type
-        in: path
-        required: true
-        description: >-
-          Rendition size type. thumbnail2x is a small thumbnail, numeric
-          values indicate the longest edge in pixels, and fullsize is the
-          maximum resolution available.
-        schema:
-          type: string
-          enum:
-          - thumbnail2x
-          - '640'
-          - '1024'
-          - '2048'
-          - fullsize
-        example: thumbnail2x
-      - $ref: '#/components/parameters/XApiKey'
-      responses:
-        '200':
-          description: Rendition image returned
-          content:
-            image/jpeg:
-              schema:
-                type: string
-                format: binary
-              examples:
-                Getrendition200Example:
-                  summary: Default getRendition 200 response
-                  x-microcks-default: true
-                  value: example_value
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
+          $ref: '#/components/responses/NotFound_2'
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
 components:
-  securitySchemes:
-    oauth2:
-      type: oauth2
-      flows:
-        authorizationCode:
-          authorizationUrl: https://ims-na1.adobelogin.com/ims/authorize/v2
-          tokenUrl: https://ims-na1.adobelogin.com/ims/token/v3
-          scopes:
-            lr_partner_apis: Access Lightroom partner APIs
-    apiKey:
-      type: apiKey
-      name: X-Api-Key
-      in: header
   parameters:
-    XApiKey:
-      name: X-Api-Key
-      in: header
-      required: true
-      description: API key from Adobe Developer Console
-      schema:
-        type: string
-    CatalogId:
-      name: catalog_id
-      in: path
-      required: true
-      description: Unique identifier of the Lightroom catalog
-      schema:
-        type: string
     AssetId:
       name: asset_id
       in: path
@@ -493,7 +386,88 @@ components:
       schema:
         type: string
         format: uuid
+    CatalogId:
+      name: catalog_id
+      in: path
+      required: true
+      description: Unique identifier of the Lightroom catalog
+      schema:
+        type: string
+    XApiKey_2:
+      name: X-Api-Key
+      in: header
+      required: true
+      description: API key from the Adobe Developer Console
+      schema:
+        type: string
+    AssetId_2:
+      name: asset_id
+      in: path
+      required: true
+      description: Unique identifier of the asset
+      schema:
+        type: string
+    XApiKey:
+      name: X-Api-Key
+      in: header
+      required: true
+      description: API key from Adobe Developer Console
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden_2:
+      description: Insufficient permissions. The user has not granted access or the partner application is not entitled.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse_2'
+    Unauthorized_2:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse_2'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound_2:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse_2'
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 10
+        description:
+          type: string
+          example: A sample description.
+    Links:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          href:
+            type: string
     AssetsListResponse:
       type: object
       properties:
@@ -508,6 +482,41 @@ components:
           example: []
         links:
           $ref: '#/components/schemas/Links'
+    AssetCreateRequest:
+      type: object
+      required:
+      - subtype
+      - payload
+      properties:
+        subtype:
+          type: string
+          enum:
+          - image
+          - video
+          example: image
+        payload:
+          type: object
+          properties:
+            captureDate:
+              type: string
+              format: date-time
+            userCreated:
+              type: string
+              format: date-time
+            userUpdated:
+              type: string
+              format: date-time
+            importSource:
+              type: object
+              properties:
+                fileName:
+                  type: string
+                importedOnDevice:
+                  type: string
+                importTimestamp:
+                  type: string
+                  format: date-time
+          example: example_value
     Asset:
       type: object
       properties:
@@ -619,73 +628,40 @@ components:
           $ref: '#/components/schemas/AssetPayload'
         links:
           $ref: '#/components/schemas/Links'
-    AssetCreateRequest:
-      type: object
-      required:
-      - subtype
-      - payload
-      properties:
-        subtype:
-          type: string
-          enum:
-          - image
-          - video
-          example: image
-        payload:
-          type: object
-          properties:
-            captureDate:
-              type: string
-              format: date-time
-            userCreated:
-              type: string
-              format: date-time
-            userUpdated:
-              type: string
-              format: date-time
-            importSource:
-              type: object
-              properties:
-                fileName:
-                  type: string
-                importedOnDevice:
-                  type: string
-                importTimestamp:
-                  type: string
-                  format: date-time
-          example: example_value
-    Links:
-      type: object
-      additionalProperties:
-        type: object
-        properties:
-          href:
-            type: string
-    ErrorResponse:
+    ErrorResponse_2:
       type: object
       properties:
         code:
           type: integer
+          description: HTTP status code
           example: 10
         description:
           type: string
+          description: Error description
           example: A sample description.
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+              field:
+                type: string
+          example: []
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ims-na1.adobelogin.com/ims/authorize/v2
+          tokenUrl: https://ims-na1.adobelogin.com/ims/token/v3
+          scopes:
+            lr_partner_apis: Access Lightroom partner APIs
+    apiKey:
+      type: apiKey
+      name: X-Api-Key
+      in: header
+externalDocs:
+  description: Lightroom Albums API Documentation
+  url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
