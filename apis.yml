@@ -5,7 +5,20 @@ description: >-
   programmatically. The Lightroom APIs are also available as part of Adobe Firefly Services for AI-powered image editing
   operations such as auto tone, auto straighten, and preset application.
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/lightroom.png
 tags:
   - Cloud Storage
   - Image Editing
@@ -17,47 +30,261 @@ created: '2024-01-01'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: lightroom:lightroom-services-api
-    name: Lightroom Services API
-    description: >-
-      Core partner API for accessing Lightroom cloud catalog data, albums, and assets. Partner applications authenticate
-      Lightroom customers through Adobe Identity Management System using a standard OAuth 2.0 workflow.
-    humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/
-    tags:
-      - Albums
-      - Assets
-      - Catalogs
-      - Photos
-    properties:
-      - type: Documentation
-        url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
-      - type: Authentication
-        url: https://developer.adobe.com/developer-console/docs/guides/authentication/
-      - type: GettingStarted
-        url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
-      - type: ChangeLog
-        url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
-      - type: OpenAPI
-        url: openapi/lightroom-services-openapi.yml
-  - aid: lightroom:lightroom-firefly-services-api
-    name: Adobe Lightroom API (Firefly Services)
-    description: >-
-      AI-powered image editing API available through Adobe Firefly Services. Provides auto tone, auto straighten, preset
-      application, and programmatic editing capabilities using REST endpoints.
-    humanURL: https://developer.adobe.com/firefly-services/docs/lightroom/
-    tags:
-      - AI
-      - Auto Tone
-      - Image Editing
-      - Presets
-    properties:
-      - type: Documentation
-        url: https://developer.adobe.com/firefly-services/docs/lightroom/
-      - type: GettingStarted
-        url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
-      - type: OpenAPI
-        url: openapi/lightroom-firefly-services-openapi.yml
+- aid: lightroom:lightroom-album-assets-api
+  name: Adobe Lightroom Album Assets API
+  description: Manage assets within albums
+  humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/
+  tags:
+  - Album Assets
+  properties:
+  - type: OpenAPI
+    url: openapi/lightroom-album-assets-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+  - type: Authentication
+    url: https://developer.adobe.com/developer-console/docs/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
+  - type: ChangeLog
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
+  - type: Documentation
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/
+  - type: GettingStarted
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
+- aid: lightroom:lightroom-albums-api
+  name: Adobe Lightroom Albums API
+  description: CRUD operations on albums
+  humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/
+  tags:
+  - Albums
+  properties:
+  - type: OpenAPI
+    url: openapi/lightroom-albums-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+  - type: Authentication
+    url: https://developer.adobe.com/developer-console/docs/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
+  - type: ChangeLog
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
+  - type: Documentation
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/
+  - type: GettingStarted
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
+- aid: lightroom:lightroom-assets-api
+  name: Adobe Lightroom Assets API
+  description: CRUD operations on photo and video assets
+  humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/
+  tags:
+  - Assets
+  properties:
+  - type: OpenAPI
+    url: openapi/lightroom-assets-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+  - type: Authentication
+    url: https://developer.adobe.com/developer-console/docs/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
+  - type: ChangeLog
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
+  - type: Documentation
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/
+  - type: GettingStarted
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
+- aid: lightroom:lightroom-auto-straighten-api
+  name: Adobe Lightroom Auto Straighten API
+  description: Automatically detect and correct image horizon alignment
+  humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/
+  tags:
+  - Auto Straighten
+  properties:
+  - type: OpenAPI
+    url: openapi/lightroom-auto-straighten-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+  - type: Authentication
+    url: https://developer.adobe.com/developer-console/docs/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
+  - type: ChangeLog
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
+  - type: Documentation
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/
+  - type: GettingStarted
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
+- aid: lightroom:lightroom-auto-tone-api
+  name: Adobe Lightroom Auto Tone API
+  description: Automatically adjust tonal values for optimal exposure and contrast
+  humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/
+  tags:
+  - Auto Tone
+  properties:
+  - type: OpenAPI
+    url: openapi/lightroom-auto-tone-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+  - type: Authentication
+    url: https://developer.adobe.com/developer-console/docs/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
+  - type: ChangeLog
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
+  - type: Documentation
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/
+  - type: GettingStarted
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
+- aid: lightroom:lightroom-catalog-api
+  name: Adobe Lightroom Catalog API
+  description: Catalog metadata and configuration
+  humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/
+  tags:
+  - Catalog
+  properties:
+  - type: OpenAPI
+    url: openapi/lightroom-catalog-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+  - type: Authentication
+    url: https://developer.adobe.com/developer-console/docs/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
+  - type: ChangeLog
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
+  - type: Documentation
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/
+  - type: GettingStarted
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
+- aid: lightroom:lightroom-edit-image-api
+  name: Adobe Lightroom Edit Image API
+  description: Apply custom Lightroom edit settings to images
+  humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/
+  tags:
+  - Edit Image
+  properties:
+  - type: OpenAPI
+    url: openapi/lightroom-edit-image-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+  - type: Authentication
+    url: https://developer.adobe.com/developer-console/docs/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
+  - type: ChangeLog
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
+  - type: Documentation
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/
+  - type: GettingStarted
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
+- aid: lightroom:lightroom-health-api
+  name: Adobe Lightroom Health API
+  description: API health and availability checks
+  humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/lightroom-health-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+  - type: Authentication
+    url: https://developer.adobe.com/developer-console/docs/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
+  - type: ChangeLog
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
+  - type: Documentation
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/
+  - type: GettingStarted
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
+- aid: lightroom:lightroom-master-api
+  name: Adobe Lightroom Master API
+  description: Upload and manage original master files
+  humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/
+  tags:
+  - Master
+  properties:
+  - type: OpenAPI
+    url: openapi/lightroom-master-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+  - type: Authentication
+    url: https://developer.adobe.com/developer-console/docs/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
+  - type: ChangeLog
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
+  - type: Documentation
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/
+  - type: GettingStarted
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
+- aid: lightroom:lightroom-presets-api
+  name: Adobe Lightroom Presets API
+  description: Apply Lightroom presets (XMP develop settings) to images
+  humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/
+  tags:
+  - Presets
+  properties:
+  - type: OpenAPI
+    url: openapi/lightroom-presets-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+  - type: Authentication
+    url: https://developer.adobe.com/developer-console/docs/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
+  - type: ChangeLog
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
+  - type: Documentation
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/
+  - type: GettingStarted
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
+- aid: lightroom:lightroom-renditions-api
+  name: Adobe Lightroom Renditions API
+  description: Retrieve generated renditions (previews and thumbnails)
+  humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/
+  tags:
+  - Renditions
+  properties:
+  - type: OpenAPI
+    url: openapi/lightroom-renditions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+  - type: Authentication
+    url: https://developer.adobe.com/developer-console/docs/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
+  - type: ChangeLog
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
+  - type: Documentation
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/
+  - type: GettingStarted
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
+- aid: lightroom:lightroom-xmp-api
+  name: Adobe Lightroom XMP API
+  description: Read and write external develop XMP sidecar files
+  humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/
+  tags:
+  - XMP
+  properties:
+  - type: OpenAPI
+    url: openapi/lightroom-xmp-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+  - type: Authentication
+    url: https://developer.adobe.com/developer-console/docs/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
+  - type: ChangeLog
+    url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
+  - type: Documentation
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/
+  - type: GettingStarted
+    url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/adobe-lightroom/overview
   - type: AgenticAccess
     url: agentic-access/lightroom-agentic-access.yml
   - type: VulnerabilityDisclosure
