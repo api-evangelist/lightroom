@@ -1,0 +1,2141 @@
+{
+  "info": {
+    "_postman_id": "c886a787-6be7-4327-9576-6f669198dba4",
+    "name": "Adobe Lightroom Lightroom Albums Album Assets API",
+    "description": "API for creating and managing albums and collections within an Adobe Lightroom cloud catalog. Albums organize assets into user-defined collections. Supports listing, creating, updating, and deleting albums as well as managing the assets within each album.\n\nContact Support:\n Name: Adobe Lightroom Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:06:51.000Z",
+    "updatedAt": "2026-07-28T02:06:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c886a787-6be7-4327-9576-6f669198dba4"
+  },
+  "item": [
+    {
+      "name": "catalogs",
+      "item": [
+        {
+          "name": "{catalog_id}",
+          "item": [
+            {
+              "name": "assets",
+              "item": [
+                {
+                  "name": "{asset_id}",
+                  "item": [
+                    {
+                      "name": "master",
+                      "item": [
+                        {
+                          "name": "Adobe Lightroom Upload the Master (original) File for an Asset",
+                          "id": "223ee524-4d20-4933-8f9c-fe8daeeeb152",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) API key from the Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "(Required) ",
+                                "key": "Content-Length",
+                                "value": "<integer>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/octet-stream"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "<binary>"
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/master",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "assets",
+                                ":asset_id",
+                                "master"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "1a05a7e4-c9fc-419e-8ec8-72fe4ec49ba9",
+                                  "key": "catalog_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier of the Lightroom catalog"
+                                },
+                                {
+                                  "id": "701ee51f-6518-423b-b85d-fd36f764895b",
+                                  "key": "asset_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier of the asset"
+                                }
+                              ]
+                            },
+                            "description": "Uploads the original master file for a previously created asset. The asset must already exist in the catalog. The request body should contain the binary image data."
+                          },
+                          "response": [
+                            {
+                              "id": "1e6ba2d3-0f8a-4508-8e8c-1a1ce4735bee",
+                              "name": "Master file uploaded successfully",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "description": "(Required) API key from the Adobe Developer Console",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "description": "(Required) ",
+                                    "key": "Content-Length",
+                                    "value": "<integer>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/octet-stream"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "<binary>"
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/master",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalog_id",
+                                    "assets",
+                                    ":asset_id",
+                                    "master"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "catalog_id"
+                                    },
+                                    {
+                                      "key": "asset_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:06:52.000Z",
+                              "updatedAt": "2026-07-28T02:06:52.000Z",
+                              "uid": "35240-1e6ba2d3-0f8a-4508-8e8c-1a1ce4735bee"
+                            },
+                            {
+                              "id": "b66411e6-230c-4e02-9938-c269751034d9",
+                              "name": "Master file created successfully",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "description": "(Required) API key from the Adobe Developer Console",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "description": "(Required) ",
+                                    "key": "Content-Length",
+                                    "value": "<integer>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/octet-stream"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "<binary>"
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/master",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalog_id",
+                                    "assets",
+                                    ":asset_id",
+                                    "master"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "catalog_id"
+                                    },
+                                    {
+                                      "key": "asset_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Created",
+                              "code": 201,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:06:52.000Z",
+                              "updatedAt": "2026-07-28T02:06:52.000Z",
+                              "uid": "35240-b66411e6-230c-4e02-9938-c269751034d9"
+                            },
+                            {
+                              "id": "542d8245-217b-46ae-8903-ca1e6d016de3",
+                              "name": "Authentication required or invalid credentials",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "description": "(Required) API key from the Adobe Developer Console",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "description": "(Required) ",
+                                    "key": "Content-Length",
+                                    "value": "<integer>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/octet-stream"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "<binary>"
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/master",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalog_id",
+                                    "assets",
+                                    ":asset_id",
+                                    "master"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "catalog_id"
+                                    },
+                                    {
+                                      "key": "asset_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:06:52.000Z",
+                              "updatedAt": "2026-07-28T02:06:52.000Z",
+                              "uid": "35240-542d8245-217b-46ae-8903-ca1e6d016de3"
+                            },
+                            {
+                              "id": "e13f0c8a-86cc-4aeb-a349-7b44a4d7d871",
+                              "name": "Insufficient permissions. The user has not granted access or the partner application is not entitled.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "description": "(Required) API key from the Adobe Developer Console",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "description": "(Required) ",
+                                    "key": "Content-Length",
+                                    "value": "<integer>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/octet-stream"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "<binary>"
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/master",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalog_id",
+                                    "assets",
+                                    ":asset_id",
+                                    "master"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "catalog_id"
+                                    },
+                                    {
+                                      "key": "asset_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:06:52.000Z",
+                              "updatedAt": "2026-07-28T02:06:52.000Z",
+                              "uid": "35240-e13f0c8a-86cc-4aeb-a349-7b44a4d7d871"
+                            },
+                            {
+                              "id": "7d522b07-1984-4acc-abd9-a5c2c1dbe1f7",
+                              "name": "The specified resource was not found",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "description": "(Required) API key from the Adobe Developer Console",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "description": "(Required) ",
+                                    "key": "Content-Length",
+                                    "value": "<integer>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/octet-stream"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "<binary>"
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/master",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalog_id",
+                                    "assets",
+                                    ":asset_id",
+                                    "master"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "catalog_id"
+                                    },
+                                    {
+                                      "key": "asset_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:06:52.000Z",
+                              "updatedAt": "2026-07-28T02:06:52.000Z",
+                              "uid": "35240-7d522b07-1984-4acc-abd9-a5c2c1dbe1f7"
+                            },
+                            {
+                              "id": "390b8b71-b16d-47ac-8968-57dddec706db",
+                              "name": "File too large",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "description": "(Required) API key from the Adobe Developer Console",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "description": "(Required) ",
+                                    "key": "Content-Length",
+                                    "value": "<integer>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/octet-stream"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "<binary>"
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/master",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalog_id",
+                                    "assets",
+                                    ":asset_id",
+                                    "master"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "catalog_id"
+                                    },
+                                    {
+                                      "key": "asset_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Request Entity Too Large",
+                              "code": 413,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:06:52.000Z",
+                              "updatedAt": "2026-07-28T02:06:52.000Z",
+                              "uid": "35240-390b8b71-b16d-47ac-8968-57dddec706db"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:06:52.000Z",
+                          "updatedAt": "2026-07-28T02:06:52.000Z",
+                          "uid": "35240-223ee524-4d20-4933-8f9c-fe8daeeeb152"
+                        }
+                      ],
+                      "id": "5138d462-bb65-4c8b-b6ff-37e70d7c61f6",
+                      "createdAt": "2026-07-28T02:06:52.000Z",
+                      "updatedAt": "2026-07-28T02:06:52.000Z",
+                      "uid": "35240-5138d462-bb65-4c8b-b6ff-37e70d7c61f6"
+                    },
+                    {
+                      "name": "xmp",
+                      "item": [
+                        {
+                          "name": "develop",
+                          "item": [
+                            {
+                              "name": "Adobe Lightroom Get the Develop Settings Xmp for an Asset",
+                              "id": "2ef33e15-5651-4532-a105-0f22a55fd9e5",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "(Required) API key from the Adobe Developer Console",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/rdf+xml"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/xmp/develop",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalog_id",
+                                    "assets",
+                                    ":asset_id",
+                                    "xmp",
+                                    "develop"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "89791841-3537-4457-9f47-c779a1729310",
+                                      "key": "catalog_id",
+                                      "value": "<string>",
+                                      "description": "(Required) Unique identifier of the Lightroom catalog"
+                                    },
+                                    {
+                                      "id": "a57a33a3-b648-46cd-9bc1-f8a5e5599f15",
+                                      "key": "asset_id",
+                                      "value": "<string>",
+                                      "description": "(Required) Unique identifier of the asset"
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieves the external develop XMP sidecar file for the specified asset. Contains Lightroom develop settings as XMP metadata."
+                              },
+                              "response": [
+                                {
+                                  "id": "71ecf657-2dc1-4c39-aeaf-9d402ec10da8",
+                                  "name": "XMP develop settings retrieved successfully",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "(Required) API key from the Adobe Developer Console",
+                                        "key": "X-Api-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/rdf+xml"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/xmp/develop",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "catalogs",
+                                        ":catalog_id",
+                                        "assets",
+                                        ":asset_id",
+                                        "xmp",
+                                        "develop"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "catalog_id"
+                                        },
+                                        {
+                                          "key": "asset_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "xml",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/rdf+xml"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                                  "createdAt": "2026-07-28T02:06:52.000Z",
+                                  "updatedAt": "2026-07-28T02:06:52.000Z",
+                                  "uid": "35240-71ecf657-2dc1-4c39-aeaf-9d402ec10da8"
+                                },
+                                {
+                                  "id": "7f15f2d3-4ba8-4dbf-b597-5a878abcaefd",
+                                  "name": "Authentication required or invalid credentials",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "(Required) API key from the Adobe Developer Console",
+                                        "key": "X-Api-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/xmp/develop",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "catalogs",
+                                        ":catalog_id",
+                                        "assets",
+                                        ":asset_id",
+                                        "xmp",
+                                        "develop"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "catalog_id"
+                                        },
+                                        {
+                                          "key": "asset_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T02:06:52.000Z",
+                                  "updatedAt": "2026-07-28T02:06:52.000Z",
+                                  "uid": "35240-7f15f2d3-4ba8-4dbf-b597-5a878abcaefd"
+                                },
+                                {
+                                  "id": "fb814ac7-5cec-4681-900b-90b16107abfc",
+                                  "name": "The specified resource was not found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "(Required) API key from the Adobe Developer Console",
+                                        "key": "X-Api-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/xmp/develop",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "catalogs",
+                                        ":catalog_id",
+                                        "assets",
+                                        ":asset_id",
+                                        "xmp",
+                                        "develop"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "catalog_id"
+                                        },
+                                        {
+                                          "key": "asset_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T02:06:52.000Z",
+                                  "updatedAt": "2026-07-28T02:06:52.000Z",
+                                  "uid": "35240-fb814ac7-5cec-4681-900b-90b16107abfc"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:06:52.000Z",
+                              "updatedAt": "2026-07-28T02:06:52.000Z",
+                              "uid": "35240-2ef33e15-5651-4532-a105-0f22a55fd9e5"
+                            },
+                            {
+                              "name": "Adobe Lightroom Upload Develop Settings Xmp for an Asset",
+                              "id": "553c5047-8e30-4d77-ba2d-90de0a0ce8fd",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "description": "(Required) API key from the Adobe Developer Console",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/rdf+xml"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "xml",
+                                      "language": "xml"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/xmp/develop",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalog_id",
+                                    "assets",
+                                    ":asset_id",
+                                    "xmp",
+                                    "develop"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "a3961772-e470-4d65-9c39-3c1074318feb",
+                                      "key": "catalog_id",
+                                      "value": "<string>",
+                                      "description": "(Required) Unique identifier of the Lightroom catalog"
+                                    },
+                                    {
+                                      "id": "906f8e5c-4d46-4368-8749-41b5475be6d4",
+                                      "key": "asset_id",
+                                      "value": "<string>",
+                                      "description": "(Required) Unique identifier of the asset"
+                                    }
+                                  ]
+                                },
+                                "description": "Uploads an external develop XMP sidecar file for the specified asset, applying Lightroom develop settings."
+                              },
+                              "response": [
+                                {
+                                  "id": "161edc96-426e-4bdd-bc29-02ad18577577",
+                                  "name": "XMP develop settings updated successfully",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "description": "(Required) API key from the Adobe Developer Console",
+                                        "key": "X-Api-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/rdf+xml"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "xml",
+                                          "language": "xml"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/xmp/develop",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "catalogs",
+                                        ":catalog_id",
+                                        "assets",
+                                        ":asset_id",
+                                        "xmp",
+                                        "develop"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "catalog_id"
+                                        },
+                                        {
+                                          "key": "asset_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:06:52.000Z",
+                                  "updatedAt": "2026-07-28T02:06:52.000Z",
+                                  "uid": "35240-161edc96-426e-4bdd-bc29-02ad18577577"
+                                },
+                                {
+                                  "id": "ac858d5f-cfeb-479a-9a75-a3a7ef7fc405",
+                                  "name": "XMP develop settings created successfully",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "description": "(Required) API key from the Adobe Developer Console",
+                                        "key": "X-Api-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/rdf+xml"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "xml",
+                                          "language": "xml"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/xmp/develop",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "catalogs",
+                                        ":catalog_id",
+                                        "assets",
+                                        ":asset_id",
+                                        "xmp",
+                                        "develop"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "catalog_id"
+                                        },
+                                        {
+                                          "key": "asset_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Created",
+                                  "code": 201,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:06:52.000Z",
+                                  "updatedAt": "2026-07-28T02:06:52.000Z",
+                                  "uid": "35240-ac858d5f-cfeb-479a-9a75-a3a7ef7fc405"
+                                },
+                                {
+                                  "id": "11baa49e-4f28-4148-b599-ad95300d46df",
+                                  "name": "Authentication required or invalid credentials",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "description": "(Required) API key from the Adobe Developer Console",
+                                        "key": "X-Api-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/rdf+xml"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "xml",
+                                          "language": "xml"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/xmp/develop",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "catalogs",
+                                        ":catalog_id",
+                                        "assets",
+                                        ":asset_id",
+                                        "xmp",
+                                        "develop"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "catalog_id"
+                                        },
+                                        {
+                                          "key": "asset_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T02:06:52.000Z",
+                                  "updatedAt": "2026-07-28T02:06:52.000Z",
+                                  "uid": "35240-11baa49e-4f28-4148-b599-ad95300d46df"
+                                },
+                                {
+                                  "id": "c41aad6c-029b-4427-985e-e1985ce3f1e4",
+                                  "name": "The specified resource was not found",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "description": "(Required) API key from the Adobe Developer Console",
+                                        "key": "X-Api-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/rdf+xml"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "xml",
+                                          "language": "xml"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/xmp/develop",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "catalogs",
+                                        ":catalog_id",
+                                        "assets",
+                                        ":asset_id",
+                                        "xmp",
+                                        "develop"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "catalog_id"
+                                        },
+                                        {
+                                          "key": "asset_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T02:06:52.000Z",
+                                  "updatedAt": "2026-07-28T02:06:52.000Z",
+                                  "uid": "35240-c41aad6c-029b-4427-985e-e1985ce3f1e4"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:06:52.000Z",
+                              "updatedAt": "2026-07-28T02:06:52.000Z",
+                              "uid": "35240-553c5047-8e30-4d77-ba2d-90de0a0ce8fd"
+                            }
+                          ],
+                          "id": "c5b14dd4-fc82-46bc-8276-7790db88f39a",
+                          "createdAt": "2026-07-28T02:06:52.000Z",
+                          "updatedAt": "2026-07-28T02:06:52.000Z",
+                          "uid": "35240-c5b14dd4-fc82-46bc-8276-7790db88f39a"
+                        }
+                      ],
+                      "id": "87c9ceff-b83d-42ae-97a5-3916669cb188",
+                      "createdAt": "2026-07-28T02:06:52.000Z",
+                      "updatedAt": "2026-07-28T02:06:52.000Z",
+                      "uid": "35240-87c9ceff-b83d-42ae-97a5-3916669cb188"
+                    },
+                    {
+                      "name": "Adobe Lightroom Get Asset Metadata",
+                      "id": "69a9dc76-5b20-418f-9126-e6f60572bd8c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) API key from Adobe Developer Console",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalog_id",
+                            "assets",
+                            ":asset_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "7405a79d-656d-49f0-916b-605e4bd390b4",
+                              "key": "catalog_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier of the Lightroom catalog"
+                            },
+                            {
+                              "id": "47f3dda1-3c17-4560-aee5-38982fe47e18",
+                              "key": "asset_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the asset (UUID format)"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves complete metadata for a specific asset including EXIF data, capture date, import source, location, develop settings, and links to available renditions."
+                      },
+                      "response": [
+                        {
+                          "id": "f71a7d88-3f1a-478b-a565-820e7c1e8177",
+                          "name": "Asset metadata retrieved successfully",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) API key from Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "assets",
+                                ":asset_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalog_id"
+                                },
+                                {
+                                  "key": "asset_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"base\": \"<string>\",\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"subtype\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"payload\": {\n    \"captureDate\": \"<dateTime>\",\n    \"userCreated\": \"<dateTime>\",\n    \"userUpdated\": \"<dateTime>\",\n    \"importSource\": {\n      \"fileName\": \"<string>\",\n      \"importedOnDevice\": \"<string>\",\n      \"importTimestamp\": \"<dateTime>\"\n    },\n    \"develop\": {},\n    \"xmp\": {},\n    \"location\": {\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"altitude\": \"<number>\",\n      \"direction\": \"<number>\"\n    }\n  },\n  \"links\": {\n    \"laborum_2\": {\n      \"href\": \"<string>\"\n    },\n    \"cillum6\": {\n      \"href\": \"<string>\"\n    },\n    \"irure028\": {\n      \"href\": \"<string>\"\n    },\n    \"aliquip_f\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:06:52.000Z",
+                          "updatedAt": "2026-07-28T02:06:52.000Z",
+                          "uid": "35240-f71a7d88-3f1a-478b-a565-820e7c1e8177"
+                        },
+                        {
+                          "id": "808f29b2-b7de-4cf1-86ea-03d79c0b7234",
+                          "name": "Authentication required",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) API key from Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "assets",
+                                ":asset_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalog_id"
+                                },
+                                {
+                                  "key": "asset_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:06:52.000Z",
+                          "updatedAt": "2026-07-28T02:06:52.000Z",
+                          "uid": "35240-808f29b2-b7de-4cf1-86ea-03d79c0b7234"
+                        },
+                        {
+                          "id": "5cb6070e-2b1d-4199-a1fb-989c1644b9ae",
+                          "name": "Resource not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) API key from Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "assets",
+                                ":asset_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalog_id"
+                                },
+                                {
+                                  "key": "asset_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:06:52.000Z",
+                          "updatedAt": "2026-07-28T02:06:52.000Z",
+                          "uid": "35240-5cb6070e-2b1d-4199-a1fb-989c1644b9ae"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:06:52.000Z",
+                      "updatedAt": "2026-07-28T02:06:52.000Z",
+                      "uid": "35240-69a9dc76-5b20-418f-9126-e6f60572bd8c"
+                    },
+                    {
+                      "name": "Adobe Lightroom Create or Update an Asset",
+                      "id": "5a35be02-a5fc-449a-bd88-9991846d9f41",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "(Required) API key from Adobe Developer Console",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"subtype\": \"video\",\n  \"payload\": {\n    \"captureDate\": \"<dateTime>\",\n    \"userCreated\": \"<dateTime>\",\n    \"userUpdated\": \"<dateTime>\",\n    \"importSource\": {\n      \"fileName\": \"<string>\",\n      \"importedOnDevice\": \"<string>\",\n      \"importTimestamp\": \"<dateTime>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalog_id",
+                            "assets",
+                            ":asset_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "e79ea116-b8e6-4f1e-8541-7ddc5fc82995",
+                              "key": "catalog_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier of the Lightroom catalog"
+                            },
+                            {
+                              "id": "d4cf418b-75ec-48de-8811-2ebb1e465270",
+                              "key": "asset_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the asset (UUID format)"
+                            }
+                          ]
+                        },
+                        "description": "Creates a new asset or updates an existing asset in the catalog. The asset_id should be a client-generated UUID. After creating an asset, upload the master file using the master endpoint."
+                      },
+                      "response": [
+                        {
+                          "id": "26526b0e-b6a3-45ab-88a8-06b1ddc07219",
+                          "name": "Asset updated successfully",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) API key from Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"subtype\": \"video\",\n  \"payload\": {\n    \"captureDate\": \"<dateTime>\",\n    \"userCreated\": \"<dateTime>\",\n    \"userUpdated\": \"<dateTime>\",\n    \"importSource\": {\n      \"fileName\": \"<string>\",\n      \"importedOnDevice\": \"<string>\",\n      \"importTimestamp\": \"<dateTime>\"\n    }\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "assets",
+                                ":asset_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalog_id"
+                                },
+                                {
+                                  "key": "asset_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"base\": \"<string>\",\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"subtype\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"payload\": {\n    \"captureDate\": \"<dateTime>\",\n    \"userCreated\": \"<dateTime>\",\n    \"userUpdated\": \"<dateTime>\",\n    \"importSource\": {\n      \"fileName\": \"<string>\",\n      \"importedOnDevice\": \"<string>\",\n      \"importTimestamp\": \"<dateTime>\"\n    },\n    \"develop\": {},\n    \"xmp\": {},\n    \"location\": {\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"altitude\": \"<number>\",\n      \"direction\": \"<number>\"\n    }\n  },\n  \"links\": {\n    \"laborum_2\": {\n      \"href\": \"<string>\"\n    },\n    \"cillum6\": {\n      \"href\": \"<string>\"\n    },\n    \"irure028\": {\n      \"href\": \"<string>\"\n    },\n    \"aliquip_f\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:06:52.000Z",
+                          "updatedAt": "2026-07-28T02:06:52.000Z",
+                          "uid": "35240-26526b0e-b6a3-45ab-88a8-06b1ddc07219"
+                        },
+                        {
+                          "id": "793e66a4-382b-4581-ba8d-56f4e6367d3e",
+                          "name": "Asset created successfully",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) API key from Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"subtype\": \"video\",\n  \"payload\": {\n    \"captureDate\": \"<dateTime>\",\n    \"userCreated\": \"<dateTime>\",\n    \"userUpdated\": \"<dateTime>\",\n    \"importSource\": {\n      \"fileName\": \"<string>\",\n      \"importedOnDevice\": \"<string>\",\n      \"importTimestamp\": \"<dateTime>\"\n    }\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "assets",
+                                ":asset_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalog_id"
+                                },
+                                {
+                                  "key": "asset_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"base\": \"<string>\",\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"subtype\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"payload\": {\n    \"captureDate\": \"<dateTime>\",\n    \"userCreated\": \"<dateTime>\",\n    \"userUpdated\": \"<dateTime>\",\n    \"importSource\": {\n      \"fileName\": \"<string>\",\n      \"importedOnDevice\": \"<string>\",\n      \"importTimestamp\": \"<dateTime>\"\n    },\n    \"develop\": {},\n    \"xmp\": {},\n    \"location\": {\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"altitude\": \"<number>\",\n      \"direction\": \"<number>\"\n    }\n  },\n  \"links\": {\n    \"laborum_2\": {\n      \"href\": \"<string>\"\n    },\n    \"cillum6\": {\n      \"href\": \"<string>\"\n    },\n    \"irure028\": {\n      \"href\": \"<string>\"\n    },\n    \"aliquip_f\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:06:52.000Z",
+                          "updatedAt": "2026-07-28T02:06:52.000Z",
+                          "uid": "35240-793e66a4-382b-4581-ba8d-56f4e6367d3e"
+                        },
+                        {
+                          "id": "a7cc2487-e00b-42b2-8259-fbbe6324eabd",
+                          "name": "Authentication required",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) API key from Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"subtype\": \"video\",\n  \"payload\": {\n    \"captureDate\": \"<dateTime>\",\n    \"userCreated\": \"<dateTime>\",\n    \"userUpdated\": \"<dateTime>\",\n    \"importSource\": {\n      \"fileName\": \"<string>\",\n      \"importedOnDevice\": \"<string>\",\n      \"importTimestamp\": \"<dateTime>\"\n    }\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "assets",
+                                ":asset_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalog_id"
+                                },
+                                {
+                                  "key": "asset_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:06:52.000Z",
+                          "updatedAt": "2026-07-28T02:06:52.000Z",
+                          "uid": "35240-a7cc2487-e00b-42b2-8259-fbbe6324eabd"
+                        },
+                        {
+                          "id": "ddeaa644-6a31-4a12-b0ed-2d8a1cfd7e37",
+                          "name": "Insufficient permissions",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) API key from Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"subtype\": \"video\",\n  \"payload\": {\n    \"captureDate\": \"<dateTime>\",\n    \"userCreated\": \"<dateTime>\",\n    \"userUpdated\": \"<dateTime>\",\n    \"importSource\": {\n      \"fileName\": \"<string>\",\n      \"importedOnDevice\": \"<string>\",\n      \"importTimestamp\": \"<dateTime>\"\n    }\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "assets",
+                                ":asset_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalog_id"
+                                },
+                                {
+                                  "key": "asset_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:06:52.000Z",
+                          "updatedAt": "2026-07-28T02:06:52.000Z",
+                          "uid": "35240-ddeaa644-6a31-4a12-b0ed-2d8a1cfd7e37"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:06:52.000Z",
+                      "updatedAt": "2026-07-28T02:06:52.000Z",
+                      "uid": "35240-5a35be02-a5fc-449a-bd88-9991846d9f41"
+                    }
+                  ],
+                  "id": "ddf842e9-db6d-46db-9df8-d7a3672e82c4",
+                  "createdAt": "2026-07-28T02:06:52.000Z",
+                  "updatedAt": "2026-07-28T02:06:52.000Z",
+                  "uid": "35240-ddf842e9-db6d-46db-9df8-d7a3672e82c4"
+                },
+                {
+                  "name": "Adobe Lightroom List Assets in a Catalog",
+                  "id": "91623959-ff5f-4dfa-9fb8-e258334dcfc0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) API key from Adobe Developer Console",
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/catalogs/:catalog_id/assets?subtype=image&captured_after=<dateTime>&captured_before=<dateTime>&limit=100&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "catalogs",
+                        ":catalog_id",
+                        "assets"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by asset subtype",
+                          "key": "subtype",
+                          "value": "image"
+                        },
+                        {
+                          "description": "Filter assets captured after this ISO 8601 timestamp",
+                          "key": "captured_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter assets captured before this ISO 8601 timestamp",
+                          "key": "captured_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Maximum number of results",
+                          "key": "limit",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Pagination offset",
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "aaf2425f-2cfb-478a-bf47-fd33c5bfa878",
+                          "key": "catalog_id",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the Lightroom catalog"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a paginated list of assets in the specified catalog. Supports filtering by subtype (image or video) and capture date range."
+                  },
+                  "response": [
+                    {
+                      "id": "80b9c59d-05e3-43a0-bcc9-ee76ac67e2bf",
+                      "name": "Assets retrieved successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) API key from Adobe Developer Console",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalog_id/assets?subtype=image&captured_after=<dateTime>&captured_before=<dateTime>&limit=100&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalog_id",
+                            "assets"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by asset subtype",
+                              "key": "subtype",
+                              "value": "image"
+                            },
+                            {
+                              "description": "Filter assets captured after this ISO 8601 timestamp",
+                              "key": "captured_after",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Filter assets captured before this ISO 8601 timestamp",
+                              "key": "captured_before",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Maximum number of results",
+                              "key": "limit",
+                              "value": "100"
+                            },
+                            {
+                              "description": "Pagination offset",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalog_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"base\": \"<string>\",\n  \"resources\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"subtype\": \"image\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\",\n      \"revision_ids\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"payload\": {\n        \"captureDate\": \"<dateTime>\",\n        \"userCreated\": \"<dateTime>\",\n        \"userUpdated\": \"<dateTime>\",\n        \"importSource\": {\n          \"fileName\": \"<string>\",\n          \"importedOnDevice\": \"<string>\",\n          \"importTimestamp\": \"<dateTime>\"\n        },\n        \"develop\": {},\n        \"xmp\": {},\n        \"location\": {\n          \"latitude\": \"<number>\",\n          \"longitude\": \"<number>\",\n          \"altitude\": \"<number>\",\n          \"direction\": \"<number>\"\n        }\n      },\n      \"links\": {\n        \"id96d\": {\n          \"href\": \"<string>\"\n        },\n        \"ut_05\": {\n          \"href\": \"<string>\"\n        },\n        \"ind\": {\n          \"href\": \"<string>\"\n        },\n        \"non0\": {\n          \"href\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"subtype\": \"video\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\",\n      \"revision_ids\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"payload\": {\n        \"captureDate\": \"<dateTime>\",\n        \"userCreated\": \"<dateTime>\",\n        \"userUpdated\": \"<dateTime>\",\n        \"importSource\": {\n          \"fileName\": \"<string>\",\n          \"importedOnDevice\": \"<string>\",\n          \"importTimestamp\": \"<dateTime>\"\n        },\n        \"develop\": {},\n        \"xmp\": {},\n        \"location\": {\n          \"latitude\": \"<number>\",\n          \"longitude\": \"<number>\",\n          \"altitude\": \"<number>\",\n          \"direction\": \"<number>\"\n        }\n      },\n      \"links\": {\n        \"sit_61\": {\n          \"href\": \"<string>\"\n        },\n        \"exercitation_0e6\": {\n          \"href\": \"<string>\"\n        },\n        \"ex9a\": {\n          \"href\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"links\": {\n    \"est_2e\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:06:52.000Z",
+                      "updatedAt": "2026-07-28T02:06:52.000Z",
+                      "uid": "35240-80b9c59d-05e3-43a0-bcc9-ee76ac67e2bf"
+                    },
+                    {
+                      "id": "a1b367be-de8d-4426-9dbc-c610449a01b8",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) API key from Adobe Developer Console",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalog_id/assets?subtype=image&captured_after=<dateTime>&captured_before=<dateTime>&limit=100&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalog_id",
+                            "assets"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by asset subtype",
+                              "key": "subtype",
+                              "value": "image"
+                            },
+                            {
+                              "description": "Filter assets captured after this ISO 8601 timestamp",
+                              "key": "captured_after",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Filter assets captured before this ISO 8601 timestamp",
+                              "key": "captured_before",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Maximum number of results",
+                              "key": "limit",
+                              "value": "100"
+                            },
+                            {
+                              "description": "Pagination offset",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalog_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:06:52.000Z",
+                      "updatedAt": "2026-07-28T02:06:52.000Z",
+                      "uid": "35240-a1b367be-de8d-4426-9dbc-c610449a01b8"
+                    },
+                    {
+                      "id": "a0ac235d-aedd-4bb2-8f55-fc04759f2355",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) API key from Adobe Developer Console",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalog_id/assets?subtype=image&captured_after=<dateTime>&captured_before=<dateTime>&limit=100&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalog_id",
+                            "assets"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by asset subtype",
+                              "key": "subtype",
+                              "value": "image"
+                            },
+                            {
+                              "description": "Filter assets captured after this ISO 8601 timestamp",
+                              "key": "captured_after",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Filter assets captured before this ISO 8601 timestamp",
+                              "key": "captured_before",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Maximum number of results",
+                              "key": "limit",
+                              "value": "100"
+                            },
+                            {
+                              "description": "Pagination offset",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalog_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:06:52.000Z",
+                      "updatedAt": "2026-07-28T02:06:52.000Z",
+                      "uid": "35240-a0ac235d-aedd-4bb2-8f55-fc04759f2355"
+                    },
+                    {
+                      "id": "a9848d20-3b42-422e-b1eb-fefb318818b9",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) API key from Adobe Developer Console",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalog_id/assets?subtype=image&captured_after=<dateTime>&captured_before=<dateTime>&limit=100&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalog_id",
+                            "assets"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by asset subtype",
+                              "key": "subtype",
+                              "value": "image"
+                            },
+                            {
+                              "description": "Filter assets captured after this ISO 8601 timestamp",
+                              "key": "captured_after",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Filter assets captured before this ISO 8601 timestamp",
+                              "key": "captured_before",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Maximum number of results",
+                              "key": "limit",
+                              "value": "100"
+                            },
+                            {
+                              "description": "Pagination offset",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalog_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:06:52.000Z",
+                      "updatedAt": "2026-07-28T02:06:52.000Z",
+                      "uid": "35240-a9848d20-3b42-422e-b1eb-fefb318818b9"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:06:52.000Z",
+                  "updatedAt": "2026-07-28T02:06:52.000Z",
+                  "uid": "35240-91623959-ff5f-4dfa-9fb8-e258334dcfc0"
+                }
+              ],
+              "id": "5b4cacd5-812e-45ab-a15d-a93ba8e88bea",
+              "createdAt": "2026-07-28T02:06:52.000Z",
+              "updatedAt": "2026-07-28T02:06:52.000Z",
+              "uid": "35240-5b4cacd5-812e-45ab-a15d-a93ba8e88bea"
+            }
+          ],
+          "id": "fe6480ff-bc6a-4694-8f0b-19aea024d586",
+          "createdAt": "2026-07-28T02:06:52.000Z",
+          "updatedAt": "2026-07-28T02:06:52.000Z",
+          "uid": "35240-fe6480ff-bc6a-4694-8f0b-19aea024d586"
+        }
+      ],
+      "id": "09d12f05-a63e-4655-9466-755dfcbade34",
+      "createdAt": "2026-07-28T02:06:52.000Z",
+      "updatedAt": "2026-07-28T02:06:52.000Z",
+      "uid": "35240-09d12f05-a63e-4655-9466-755dfcbade34"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "lr_partner_apis",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://ims-na1.adobelogin.com/ims/token/v3",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://ims-na1.adobelogin.com/ims/authorize/v2",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://lr.adobe.io/v2"
+    }
+  ]
+}

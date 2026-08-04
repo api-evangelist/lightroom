@@ -1,0 +1,160 @@
+{
+  "info": {
+    "_postman_id": "a814e721-34ca-4a9d-b904-552686850a88",
+    "name": "Adobe Lightroom Lightroom Albums Album Assets Health API",
+    "description": "API for creating and managing albums and collections within an Adobe Lightroom cloud catalog. Albums organize assets into user-defined collections. Supports listing, creating, updating, and deleting albums as well as managing the assets within each album.\n\nContact Support:\n Name: Adobe Lightroom Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:07:03.000Z",
+    "updatedAt": "2026-07-28T02:07:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a814e721-34ca-4a9d-b904-552686850a88"
+  },
+  "item": [
+    {
+      "name": "health",
+      "item": [
+        {
+          "name": "Adobe Lightroom Check Api Health",
+          "id": "774a634c-6869-48af-b3ea-662cd82a6786",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            },
+            "description": "Returns the current health status of the Lightroom Services API. This endpoint does not require authentication and is intended for monitoring and uptime verification."
+          },
+          "response": [
+            {
+              "id": "feff6ad9-805e-4339-a4a7-e16ac8fa1728",
+              "name": "API is healthy",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/health",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "health"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:07:04.000Z",
+              "updatedAt": "2026-07-28T02:07:04.000Z",
+              "uid": "35240-feff6ad9-805e-4339-a4a7-e16ac8fa1728"
+            },
+            {
+              "id": "c723f24e-43cf-495d-b56a-c3c832fb77b0",
+              "name": "API is unavailable",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/health",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "health"
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:07:04.000Z",
+              "updatedAt": "2026-07-28T02:07:04.000Z",
+              "uid": "35240-c723f24e-43cf-495d-b56a-c3c832fb77b0"
+            }
+          ],
+          "createdAt": "2026-07-28T02:07:04.000Z",
+          "updatedAt": "2026-07-28T02:07:04.000Z",
+          "uid": "35240-774a634c-6869-48af-b3ea-662cd82a6786"
+        }
+      ],
+      "id": "d930ac7a-2058-4843-b65c-07b4bc72fc59",
+      "createdAt": "2026-07-28T02:07:04.000Z",
+      "updatedAt": "2026-07-28T02:07:04.000Z",
+      "uid": "35240-d930ac7a-2058-4843-b65c-07b4bc72fc59"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "lr_partner_apis",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://ims-na1.adobelogin.com/ims/token/v3",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://ims-na1.adobelogin.com/ims/authorize/v2",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://lr.adobe.io/v2"
+    }
+  ]
+}

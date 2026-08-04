@@ -1,0 +1,486 @@
+{
+  "info": {
+    "_postman_id": "d559462f-6f3e-41e8-8876-946d86f385b9",
+    "name": "Adobe Lightroom Lightroom Albums Album Assets Edit Image API",
+    "description": "API for creating and managing albums and collections within an Adobe Lightroom cloud catalog. Albums organize assets into user-defined collections. Supports listing, creating, updating, and deleting albums as well as managing the assets within each album.\n\nContact Support:\n Name: Adobe Lightroom Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:07:01.000Z",
+    "updatedAt": "2026-07-28T02:07:01.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d559462f-6f3e-41e8-8876-946d86f385b9"
+  },
+  "item": [
+    {
+      "name": "lrService",
+      "item": [
+        {
+          "name": "edit",
+          "item": [
+            {
+              "name": "Adobe Lightroom Apply Custom Edit Settings to an Image",
+              "id": "5cb7eb62-a328-4d50-bdaf-a944c3524c5f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"<string>\",\n      \"storage\": \"external\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"image/tiff\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/dng\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    }\n  ],\n  \"options\": {\n    \"Exposure\": \"<number>\",\n    \"Contrast\": \"<integer>\",\n    \"Highlights\": \"<integer>\",\n    \"Shadows\": \"<integer>\",\n    \"Whites\": \"<integer>\",\n    \"Blacks\": \"<integer>\",\n    \"Clarity\": \"<integer>\",\n    \"Dehaze\": \"<integer>\",\n    \"Vibrance\": \"<integer>\",\n    \"Saturation\": \"<integer>\",\n    \"WhiteBalance\": \"Daylight\",\n    \"Temperature\": \"<integer>\",\n    \"Tint\": \"<integer>\",\n    \"Sharpness\": \"<integer>\",\n    \"SharpenRadius\": \"<number>\",\n    \"SharpenDetail\": \"<integer>\",\n    \"NoiseReduction\": \"<integer>\",\n    \"ColorNoiseReduction\": \"<integer>\",\n    \"VignetteAmount\": \"<integer>\",\n    \"GrainAmount\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/lrService/edit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "lrService",
+                    "edit"
+                  ]
+                },
+                "description": "Applies custom Lightroom develop settings to an image. Accepts a comprehensive set of editing parameters covering white balance, exposure, contrast, highlights, shadows, tone curve, HSL, split toning, sharpening, noise reduction, lens corrections, and more. Provides the full range of non-destructive editing capabilities available in the Lightroom develop module."
+              },
+              "response": [
+                {
+                  "id": "988a0406-91bd-4c19-88d8-d4bc4ac609f7",
+                  "name": "Edit applied successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) API key (client_id) from Adobe Developer Console",
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"<string>\",\n      \"storage\": \"external\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"image/tiff\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/dng\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    }\n  ],\n  \"options\": {\n    \"Exposure\": \"<number>\",\n    \"Contrast\": \"<integer>\",\n    \"Highlights\": \"<integer>\",\n    \"Shadows\": \"<integer>\",\n    \"Whites\": \"<integer>\",\n    \"Blacks\": \"<integer>\",\n    \"Clarity\": \"<integer>\",\n    \"Dehaze\": \"<integer>\",\n    \"Vibrance\": \"<integer>\",\n    \"Saturation\": \"<integer>\",\n    \"WhiteBalance\": \"Daylight\",\n    \"Temperature\": \"<integer>\",\n    \"Tint\": \"<integer>\",\n    \"Sharpness\": \"<integer>\",\n    \"SharpenRadius\": \"<number>\",\n    \"SharpenDetail\": \"<integer>\",\n    \"NoiseReduction\": \"<integer>\",\n    \"ColorNoiseReduction\": \"<integer>\",\n    \"VignetteAmount\": \"<integer>\",\n    \"GrainAmount\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/lrService/edit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lrService",
+                        "edit"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jobId\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\",\n  \"outputs\": [\n    {\n      \"input\": \"<string>\",\n      \"status\": \"pending\",\n      \"href\": \"<string>\",\n      \"errors\": {\n        \"type\": \"<string>\",\n        \"title\": \"<string>\",\n        \"code\": \"<integer>\"\n      }\n    },\n    {\n      \"input\": \"<string>\",\n      \"status\": \"succeeded\",\n      \"href\": \"<string>\",\n      \"errors\": {\n        \"type\": \"<string>\",\n        \"title\": \"<string>\",\n        \"code\": \"<integer>\"\n      }\n    }\n  ],\n  \"_links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:07:01.000Z",
+                  "updatedAt": "2026-07-28T02:07:01.000Z",
+                  "uid": "35240-988a0406-91bd-4c19-88d8-d4bc4ac609f7"
+                },
+                {
+                  "id": "0b556723-ae78-460c-849c-97a630aa5994",
+                  "name": "Job accepted and processing",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) API key (client_id) from Adobe Developer Console",
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"<string>\",\n      \"storage\": \"external\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"image/tiff\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/dng\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    }\n  ],\n  \"options\": {\n    \"Exposure\": \"<number>\",\n    \"Contrast\": \"<integer>\",\n    \"Highlights\": \"<integer>\",\n    \"Shadows\": \"<integer>\",\n    \"Whites\": \"<integer>\",\n    \"Blacks\": \"<integer>\",\n    \"Clarity\": \"<integer>\",\n    \"Dehaze\": \"<integer>\",\n    \"Vibrance\": \"<integer>\",\n    \"Saturation\": \"<integer>\",\n    \"WhiteBalance\": \"Daylight\",\n    \"Temperature\": \"<integer>\",\n    \"Tint\": \"<integer>\",\n    \"Sharpness\": \"<integer>\",\n    \"SharpenRadius\": \"<number>\",\n    \"SharpenDetail\": \"<integer>\",\n    \"NoiseReduction\": \"<integer>\",\n    \"ColorNoiseReduction\": \"<integer>\",\n    \"VignetteAmount\": \"<integer>\",\n    \"GrainAmount\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/lrService/edit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lrService",
+                        "edit"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jobId\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\",\n  \"outputs\": [\n    {\n      \"input\": \"<string>\",\n      \"status\": \"pending\",\n      \"href\": \"<string>\",\n      \"errors\": {\n        \"type\": \"<string>\",\n        \"title\": \"<string>\",\n        \"code\": \"<integer>\"\n      }\n    },\n    {\n      \"input\": \"<string>\",\n      \"status\": \"succeeded\",\n      \"href\": \"<string>\",\n      \"errors\": {\n        \"type\": \"<string>\",\n        \"title\": \"<string>\",\n        \"code\": \"<integer>\"\n      }\n    }\n  ],\n  \"_links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:07:01.000Z",
+                  "updatedAt": "2026-07-28T02:07:01.000Z",
+                  "uid": "35240-0b556723-ae78-460c-849c-97a630aa5994"
+                },
+                {
+                  "id": "93dc47eb-1ede-424a-9b35-637aea253685",
+                  "name": "Invalid request parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) API key (client_id) from Adobe Developer Console",
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"<string>\",\n      \"storage\": \"external\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"image/tiff\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/dng\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    }\n  ],\n  \"options\": {\n    \"Exposure\": \"<number>\",\n    \"Contrast\": \"<integer>\",\n    \"Highlights\": \"<integer>\",\n    \"Shadows\": \"<integer>\",\n    \"Whites\": \"<integer>\",\n    \"Blacks\": \"<integer>\",\n    \"Clarity\": \"<integer>\",\n    \"Dehaze\": \"<integer>\",\n    \"Vibrance\": \"<integer>\",\n    \"Saturation\": \"<integer>\",\n    \"WhiteBalance\": \"Daylight\",\n    \"Temperature\": \"<integer>\",\n    \"Tint\": \"<integer>\",\n    \"Sharpness\": \"<integer>\",\n    \"SharpenRadius\": \"<number>\",\n    \"SharpenDetail\": \"<integer>\",\n    \"NoiseReduction\": \"<integer>\",\n    \"ColorNoiseReduction\": \"<integer>\",\n    \"VignetteAmount\": \"<integer>\",\n    \"GrainAmount\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/lrService/edit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lrService",
+                        "edit"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"detail\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:07:01.000Z",
+                  "updatedAt": "2026-07-28T02:07:01.000Z",
+                  "uid": "35240-93dc47eb-1ede-424a-9b35-637aea253685"
+                },
+                {
+                  "id": "c439c008-fe84-4bab-b0ea-9e0bfb64eda4",
+                  "name": "Authentication required or invalid token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) API key (client_id) from Adobe Developer Console",
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"<string>\",\n      \"storage\": \"external\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"image/tiff\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/dng\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    }\n  ],\n  \"options\": {\n    \"Exposure\": \"<number>\",\n    \"Contrast\": \"<integer>\",\n    \"Highlights\": \"<integer>\",\n    \"Shadows\": \"<integer>\",\n    \"Whites\": \"<integer>\",\n    \"Blacks\": \"<integer>\",\n    \"Clarity\": \"<integer>\",\n    \"Dehaze\": \"<integer>\",\n    \"Vibrance\": \"<integer>\",\n    \"Saturation\": \"<integer>\",\n    \"WhiteBalance\": \"Daylight\",\n    \"Temperature\": \"<integer>\",\n    \"Tint\": \"<integer>\",\n    \"Sharpness\": \"<integer>\",\n    \"SharpenRadius\": \"<number>\",\n    \"SharpenDetail\": \"<integer>\",\n    \"NoiseReduction\": \"<integer>\",\n    \"ColorNoiseReduction\": \"<integer>\",\n    \"VignetteAmount\": \"<integer>\",\n    \"GrainAmount\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/lrService/edit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lrService",
+                        "edit"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"detail\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:07:01.000Z",
+                  "updatedAt": "2026-07-28T02:07:01.000Z",
+                  "uid": "35240-c439c008-fe84-4bab-b0ea-9e0bfb64eda4"
+                },
+                {
+                  "id": "8934803a-c847-4176-aa15-5afd4c7699e1",
+                  "name": "Insufficient permissions or quota exceeded",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) API key (client_id) from Adobe Developer Console",
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"<string>\",\n      \"storage\": \"external\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"image/tiff\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/dng\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    }\n  ],\n  \"options\": {\n    \"Exposure\": \"<number>\",\n    \"Contrast\": \"<integer>\",\n    \"Highlights\": \"<integer>\",\n    \"Shadows\": \"<integer>\",\n    \"Whites\": \"<integer>\",\n    \"Blacks\": \"<integer>\",\n    \"Clarity\": \"<integer>\",\n    \"Dehaze\": \"<integer>\",\n    \"Vibrance\": \"<integer>\",\n    \"Saturation\": \"<integer>\",\n    \"WhiteBalance\": \"Daylight\",\n    \"Temperature\": \"<integer>\",\n    \"Tint\": \"<integer>\",\n    \"Sharpness\": \"<integer>\",\n    \"SharpenRadius\": \"<number>\",\n    \"SharpenDetail\": \"<integer>\",\n    \"NoiseReduction\": \"<integer>\",\n    \"ColorNoiseReduction\": \"<integer>\",\n    \"VignetteAmount\": \"<integer>\",\n    \"GrainAmount\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/lrService/edit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lrService",
+                        "edit"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"detail\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:07:01.000Z",
+                  "updatedAt": "2026-07-28T02:07:01.000Z",
+                  "uid": "35240-8934803a-c847-4176-aa15-5afd4c7699e1"
+                },
+                {
+                  "id": "af427cb2-b75d-44c0-baec-0350b4c76cec",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) API key (client_id) from Adobe Developer Console",
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"<string>\",\n      \"storage\": \"external\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"image/tiff\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/dng\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    }\n  ],\n  \"options\": {\n    \"Exposure\": \"<number>\",\n    \"Contrast\": \"<integer>\",\n    \"Highlights\": \"<integer>\",\n    \"Shadows\": \"<integer>\",\n    \"Whites\": \"<integer>\",\n    \"Blacks\": \"<integer>\",\n    \"Clarity\": \"<integer>\",\n    \"Dehaze\": \"<integer>\",\n    \"Vibrance\": \"<integer>\",\n    \"Saturation\": \"<integer>\",\n    \"WhiteBalance\": \"Daylight\",\n    \"Temperature\": \"<integer>\",\n    \"Tint\": \"<integer>\",\n    \"Sharpness\": \"<integer>\",\n    \"SharpenRadius\": \"<number>\",\n    \"SharpenDetail\": \"<integer>\",\n    \"NoiseReduction\": \"<integer>\",\n    \"ColorNoiseReduction\": \"<integer>\",\n    \"VignetteAmount\": \"<integer>\",\n    \"GrainAmount\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/lrService/edit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lrService",
+                        "edit"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"detail\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:07:01.000Z",
+                  "updatedAt": "2026-07-28T02:07:01.000Z",
+                  "uid": "35240-af427cb2-b75d-44c0-baec-0350b4c76cec"
+                }
+              ],
+              "createdAt": "2026-07-28T02:07:01.000Z",
+              "updatedAt": "2026-07-28T02:07:01.000Z",
+              "uid": "35240-5cb7eb62-a328-4d50-bdaf-a944c3524c5f"
+            }
+          ],
+          "id": "a70e7cd5-5c68-49a4-aed2-844aac03afb0",
+          "createdAt": "2026-07-28T02:07:01.000Z",
+          "updatedAt": "2026-07-28T02:07:01.000Z",
+          "uid": "35240-a70e7cd5-5c68-49a4-aed2-844aac03afb0"
+        }
+      ],
+      "id": "36dd20b5-2e96-4ae2-af8b-8ea2b2742bcb",
+      "createdAt": "2026-07-28T02:07:01.000Z",
+      "updatedAt": "2026-07-28T02:07:01.000Z",
+      "uid": "35240-36dd20b5-2e96-4ae2-af8b-8ea2b2742bcb"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "lr_partner_apis",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://ims-na1.adobelogin.com/ims/token/v3",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://ims-na1.adobelogin.com/ims/authorize/v2",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://lr.adobe.io/v2"
+    }
+  ]
+}

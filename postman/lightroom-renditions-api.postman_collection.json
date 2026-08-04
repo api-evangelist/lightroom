@@ -1,0 +1,349 @@
+{
+  "info": {
+    "_postman_id": "c898a563-2c18-4325-af21-1ae6b2f8233f",
+    "name": "Adobe Lightroom Lightroom Albums Album Assets Renditions API",
+    "description": "API for creating and managing albums and collections within an Adobe Lightroom cloud catalog. Albums organize assets into user-defined collections. Supports listing, creating, updating, and deleting albums as well as managing the assets within each album.\n\nContact Support:\n Name: Adobe Lightroom Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:07:31.000Z",
+    "updatedAt": "2026-07-28T02:07:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c898a563-2c18-4325-af21-1ae6b2f8233f"
+  },
+  "item": [
+    {
+      "name": "catalogs",
+      "item": [
+        {
+          "name": "{catalog_id}",
+          "item": [
+            {
+              "name": "assets",
+              "item": [
+                {
+                  "name": "{asset_id}",
+                  "item": [
+                    {
+                      "name": "renditions",
+                      "item": [
+                        {
+                          "name": "{rendition_type}",
+                          "item": [
+                            {
+                              "name": "Adobe Lightroom Get an Asset Rendition",
+                              "id": "5185c624-1d50-4037-8030-7f500f7a4f0e",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "(Required) API key from Adobe Developer Console",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "image/jpeg"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/renditions/:rendition_type",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalog_id",
+                                    "assets",
+                                    ":asset_id",
+                                    "renditions",
+                                    ":rendition_type"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "0c08eab2-f82d-4c90-aea9-eb4aae2da53a",
+                                      "key": "catalog_id",
+                                      "value": "<string>",
+                                      "description": "(Required) Unique identifier of the Lightroom catalog"
+                                    },
+                                    {
+                                      "id": "401bc588-426f-4d57-a51f-f3a948a4dad9",
+                                      "key": "asset_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Unique identifier of the asset (UUID format)"
+                                    },
+                                    {
+                                      "id": "0a6fd2e1-ed29-4128-b8f4-0c1d8c09282e",
+                                      "key": "rendition_type",
+                                      "value": "1024",
+                                      "description": "(Required) Rendition size type. thumbnail2x is a small thumbnail, numeric values indicate the longest edge in pixels, and fullsize is the maximum resolution available."
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieves a server-generated rendition of the asset at the specified size. Renditions are JPEG preview images generated from the master file with current develop settings applied."
+                              },
+                              "response": [
+                                {
+                                  "id": "ec8859c4-d1e7-4da1-bec1-4a87fdbdbeab",
+                                  "name": "Rendition image returned",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "(Required) API key from Adobe Developer Console",
+                                        "key": "X-Api-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "image/jpeg"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/renditions/:rendition_type",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "catalogs",
+                                        ":catalog_id",
+                                        "assets",
+                                        ":asset_id",
+                                        "renditions",
+                                        ":rendition_type"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "catalog_id"
+                                        },
+                                        {
+                                          "key": "asset_id"
+                                        },
+                                        {
+                                          "key": "rendition_type"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "image/jpeg"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<binary>",
+                                  "createdAt": "2026-07-28T02:07:31.000Z",
+                                  "updatedAt": "2026-07-28T02:07:31.000Z",
+                                  "uid": "35240-ec8859c4-d1e7-4da1-bec1-4a87fdbdbeab"
+                                },
+                                {
+                                  "id": "e13ae446-c03d-4b42-9c40-a40b3a8451de",
+                                  "name": "Authentication required",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "(Required) API key from Adobe Developer Console",
+                                        "key": "X-Api-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/renditions/:rendition_type",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "catalogs",
+                                        ":catalog_id",
+                                        "assets",
+                                        ":asset_id",
+                                        "renditions",
+                                        ":rendition_type"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "catalog_id"
+                                        },
+                                        {
+                                          "key": "asset_id"
+                                        },
+                                        {
+                                          "key": "rendition_type"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:07:31.000Z",
+                                  "updatedAt": "2026-07-28T02:07:31.000Z",
+                                  "uid": "35240-e13ae446-c03d-4b42-9c40-a40b3a8451de"
+                                },
+                                {
+                                  "id": "2f777fca-f6d5-4381-9d0e-0419d1e45641",
+                                  "name": "Resource not found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "(Required) API key from Adobe Developer Console",
+                                        "key": "X-Api-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/catalogs/:catalog_id/assets/:asset_id/renditions/:rendition_type",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "catalogs",
+                                        ":catalog_id",
+                                        "assets",
+                                        ":asset_id",
+                                        "renditions",
+                                        ":rendition_type"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "catalog_id"
+                                        },
+                                        {
+                                          "key": "asset_id"
+                                        },
+                                        {
+                                          "key": "rendition_type"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:07:31.000Z",
+                                  "updatedAt": "2026-07-28T02:07:31.000Z",
+                                  "uid": "35240-2f777fca-f6d5-4381-9d0e-0419d1e45641"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:07:31.000Z",
+                              "updatedAt": "2026-07-28T02:07:31.000Z",
+                              "uid": "35240-5185c624-1d50-4037-8030-7f500f7a4f0e"
+                            }
+                          ],
+                          "id": "114fa4c1-f9aa-4793-89a6-f0b4f77a453b",
+                          "createdAt": "2026-07-28T02:07:31.000Z",
+                          "updatedAt": "2026-07-28T02:07:31.000Z",
+                          "uid": "35240-114fa4c1-f9aa-4793-89a6-f0b4f77a453b"
+                        }
+                      ],
+                      "id": "6ab77865-c5eb-46b6-861e-ebda55cafa36",
+                      "createdAt": "2026-07-28T02:07:31.000Z",
+                      "updatedAt": "2026-07-28T02:07:31.000Z",
+                      "uid": "35240-6ab77865-c5eb-46b6-861e-ebda55cafa36"
+                    }
+                  ],
+                  "id": "1ed7693c-fe48-4eeb-ba02-3edce1330997",
+                  "createdAt": "2026-07-28T02:07:31.000Z",
+                  "updatedAt": "2026-07-28T02:07:31.000Z",
+                  "uid": "35240-1ed7693c-fe48-4eeb-ba02-3edce1330997"
+                }
+              ],
+              "id": "b22a5434-8f66-4a3c-a169-db4e0abc87a9",
+              "createdAt": "2026-07-28T02:07:31.000Z",
+              "updatedAt": "2026-07-28T02:07:31.000Z",
+              "uid": "35240-b22a5434-8f66-4a3c-a169-db4e0abc87a9"
+            }
+          ],
+          "id": "e59c7ec8-c4ef-4662-9752-afddf6e991e8",
+          "createdAt": "2026-07-28T02:07:31.000Z",
+          "updatedAt": "2026-07-28T02:07:31.000Z",
+          "uid": "35240-e59c7ec8-c4ef-4662-9752-afddf6e991e8"
+        }
+      ],
+      "id": "9f595e99-4078-49a3-9a29-73239902146f",
+      "createdAt": "2026-07-28T02:07:31.000Z",
+      "updatedAt": "2026-07-28T02:07:31.000Z",
+      "uid": "35240-9f595e99-4078-49a3-9a29-73239902146f"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "lr_partner_apis",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://ims-na1.adobelogin.com/ims/token/v3",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://ims-na1.adobelogin.com/ims/authorize/v2",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://lr.adobe.io/v2"
+    }
+  ]
+}

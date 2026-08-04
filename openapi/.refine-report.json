@@ -1,0 +1,36 @@
+{
+  "provider": "lightroom",
+  "sources": [
+    "lightroom-album-assets-api-openapi.yml",
+    "lightroom-albums-api-openapi.yml",
+    "lightroom-assets-api-openapi.yml",
+    "lightroom-auto-straighten-api-openapi.yml",
+    "lightroom-auto-tone-api-openapi.yml",
+    "lightroom-catalog-api-openapi.yml",
+    "lightroom-edit-image-api-openapi.yml",
+    "lightroom-health-api-openapi.yml",
+    "lightroom-master-api-openapi.yml",
+    "lightroom-presets-api-openapi.yml",
+    "lightroom-renditions-api-openapi.yml",
+    "lightroom-xmp-api-openapi.yml"
+  ],
+  "outputs": [
+    "lightroom-album-assets-api-openapi.yml",
+    "lightroom-albums-api-openapi.yml",
+    "lightroom-assets-api-openapi.yml",
+    "lightroom-auto-straighten-api-openapi.yml",
+    "lightroom-auto-tone-api-openapi.yml",
+    "lightroom-catalog-api-openapi.yml",
+    "lightroom-edit-image-api-openapi.yml",
+    "lightroom-health-api-openapi.yml",
+    "lightroom-master-api-openapi.yml",
+    "lightroom-presets-api-openapi.yml",
+    "lightroom-renditions-api-openapi.yml",
+    "lightroom-xmp-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

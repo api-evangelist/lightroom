@@ -1,0 +1,691 @@
+openapi: 3.1.0
+info:
+  title: Adobe Lightroom Lightroom Assets API
+  description: >-
+    API for managing photo assets within an Adobe Lightroom cloud catalog.
+    Supports creating master assets, uploading original files, reading and
+    writing external develop XMP sidecar files, and generating renditions
+    at various sizes. Assets represent individual photos or videos stored
+    in a customer's Lightroom catalog.
+  version: '2'
+  contact:
+    name: Adobe Lightroom Developer Support
+    url: https://community.adobe.com/t5/lightroom/ct-p/ct-lightroom
+  license:
+    name: Adobe Terms of Service
+    url: https://www.adobe.com/legal/terms.html
+  termsOfService: https://www.adobe.com/legal/terms.html
+externalDocs:
+  description: Lightroom Assets API Documentation
+  url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
+servers:
+- url: https://lr.adobe.io/v2
+  description: Lightroom Services Production Server
+tags:
+- name: Assets
+  description: CRUD operations on photo and video assets
+- name: Master
+  description: Upload and manage original master files
+- name: Renditions
+  description: Retrieve generated renditions (previews and thumbnails)
+- name: XMP
+  description: Read and write external develop XMP sidecar files
+security:
+- oauth2:
+  - lr_partner_apis
+- apiKey: []
+paths:
+  /catalogs/{catalog_id}/assets:
+    get:
+      operationId: listAssets
+      summary: Adobe Lightroom List Assets in a Catalog
+      description: >-
+        Retrieves a paginated list of assets in the specified catalog. Supports
+        filtering by subtype (image or video) and capture date range.
+      tags:
+      - Assets
+      parameters:
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/XApiKey'
+      - name: subtype
+        in: query
+        description: Filter by asset subtype
+        schema:
+          type: string
+          enum:
+          - image
+          - video
+        example: image
+      - name: captured_after
+        in: query
+        description: Filter assets captured after this ISO 8601 timestamp
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: captured_before
+        in: query
+        description: Filter assets captured before this ISO 8601 timestamp
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: limit
+        in: query
+        description: Maximum number of results
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+          maximum: 500
+        example: 10
+      - name: offset
+        in: query
+        description: Pagination offset
+        schema:
+          type: integer
+          default: 0
+        example: 10
+      responses:
+        '200':
+          description: Assets retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetsListResponse'
+              examples:
+                Listassets200Example:
+                  summary: Default listAssets 200 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    resources:
+                    - id: abc123
+                      type: example_value
+                      subtype: image
+                      created: '2026-01-15T10:30:00Z'
+                      updated: '2026-01-15T10:30:00Z'
+                      revision_ids: {}
+                    links: {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalogs/{catalog_id}/assets/{asset_id}:
+    get:
+      operationId: getAsset
+      summary: Adobe Lightroom Get Asset Metadata
+      description: >-
+        Retrieves complete metadata for a specific asset including EXIF data,
+        capture date, import source, location, develop settings, and links to
+        available renditions.
+      tags:
+      - Assets
+      parameters:
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AssetId'
+      - $ref: '#/components/parameters/XApiKey'
+      responses:
+        '200':
+          description: Asset metadata retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetResponse'
+              examples:
+                Getasset200Example:
+                  summary: Default getAsset 200 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    id: abc123
+                    type: example_value
+                    subtype: example_value
+                    created: '2026-01-15T10:30:00Z'
+                    updated: '2026-01-15T10:30:00Z'
+                    payload:
+                      captureDate: '2026-01-15T10:30:00Z'
+                      userCreated: '2026-01-15T10:30:00Z'
+                      userUpdated: '2026-01-15T10:30:00Z'
+                      importSource:
+                        fileName: example_value
+                        importedOnDevice: example_value
+                        importTimestamp: '2026-01-15T10:30:00Z'
+                      develop: example_value
+                      xmp: example_value
+                      location:
+                        latitude: 42.5
+                        longitude: 42.5
+                        altitude: 42.5
+                        direction: 42.5
+                    links: {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: createOrUpdateAsset
+      summary: Adobe Lightroom Create or Update an Asset
+      description: >-
+        Creates a new asset or updates an existing asset in the catalog. The
+        asset_id should be a client-generated UUID. After creating an asset,
+        upload the master file using the master endpoint.
+      tags:
+      - Assets
+      parameters:
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AssetId'
+      - $ref: '#/components/parameters/XApiKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetCreateRequest'
+            examples:
+              CreateorupdateassetRequestExample:
+                summary: Default createOrUpdateAsset request
+                x-microcks-default: true
+                value:
+                  subtype: image
+                  payload:
+                    captureDate: '2026-01-15T10:30:00Z'
+                    userCreated: '2026-01-15T10:30:00Z'
+                    userUpdated: '2026-01-15T10:30:00Z'
+                    importSource:
+                      fileName: example_value
+                      importedOnDevice: example_value
+                      importTimestamp: '2026-01-15T10:30:00Z'
+      responses:
+        '200':
+          description: Asset updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetResponse'
+              examples:
+                Createorupdateasset200Example:
+                  summary: Default createOrUpdateAsset 200 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    id: abc123
+                    type: example_value
+                    subtype: example_value
+                    created: '2026-01-15T10:30:00Z'
+                    updated: '2026-01-15T10:30:00Z'
+                    payload:
+                      captureDate: '2026-01-15T10:30:00Z'
+                      userCreated: '2026-01-15T10:30:00Z'
+                      userUpdated: '2026-01-15T10:30:00Z'
+                      importSource:
+                        fileName: example_value
+                        importedOnDevice: example_value
+                        importTimestamp: '2026-01-15T10:30:00Z'
+                      develop: example_value
+                      xmp: example_value
+                      location:
+                        latitude: 42.5
+                        longitude: 42.5
+                        altitude: 42.5
+                        direction: 42.5
+                    links: {}
+        '201':
+          description: Asset created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetResponse'
+              examples:
+                Createorupdateasset201Example:
+                  summary: Default createOrUpdateAsset 201 response
+                  x-microcks-default: true
+                  value:
+                    base: example_value
+                    id: abc123
+                    type: example_value
+                    subtype: example_value
+                    created: '2026-01-15T10:30:00Z'
+                    updated: '2026-01-15T10:30:00Z'
+                    payload:
+                      captureDate: '2026-01-15T10:30:00Z'
+                      userCreated: '2026-01-15T10:30:00Z'
+                      userUpdated: '2026-01-15T10:30:00Z'
+                      importSource:
+                        fileName: example_value
+                        importedOnDevice: example_value
+                        importTimestamp: '2026-01-15T10:30:00Z'
+                      develop: example_value
+                      xmp: example_value
+                      location:
+                        latitude: 42.5
+                        longitude: 42.5
+                        altitude: 42.5
+                        direction: 42.5
+                    links: {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalogs/{catalog_id}/assets/{asset_id}/master:
+    put:
+      operationId: uploadMaster
+      summary: Adobe Lightroom Upload the Original Master File
+      description: >-
+        Uploads the original (master) image or video file for a previously
+        created asset. The Content-Type header must match the file type being
+        uploaded. Supported formats include JPEG, PNG, TIFF, DNG, and MP4.
+      tags:
+      - Master
+      parameters:
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AssetId'
+      - $ref: '#/components/parameters/XApiKey'
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - image/jpeg
+          - image/png
+          - image/tiff
+          - image/dng
+          - image/x-adobe-dng
+          - video/mp4
+        example: image/jpeg
+      - name: Content-Length
+        in: header
+        required: true
+        schema:
+          type: integer
+          description: Size of the file in bytes
+        example: 10
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+            examples:
+              UploadmasterRequestExample:
+                summary: Default uploadMaster request
+                x-microcks-default: true
+                value: example_value
+      responses:
+        '200':
+          description: Master file uploaded successfully
+        '201':
+          description: Master file created successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '413':
+          description: Request entity too large
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalogs/{catalog_id}/assets/{asset_id}/xmp/develop:
+    get:
+      operationId: getDevelopXmp
+      summary: Adobe Lightroom Get Develop Settings Xmp
+      description: >-
+        Retrieves the external develop XMP sidecar data for the asset. Contains
+        Lightroom develop module settings including exposure, white balance,
+        tone curve, and other adjustments in XMP/RDF format.
+      tags:
+      - XMP
+      parameters:
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AssetId'
+      - $ref: '#/components/parameters/XApiKey'
+      responses:
+        '200':
+          description: XMP develop settings retrieved
+          content:
+            application/rdf+xml:
+              schema:
+                type: string
+              examples:
+                Getdevelopxmp200Example:
+                  summary: Default getDevelopXmp 200 response
+                  x-microcks-default: true
+                  value: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: putDevelopXmp
+      summary: Adobe Lightroom Upload Develop Settings Xmp
+      description: >-
+        Uploads external develop XMP sidecar data for the asset. Applies
+        Lightroom develop settings to the asset.
+      tags:
+      - XMP
+      parameters:
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AssetId'
+      - $ref: '#/components/parameters/XApiKey'
+      requestBody:
+        required: true
+        content:
+          application/rdf+xml:
+            schema:
+              type: string
+            examples:
+              PutdevelopxmpRequestExample:
+                summary: Default putDevelopXmp request
+                x-microcks-default: true
+                value: example_value
+      responses:
+        '200':
+          description: XMP develop settings applied
+        '201':
+          description: XMP develop settings created
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalogs/{catalog_id}/assets/{asset_id}/renditions/{rendition_type}:
+    get:
+      operationId: getRendition
+      summary: Adobe Lightroom Get an Asset Rendition
+      description: >-
+        Retrieves a server-generated rendition of the asset at the specified
+        size. Renditions are JPEG preview images generated from the master
+        file with current develop settings applied.
+      tags:
+      - Renditions
+      parameters:
+      - $ref: '#/components/parameters/CatalogId'
+      - $ref: '#/components/parameters/AssetId'
+      - name: rendition_type
+        in: path
+        required: true
+        description: >-
+          Rendition size type. thumbnail2x is a small thumbnail, numeric
+          values indicate the longest edge in pixels, and fullsize is the
+          maximum resolution available.
+        schema:
+          type: string
+          enum:
+          - thumbnail2x
+          - '640'
+          - '1024'
+          - '2048'
+          - fullsize
+        example: thumbnail2x
+      - $ref: '#/components/parameters/XApiKey'
+      responses:
+        '200':
+          description: Rendition image returned
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+              examples:
+                Getrendition200Example:
+                  summary: Default getRendition 200 response
+                  x-microcks-default: true
+                  value: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ims-na1.adobelogin.com/ims/authorize/v2
+          tokenUrl: https://ims-na1.adobelogin.com/ims/token/v3
+          scopes:
+            lr_partner_apis: Access Lightroom partner APIs
+    apiKey:
+      type: apiKey
+      name: X-Api-Key
+      in: header
+  parameters:
+    XApiKey:
+      name: X-Api-Key
+      in: header
+      required: true
+      description: API key from Adobe Developer Console
+      schema:
+        type: string
+    CatalogId:
+      name: catalog_id
+      in: path
+      required: true
+      description: Unique identifier of the Lightroom catalog
+      schema:
+        type: string
+    AssetId:
+      name: asset_id
+      in: path
+      required: true
+      description: Unique identifier of the asset (UUID format)
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    AssetsListResponse:
+      type: object
+      properties:
+        base:
+          type: string
+          description: Base URL for API
+          example: example_value
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Asset'
+          example: []
+        links:
+          $ref: '#/components/schemas/Links'
+    Asset:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Asset unique identifier
+          example: abc123
+        type:
+          type: string
+          const: asset
+          example: example_value
+        subtype:
+          type: string
+          enum:
+          - image
+          - video
+          example: image
+        created:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        updated:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        revision_ids:
+          type: array
+          items:
+            type: string
+          example: []
+        payload:
+          $ref: '#/components/schemas/AssetPayload'
+        links:
+          $ref: '#/components/schemas/Links'
+    AssetPayload:
+      type: object
+      properties:
+        captureDate:
+          type: string
+          format: date-time
+          description: Date and time the photo was captured
+          example: '2026-01-15T10:30:00Z'
+        userCreated:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        userUpdated:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        importSource:
+          type: object
+          properties:
+            fileName:
+              type: string
+              description: Original file name
+            importedOnDevice:
+              type: string
+              description: Device used for import
+            importTimestamp:
+              type: string
+              format: date-time
+          example: example_value
+        develop:
+          type: object
+          description: Develop settings snapshot
+          example: example_value
+        xmp:
+          type: object
+          description: Embedded XMP metadata
+          example: example_value
+        location:
+          type: object
+          properties:
+            latitude:
+              type: number
+            longitude:
+              type: number
+            altitude:
+              type: number
+            direction:
+              type: number
+          example: example_value
+    AssetResponse:
+      type: object
+      properties:
+        base:
+          type: string
+          example: example_value
+        id:
+          type: string
+          example: abc123
+        type:
+          type: string
+          const: asset
+          example: example_value
+        subtype:
+          type: string
+          example: example_value
+        created:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        updated:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        payload:
+          $ref: '#/components/schemas/AssetPayload'
+        links:
+          $ref: '#/components/schemas/Links'
+    AssetCreateRequest:
+      type: object
+      required:
+      - subtype
+      - payload
+      properties:
+        subtype:
+          type: string
+          enum:
+          - image
+          - video
+          example: image
+        payload:
+          type: object
+          properties:
+            captureDate:
+              type: string
+              format: date-time
+            userCreated:
+              type: string
+              format: date-time
+            userUpdated:
+              type: string
+              format: date-time
+            importSource:
+              type: object
+              properties:
+                fileName:
+                  type: string
+                importedOnDevice:
+                  type: string
+                importTimestamp:
+                  type: string
+                  format: date-time
+          example: example_value
+    Links:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          href:
+            type: string
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 10
+        description:
+          type: string
+          example: A sample description.
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'

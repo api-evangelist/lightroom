@@ -1,0 +1,486 @@
+{
+  "info": {
+    "_postman_id": "6c7667c6-6bb9-4a93-8164-0a1e90df0c9f",
+    "name": "Adobe Lightroom Lightroom Albums Album Assets Auto Straighten API",
+    "description": "API for creating and managing albums and collections within an Adobe Lightroom cloud catalog. Albums organize assets into user-defined collections. Supports listing, creating, updating, and deleting albums as well as managing the assets within each album.\n\nContact Support:\n Name: Adobe Lightroom Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:06:52.000Z",
+    "updatedAt": "2026-07-28T02:06:53.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6c7667c6-6bb9-4a93-8164-0a1e90df0c9f"
+  },
+  "item": [
+    {
+      "name": "lrService",
+      "item": [
+        {
+          "name": "autoStraighten",
+          "item": [
+            {
+              "name": "Adobe Lightroom Automatically Straighten an Image",
+              "id": "d27038cc-1695-4020-841e-dd468bd16354",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) API key (client_id) from Adobe Developer Console",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"<string>\",\n      \"storage\": \"external\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"image/png\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/lrService/autoStraighten",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "lrService",
+                    "autoStraighten"
+                  ]
+                },
+                "description": "Detects the horizon or dominant lines in an image and applies a rotation correction to straighten it. Uses AI analysis to determine the appropriate rotation angle, similar to Lightroom's auto straighten feature in the Crop & Rotate tool."
+              },
+              "response": [
+                {
+                  "id": "81a9aea0-3f74-4208-820b-2ebff4eade84",
+                  "name": "Auto straighten applied successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) API key (client_id) from Adobe Developer Console",
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"<string>\",\n      \"storage\": \"external\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"image/png\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/lrService/autoStraighten",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lrService",
+                        "autoStraighten"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jobId\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\",\n  \"outputs\": [\n    {\n      \"input\": \"<string>\",\n      \"status\": \"succeeded\",\n      \"href\": \"<string>\",\n      \"errors\": {\n        \"type\": \"<string>\",\n        \"title\": \"<string>\",\n        \"code\": \"<integer>\"\n      }\n    },\n    {\n      \"input\": \"<string>\",\n      \"status\": \"succeeded\",\n      \"href\": \"<string>\",\n      \"errors\": {\n        \"type\": \"<string>\",\n        \"title\": \"<string>\",\n        \"code\": \"<integer>\"\n      }\n    }\n  ],\n  \"_links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:06:53.000Z",
+                  "updatedAt": "2026-07-28T02:06:53.000Z",
+                  "uid": "35240-81a9aea0-3f74-4208-820b-2ebff4eade84"
+                },
+                {
+                  "id": "9fb38fc2-95db-455c-9cc2-273da3c5659a",
+                  "name": "Job accepted and processing",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) API key (client_id) from Adobe Developer Console",
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"<string>\",\n      \"storage\": \"external\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"image/png\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/lrService/autoStraighten",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lrService",
+                        "autoStraighten"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jobId\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\",\n  \"outputs\": [\n    {\n      \"input\": \"<string>\",\n      \"status\": \"succeeded\",\n      \"href\": \"<string>\",\n      \"errors\": {\n        \"type\": \"<string>\",\n        \"title\": \"<string>\",\n        \"code\": \"<integer>\"\n      }\n    },\n    {\n      \"input\": \"<string>\",\n      \"status\": \"succeeded\",\n      \"href\": \"<string>\",\n      \"errors\": {\n        \"type\": \"<string>\",\n        \"title\": \"<string>\",\n        \"code\": \"<integer>\"\n      }\n    }\n  ],\n  \"_links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:06:53.000Z",
+                  "updatedAt": "2026-07-28T02:06:53.000Z",
+                  "uid": "35240-9fb38fc2-95db-455c-9cc2-273da3c5659a"
+                },
+                {
+                  "id": "ec4040c8-48df-4713-9216-27769a753678",
+                  "name": "Invalid request parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) API key (client_id) from Adobe Developer Console",
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"<string>\",\n      \"storage\": \"external\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"image/png\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/lrService/autoStraighten",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lrService",
+                        "autoStraighten"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"detail\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:06:53.000Z",
+                  "updatedAt": "2026-07-28T02:06:53.000Z",
+                  "uid": "35240-ec4040c8-48df-4713-9216-27769a753678"
+                },
+                {
+                  "id": "3b456b04-ab57-4abd-9df8-3c2e96d5b645",
+                  "name": "Authentication required or invalid token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) API key (client_id) from Adobe Developer Console",
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"<string>\",\n      \"storage\": \"external\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"image/png\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/lrService/autoStraighten",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lrService",
+                        "autoStraighten"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"detail\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:06:53.000Z",
+                  "updatedAt": "2026-07-28T02:06:53.000Z",
+                  "uid": "35240-3b456b04-ab57-4abd-9df8-3c2e96d5b645"
+                },
+                {
+                  "id": "aa7bead6-e8e7-41a4-a899-8180881ae32e",
+                  "name": "Insufficient permissions or quota exceeded",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) API key (client_id) from Adobe Developer Console",
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"<string>\",\n      \"storage\": \"external\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"image/png\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/lrService/autoStraighten",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lrService",
+                        "autoStraighten"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"detail\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:06:53.000Z",
+                  "updatedAt": "2026-07-28T02:06:53.000Z",
+                  "uid": "35240-aa7bead6-e8e7-41a4-a899-8180881ae32e"
+                },
+                {
+                  "id": "b1b850bd-248a-4b28-b672-0d6eb5a5123e",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) API key (client_id) from Adobe Developer Console",
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"inputs\": {\n    \"source\": {\n      \"href\": \"<string>\",\n      \"storage\": \"external\"\n    }\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"image/png\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/lrService/autoStraighten",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lrService",
+                        "autoStraighten"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"detail\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:06:53.000Z",
+                  "updatedAt": "2026-07-28T02:06:53.000Z",
+                  "uid": "35240-b1b850bd-248a-4b28-b672-0d6eb5a5123e"
+                }
+              ],
+              "createdAt": "2026-07-28T02:06:53.000Z",
+              "updatedAt": "2026-07-28T02:06:53.000Z",
+              "uid": "35240-d27038cc-1695-4020-841e-dd468bd16354"
+            }
+          ],
+          "id": "bbf5dbcd-7070-4853-864b-053c2c0be54c",
+          "createdAt": "2026-07-28T02:06:53.000Z",
+          "updatedAt": "2026-07-28T02:06:53.000Z",
+          "uid": "35240-bbf5dbcd-7070-4853-864b-053c2c0be54c"
+        }
+      ],
+      "id": "bb72e597-cee0-419d-a084-0192f62279b7",
+      "createdAt": "2026-07-28T02:06:53.000Z",
+      "updatedAt": "2026-07-28T02:06:53.000Z",
+      "uid": "35240-bb72e597-cee0-419d-a084-0192f62279b7"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "lr_partner_apis",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://ims-na1.adobelogin.com/ims/token/v3",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://ims-na1.adobelogin.com/ims/authorize/v2",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://lr.adobe.io/v2"
+    }
+  ]
+}

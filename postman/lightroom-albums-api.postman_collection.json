@@ -1,0 +1,1938 @@
+{
+  "info": {
+    "_postman_id": "95209590-ac14-42cb-9188-e23be2769be1",
+    "name": "Adobe Lightroom Lightroom Album Assets Albums API",
+    "description": "API for creating and managing albums and collections within an Adobe Lightroom cloud catalog. Albums organize assets into user-defined collections. Supports listing, creating, updating, and deleting albums as well as managing the assets within each album.\n\nContact Support:\n Name: Adobe Lightroom Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:06:50.000Z",
+    "updatedAt": "2026-07-28T02:06:50.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-95209590-ac14-42cb-9188-e23be2769be1"
+  },
+  "item": [
+    {
+      "name": "catalogs",
+      "item": [
+        {
+          "name": "{catalog_id}",
+          "item": [
+            {
+              "name": "albums",
+              "item": [
+                {
+                  "name": "{album_id}",
+                  "item": [
+                    {
+                      "name": "assets",
+                      "item": [
+                        {
+                          "name": "Adobe Lightroom List Assets in an Album",
+                          "id": "b0ff07fc-eca8-4eb2-b814-57c24e8c9b40",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) API key from the Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id/assets?limit=100&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "albums",
+                                ":album_id",
+                                "assets"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of results to return",
+                                  "key": "limit",
+                                  "value": "100"
+                                },
+                                {
+                                  "description": "Number of results to skip for pagination",
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "a0b39899-6ef9-44f2-bde8-e3f21a529e62",
+                                  "key": "catalog_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier of the Lightroom catalog"
+                                },
+                                {
+                                  "id": "f6e2f6d3-e4cf-4c7a-94bf-a36643c65730",
+                                  "key": "album_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier of the album"
+                                }
+                              ]
+                            },
+                            "description": "Retrieves a paginated list of assets contained within the specified album."
+                          },
+                          "response": [
+                            {
+                              "id": "c9063bbf-de62-4461-965a-edcdda930b68",
+                              "name": "Album assets retrieved successfully",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "(Required) API key from the Adobe Developer Console",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id/assets?limit=100&offset=0",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalog_id",
+                                    "albums",
+                                    ":album_id",
+                                    "assets"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Maximum number of results to return",
+                                      "key": "limit",
+                                      "value": "100"
+                                    },
+                                    {
+                                      "description": "Number of results to skip for pagination",
+                                      "key": "offset",
+                                      "value": "0"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "catalog_id"
+                                    },
+                                    {
+                                      "key": "album_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"base\": \"<string>\",\n  \"resources\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"subtype\": \"video\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\",\n      \"revision_ids\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"payload\": {\n        \"captureDate\": \"<dateTime>\",\n        \"userCreated\": \"<dateTime>\",\n        \"userUpdated\": \"<dateTime>\",\n        \"importSource\": {\n          \"fileName\": \"<string>\",\n          \"importedOnDevice\": \"<string>\",\n          \"importTimestamp\": \"<dateTime>\"\n        },\n        \"develop\": {},\n        \"xmp\": {},\n        \"location\": {\n          \"latitude\": \"<number>\",\n          \"longitude\": \"<number>\",\n          \"altitude\": \"<number>\",\n          \"direction\": \"<number>\"\n        }\n      },\n      \"links\": {\n        \"cupidatatf0d\": {\n          \"href\": \"<string>\"\n        },\n        \"sinta\": {\n          \"href\": \"<string>\"\n        },\n        \"irurea1\": {\n          \"href\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"subtype\": \"video\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\",\n      \"revision_ids\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"payload\": {\n        \"captureDate\": \"<dateTime>\",\n        \"userCreated\": \"<dateTime>\",\n        \"userUpdated\": \"<dateTime>\",\n        \"importSource\": {\n          \"fileName\": \"<string>\",\n          \"importedOnDevice\": \"<string>\",\n          \"importTimestamp\": \"<dateTime>\"\n        },\n        \"develop\": {},\n        \"xmp\": {},\n        \"location\": {\n          \"latitude\": \"<number>\",\n          \"longitude\": \"<number>\",\n          \"altitude\": \"<number>\",\n          \"direction\": \"<number>\"\n        }\n      },\n      \"links\": {\n        \"consequatb_\": {\n          \"href\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"links\": {\n    \"minim_8\": {\n      \"href\": \"<string>\"\n    },\n    \"dolor_a\": {\n      \"href\": \"<string>\"\n    },\n    \"exercitation_a\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T02:06:51.000Z",
+                              "updatedAt": "2026-07-28T02:06:51.000Z",
+                              "uid": "35240-c9063bbf-de62-4461-965a-edcdda930b68"
+                            },
+                            {
+                              "id": "6f6de8b5-5eb0-4d2c-bb81-156aa49355ad",
+                              "name": "Authentication required or invalid credentials",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "(Required) API key from the Adobe Developer Console",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id/assets?limit=100&offset=0",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalog_id",
+                                    "albums",
+                                    ":album_id",
+                                    "assets"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Maximum number of results to return",
+                                      "key": "limit",
+                                      "value": "100"
+                                    },
+                                    {
+                                      "description": "Number of results to skip for pagination",
+                                      "key": "offset",
+                                      "value": "0"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "catalog_id"
+                                    },
+                                    {
+                                      "key": "album_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:06:51.000Z",
+                              "updatedAt": "2026-07-28T02:06:51.000Z",
+                              "uid": "35240-6f6de8b5-5eb0-4d2c-bb81-156aa49355ad"
+                            },
+                            {
+                              "id": "b731d488-88c7-4e84-b5aa-de1f9074b297",
+                              "name": "Insufficient permissions. The user has not granted access or the partner application is not entitled.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "(Required) API key from the Adobe Developer Console",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id/assets?limit=100&offset=0",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalog_id",
+                                    "albums",
+                                    ":album_id",
+                                    "assets"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Maximum number of results to return",
+                                      "key": "limit",
+                                      "value": "100"
+                                    },
+                                    {
+                                      "description": "Number of results to skip for pagination",
+                                      "key": "offset",
+                                      "value": "0"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "catalog_id"
+                                    },
+                                    {
+                                      "key": "album_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:06:51.000Z",
+                              "updatedAt": "2026-07-28T02:06:51.000Z",
+                              "uid": "35240-b731d488-88c7-4e84-b5aa-de1f9074b297"
+                            },
+                            {
+                              "id": "31895479-457b-49b9-8353-a1e18f68f232",
+                              "name": "The specified resource was not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "(Required) API key from the Adobe Developer Console",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id/assets?limit=100&offset=0",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalog_id",
+                                    "albums",
+                                    ":album_id",
+                                    "assets"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Maximum number of results to return",
+                                      "key": "limit",
+                                      "value": "100"
+                                    },
+                                    {
+                                      "description": "Number of results to skip for pagination",
+                                      "key": "offset",
+                                      "value": "0"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "catalog_id"
+                                    },
+                                    {
+                                      "key": "album_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:06:51.000Z",
+                              "updatedAt": "2026-07-28T02:06:51.000Z",
+                              "uid": "35240-31895479-457b-49b9-8353-a1e18f68f232"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:06:51.000Z",
+                          "updatedAt": "2026-07-28T02:06:51.000Z",
+                          "uid": "35240-b0ff07fc-eca8-4eb2-b814-57c24e8c9b40"
+                        },
+                        {
+                          "name": "Adobe Lightroom Add Assets to an Album",
+                          "id": "2cc4a108-5028-47a2-9fd3-f4afd4025ac1",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) API key from the Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"resources\": [\n    {\n      \"id\": \"<string>\",\n      \"payload\": {\n        \"order\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"payload\": {\n        \"order\": \"<string>\"\n      }\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id/assets",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "albums",
+                                ":album_id",
+                                "assets"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e3318e83-f2cc-4e82-979a-e93c0c23b7ee",
+                                  "key": "catalog_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier of the Lightroom catalog"
+                                },
+                                {
+                                  "id": "c07dd207-1772-449e-b818-8ae7315948b8",
+                                  "key": "album_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier of the album"
+                                }
+                              ]
+                            },
+                            "description": "Adds one or more existing assets to the specified album. The assets must already exist in the catalog."
+                          },
+                          "response": [
+                            {
+                              "id": "a45749a7-3274-48ea-aa93-e998994ed754",
+                              "name": "Assets added to album successfully",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "description": "(Required) API key from the Adobe Developer Console",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"resources\": [\n    {\n      \"id\": \"<string>\",\n      \"payload\": {\n        \"order\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"payload\": {\n        \"order\": \"<string>\"\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id/assets",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalog_id",
+                                    "albums",
+                                    ":album_id",
+                                    "assets"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "catalog_id"
+                                    },
+                                    {
+                                      "key": "album_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:06:51.000Z",
+                              "updatedAt": "2026-07-28T02:06:51.000Z",
+                              "uid": "35240-a45749a7-3274-48ea-aa93-e998994ed754"
+                            },
+                            {
+                              "id": "cca63d35-e6c0-4e1d-920a-3bd54462e431",
+                              "name": "Authentication required or invalid credentials",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "description": "(Required) API key from the Adobe Developer Console",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"resources\": [\n    {\n      \"id\": \"<string>\",\n      \"payload\": {\n        \"order\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"payload\": {\n        \"order\": \"<string>\"\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id/assets",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalog_id",
+                                    "albums",
+                                    ":album_id",
+                                    "assets"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "catalog_id"
+                                    },
+                                    {
+                                      "key": "album_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:06:51.000Z",
+                              "updatedAt": "2026-07-28T02:06:51.000Z",
+                              "uid": "35240-cca63d35-e6c0-4e1d-920a-3bd54462e431"
+                            },
+                            {
+                              "id": "ad7dd829-ce64-4e58-8f2c-2ca23a666bcc",
+                              "name": "Insufficient permissions. The user has not granted access or the partner application is not entitled.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "description": "(Required) API key from the Adobe Developer Console",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"resources\": [\n    {\n      \"id\": \"<string>\",\n      \"payload\": {\n        \"order\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"payload\": {\n        \"order\": \"<string>\"\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id/assets",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalog_id",
+                                    "albums",
+                                    ":album_id",
+                                    "assets"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "catalog_id"
+                                    },
+                                    {
+                                      "key": "album_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:06:51.000Z",
+                              "updatedAt": "2026-07-28T02:06:51.000Z",
+                              "uid": "35240-ad7dd829-ce64-4e58-8f2c-2ca23a666bcc"
+                            },
+                            {
+                              "id": "e933f8a7-00e0-47b9-b4e3-9be10581ae78",
+                              "name": "The specified resource was not found",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "description": "(Required) API key from the Adobe Developer Console",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"resources\": [\n    {\n      \"id\": \"<string>\",\n      \"payload\": {\n        \"order\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"payload\": {\n        \"order\": \"<string>\"\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id/assets",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalog_id",
+                                    "albums",
+                                    ":album_id",
+                                    "assets"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "catalog_id"
+                                    },
+                                    {
+                                      "key": "album_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:06:51.000Z",
+                              "updatedAt": "2026-07-28T02:06:51.000Z",
+                              "uid": "35240-e933f8a7-00e0-47b9-b4e3-9be10581ae78"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:06:51.000Z",
+                          "updatedAt": "2026-07-28T02:06:51.000Z",
+                          "uid": "35240-2cc4a108-5028-47a2-9fd3-f4afd4025ac1"
+                        }
+                      ],
+                      "id": "c085d6c6-6c20-4927-a2d4-65ec5df2fa70",
+                      "createdAt": "2026-07-28T02:06:51.000Z",
+                      "updatedAt": "2026-07-28T02:06:51.000Z",
+                      "uid": "35240-c085d6c6-6c20-4927-a2d4-65ec5df2fa70"
+                    },
+                    {
+                      "name": "Adobe Lightroom Get Album Details",
+                      "id": "ab135545-8226-45c4-aaa7-d45f8e496dcb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) API key from Adobe Developer Console",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalog_id",
+                            "albums",
+                            ":album_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ce9f828e-202c-4ba5-a2ff-e1f85831df10",
+                              "key": "catalog_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier of the Lightroom catalog"
+                            },
+                            {
+                              "id": "8887a573-ca8a-4a0e-b168-092bb5f302ce",
+                              "key": "album_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the album (UUID format)"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves detailed metadata for a specific album including its name, subtype, cover asset reference, parent album reference, and timestamps."
+                      },
+                      "response": [
+                        {
+                          "id": "092f6396-0fd8-45ab-acd8-ddf54be92048",
+                          "name": "Album retrieved successfully",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) API key from Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "albums",
+                                ":album_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalog_id"
+                                },
+                                {
+                                  "key": "album_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"base\": \"<string>\",\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"subtype\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"payload\": {\n    \"name\": \"<string>\",\n    \"userCreated\": \"<dateTime>\",\n    \"userUpdated\": \"<dateTime>\",\n    \"cover\": {\n      \"id\": \"<string>\"\n    },\n    \"parent\": {\n      \"id\": \"<string>\"\n    }\n  },\n  \"links\": {\n    \"dolore_9\": {\n      \"href\": \"<string>\"\n    },\n    \"fugiat5b7\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:06:51.000Z",
+                          "updatedAt": "2026-07-28T02:06:51.000Z",
+                          "uid": "35240-092f6396-0fd8-45ab-acd8-ddf54be92048"
+                        },
+                        {
+                          "id": "d238fa6f-d79a-4772-8bc2-b1b16c2207a9",
+                          "name": "Authentication required",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) API key from Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "albums",
+                                ":album_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalog_id"
+                                },
+                                {
+                                  "key": "album_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:06:51.000Z",
+                          "updatedAt": "2026-07-28T02:06:51.000Z",
+                          "uid": "35240-d238fa6f-d79a-4772-8bc2-b1b16c2207a9"
+                        },
+                        {
+                          "id": "2c717b82-85fc-42d9-a92e-87edef0737df",
+                          "name": "Resource not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) API key from Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "albums",
+                                ":album_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalog_id"
+                                },
+                                {
+                                  "key": "album_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:06:51.000Z",
+                          "updatedAt": "2026-07-28T02:06:51.000Z",
+                          "uid": "35240-2c717b82-85fc-42d9-a92e-87edef0737df"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:06:51.000Z",
+                      "updatedAt": "2026-07-28T02:06:51.000Z",
+                      "uid": "35240-ab135545-8226-45c4-aaa7-d45f8e496dcb"
+                    },
+                    {
+                      "name": "Adobe Lightroom Create or Update an Album",
+                      "id": "aaa0b188-13f0-40a3-8ab1-65ec2ac07d4a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "(Required) API key from Adobe Developer Console",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"subtype\": \"collection_set\",\n  \"payload\": {\n    \"name\": \"<string>\",\n    \"userCreated\": \"<dateTime>\",\n    \"userUpdated\": \"<dateTime>\",\n    \"cover\": {\n      \"id\": \"<string>\"\n    },\n    \"parent\": {\n      \"id\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalog_id",
+                            "albums",
+                            ":album_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "6ec92f0f-e6c0-4a5f-abaf-aa5ce5d8cdd8",
+                              "key": "catalog_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier of the Lightroom catalog"
+                            },
+                            {
+                              "id": "e2093e99-bf47-4d42-92cc-c44c0f4160b5",
+                              "key": "album_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the album (UUID format)"
+                            }
+                          ]
+                        },
+                        "description": "Creates a new album or updates an existing album. The album_id should be a client-generated UUID for new albums. Set the subtype to collection for a regular album, collection_set for a folder that contains other albums, or project for a managed project."
+                      },
+                      "response": [
+                        {
+                          "id": "ba43b481-c047-4917-8837-352315e25c9e",
+                          "name": "Album updated",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) API key from Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"subtype\": \"collection_set\",\n  \"payload\": {\n    \"name\": \"<string>\",\n    \"userCreated\": \"<dateTime>\",\n    \"userUpdated\": \"<dateTime>\",\n    \"cover\": {\n      \"id\": \"<string>\"\n    },\n    \"parent\": {\n      \"id\": \"<string>\"\n    }\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "albums",
+                                ":album_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalog_id"
+                                },
+                                {
+                                  "key": "album_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"base\": \"<string>\",\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"subtype\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"payload\": {\n    \"name\": \"<string>\",\n    \"userCreated\": \"<dateTime>\",\n    \"userUpdated\": \"<dateTime>\",\n    \"cover\": {\n      \"id\": \"<string>\"\n    },\n    \"parent\": {\n      \"id\": \"<string>\"\n    }\n  },\n  \"links\": {\n    \"dolore_9\": {\n      \"href\": \"<string>\"\n    },\n    \"fugiat5b7\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:06:51.000Z",
+                          "updatedAt": "2026-07-28T02:06:51.000Z",
+                          "uid": "35240-ba43b481-c047-4917-8837-352315e25c9e"
+                        },
+                        {
+                          "id": "b93f038e-6cb7-43b7-8b88-cbe6112e588f",
+                          "name": "Album created",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) API key from Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"subtype\": \"collection_set\",\n  \"payload\": {\n    \"name\": \"<string>\",\n    \"userCreated\": \"<dateTime>\",\n    \"userUpdated\": \"<dateTime>\",\n    \"cover\": {\n      \"id\": \"<string>\"\n    },\n    \"parent\": {\n      \"id\": \"<string>\"\n    }\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "albums",
+                                ":album_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalog_id"
+                                },
+                                {
+                                  "key": "album_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"base\": \"<string>\",\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"subtype\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"payload\": {\n    \"name\": \"<string>\",\n    \"userCreated\": \"<dateTime>\",\n    \"userUpdated\": \"<dateTime>\",\n    \"cover\": {\n      \"id\": \"<string>\"\n    },\n    \"parent\": {\n      \"id\": \"<string>\"\n    }\n  },\n  \"links\": {\n    \"dolore_9\": {\n      \"href\": \"<string>\"\n    },\n    \"fugiat5b7\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:06:51.000Z",
+                          "updatedAt": "2026-07-28T02:06:51.000Z",
+                          "uid": "35240-b93f038e-6cb7-43b7-8b88-cbe6112e588f"
+                        },
+                        {
+                          "id": "f499165b-e238-499f-a6b5-efc9711ad868",
+                          "name": "Authentication required",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) API key from Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"subtype\": \"collection_set\",\n  \"payload\": {\n    \"name\": \"<string>\",\n    \"userCreated\": \"<dateTime>\",\n    \"userUpdated\": \"<dateTime>\",\n    \"cover\": {\n      \"id\": \"<string>\"\n    },\n    \"parent\": {\n      \"id\": \"<string>\"\n    }\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "albums",
+                                ":album_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalog_id"
+                                },
+                                {
+                                  "key": "album_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:06:51.000Z",
+                          "updatedAt": "2026-07-28T02:06:51.000Z",
+                          "uid": "35240-f499165b-e238-499f-a6b5-efc9711ad868"
+                        },
+                        {
+                          "id": "607f2103-0617-4299-a069-562fb58e5984",
+                          "name": "Insufficient permissions",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) API key from Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"subtype\": \"collection_set\",\n  \"payload\": {\n    \"name\": \"<string>\",\n    \"userCreated\": \"<dateTime>\",\n    \"userUpdated\": \"<dateTime>\",\n    \"cover\": {\n      \"id\": \"<string>\"\n    },\n    \"parent\": {\n      \"id\": \"<string>\"\n    }\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "albums",
+                                ":album_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalog_id"
+                                },
+                                {
+                                  "key": "album_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:06:51.000Z",
+                          "updatedAt": "2026-07-28T02:06:51.000Z",
+                          "uid": "35240-607f2103-0617-4299-a069-562fb58e5984"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:06:51.000Z",
+                      "updatedAt": "2026-07-28T02:06:51.000Z",
+                      "uid": "35240-aaa0b188-13f0-40a3-8ab1-65ec2ac07d4a"
+                    },
+                    {
+                      "name": "Adobe Lightroom Delete an Album",
+                      "id": "6014a6f4-f559-4d8d-997b-edd8470678ed",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) API key from Adobe Developer Console",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalog_id",
+                            "albums",
+                            ":album_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "46457306-3892-4bd9-a77f-25981a4a7c67",
+                              "key": "catalog_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier of the Lightroom catalog"
+                            },
+                            {
+                              "id": "d86f874f-691c-4856-be4d-255befbf87e7",
+                              "key": "album_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the album (UUID format)"
+                            }
+                          ]
+                        },
+                        "description": "Deletes the specified album from the catalog. Assets within the album are not deleted; they remain in the catalog."
+                      },
+                      "response": [
+                        {
+                          "id": "3a47b791-4250-40f0-8c04-f12725a7b70b",
+                          "name": "Album deleted successfully",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "(Required) API key from Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "albums",
+                                ":album_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalog_id"
+                                },
+                                {
+                                  "key": "album_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:06:51.000Z",
+                          "updatedAt": "2026-07-28T02:06:51.000Z",
+                          "uid": "35240-3a47b791-4250-40f0-8c04-f12725a7b70b"
+                        },
+                        {
+                          "id": "a86413b8-364a-4c3b-8714-fa63817b9ce0",
+                          "name": "Authentication required",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "(Required) API key from Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "albums",
+                                ":album_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalog_id"
+                                },
+                                {
+                                  "key": "album_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:06:51.000Z",
+                          "updatedAt": "2026-07-28T02:06:51.000Z",
+                          "uid": "35240-a86413b8-364a-4c3b-8714-fa63817b9ce0"
+                        },
+                        {
+                          "id": "5764995f-4f6d-4e65-8cb9-544654ad08fc",
+                          "name": "Resource not found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "(Required) API key from Adobe Developer Console",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalog_id/albums/:album_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalog_id",
+                                "albums",
+                                ":album_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalog_id"
+                                },
+                                {
+                                  "key": "album_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:06:51.000Z",
+                          "updatedAt": "2026-07-28T02:06:51.000Z",
+                          "uid": "35240-5764995f-4f6d-4e65-8cb9-544654ad08fc"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:06:51.000Z",
+                      "updatedAt": "2026-07-28T02:06:51.000Z",
+                      "uid": "35240-6014a6f4-f559-4d8d-997b-edd8470678ed"
+                    }
+                  ],
+                  "id": "5f2078ee-94d9-4bde-b345-09b14d4e9344",
+                  "createdAt": "2026-07-28T02:06:51.000Z",
+                  "updatedAt": "2026-07-28T02:06:51.000Z",
+                  "uid": "35240-5f2078ee-94d9-4bde-b345-09b14d4e9344"
+                },
+                {
+                  "name": "Adobe Lightroom List Albums in a Catalog",
+                  "id": "ef7a64db-3946-46d8-b9c6-8c8c5e766e48",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) API key from Adobe Developer Console",
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/catalogs/:catalog_id/albums?subtype=project&limit=100&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "catalogs",
+                        ":catalog_id",
+                        "albums"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter albums by subtype",
+                          "key": "subtype",
+                          "value": "project"
+                        },
+                        {
+                          "description": "Maximum number of results",
+                          "key": "limit",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Pagination offset",
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "2b34e961-36b2-4e2b-a2c9-2287115da65b",
+                          "key": "catalog_id",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the Lightroom catalog"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a paginated list of all albums in the specified catalog. Albums may be of subtype collection, collection_set, or project."
+                  },
+                  "response": [
+                    {
+                      "id": "7289c1e2-b66d-42ed-b2d3-7bd714a9f246",
+                      "name": "Albums retrieved successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) API key from Adobe Developer Console",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalog_id/albums?subtype=project&limit=100&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalog_id",
+                            "albums"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter albums by subtype",
+                              "key": "subtype",
+                              "value": "project"
+                            },
+                            {
+                              "description": "Maximum number of results",
+                              "key": "limit",
+                              "value": "100"
+                            },
+                            {
+                              "description": "Pagination offset",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalog_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"base\": \"<string>\",\n  \"resources\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"subtype\": \"project\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\",\n      \"payload\": {\n        \"name\": \"<string>\",\n        \"userCreated\": \"<dateTime>\",\n        \"userUpdated\": \"<dateTime>\",\n        \"cover\": {\n          \"id\": \"<string>\"\n        },\n        \"parent\": {\n          \"id\": \"<string>\"\n        }\n      },\n      \"links\": {\n        \"culpa785\": {\n          \"href\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"subtype\": \"collection_set\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\",\n      \"payload\": {\n        \"name\": \"<string>\",\n        \"userCreated\": \"<dateTime>\",\n        \"userUpdated\": \"<dateTime>\",\n        \"cover\": {\n          \"id\": \"<string>\"\n        },\n        \"parent\": {\n          \"id\": \"<string>\"\n        }\n      },\n      \"links\": {\n        \"laborum_\": {\n          \"href\": \"<string>\"\n        },\n        \"consequat_ad\": {\n          \"href\": \"<string>\"\n        },\n        \"et1_\": {\n          \"href\": \"<string>\"\n        },\n        \"aliquaf70\": {\n          \"href\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"links\": {\n    \"sint__2\": {\n      \"href\": \"<string>\"\n    },\n    \"consequat_\": {\n      \"href\": \"<string>\"\n    },\n    \"et2b\": {\n      \"href\": \"<string>\"\n    },\n    \"ullamco__5f\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:06:51.000Z",
+                      "updatedAt": "2026-07-28T02:06:51.000Z",
+                      "uid": "35240-7289c1e2-b66d-42ed-b2d3-7bd714a9f246"
+                    },
+                    {
+                      "id": "79f50870-45ca-4d39-a2c6-46c54121ce9b",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) API key from Adobe Developer Console",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalog_id/albums?subtype=project&limit=100&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalog_id",
+                            "albums"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter albums by subtype",
+                              "key": "subtype",
+                              "value": "project"
+                            },
+                            {
+                              "description": "Maximum number of results",
+                              "key": "limit",
+                              "value": "100"
+                            },
+                            {
+                              "description": "Pagination offset",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalog_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:06:51.000Z",
+                      "updatedAt": "2026-07-28T02:06:51.000Z",
+                      "uid": "35240-79f50870-45ca-4d39-a2c6-46c54121ce9b"
+                    },
+                    {
+                      "id": "a53c6db3-2df3-45bd-a860-038670f6d792",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) API key from Adobe Developer Console",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalog_id/albums?subtype=project&limit=100&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalog_id",
+                            "albums"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter albums by subtype",
+                              "key": "subtype",
+                              "value": "project"
+                            },
+                            {
+                              "description": "Maximum number of results",
+                              "key": "limit",
+                              "value": "100"
+                            },
+                            {
+                              "description": "Pagination offset",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalog_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:06:51.000Z",
+                      "updatedAt": "2026-07-28T02:06:51.000Z",
+                      "uid": "35240-a53c6db3-2df3-45bd-a860-038670f6d792"
+                    },
+                    {
+                      "id": "5607c42a-eb96-488a-b424-7e30ae018f6d",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) API key from Adobe Developer Console",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalog_id/albums?subtype=project&limit=100&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalog_id",
+                            "albums"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter albums by subtype",
+                              "key": "subtype",
+                              "value": "project"
+                            },
+                            {
+                              "description": "Maximum number of results",
+                              "key": "limit",
+                              "value": "100"
+                            },
+                            {
+                              "description": "Pagination offset",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalog_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:06:51.000Z",
+                      "updatedAt": "2026-07-28T02:06:51.000Z",
+                      "uid": "35240-5607c42a-eb96-488a-b424-7e30ae018f6d"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:06:51.000Z",
+                  "updatedAt": "2026-07-28T02:06:51.000Z",
+                  "uid": "35240-ef7a64db-3946-46d8-b9c6-8c8c5e766e48"
+                }
+              ],
+              "id": "4239212d-dde1-4279-811b-d7013ce444aa",
+              "createdAt": "2026-07-28T02:06:51.000Z",
+              "updatedAt": "2026-07-28T02:06:51.000Z",
+              "uid": "35240-4239212d-dde1-4279-811b-d7013ce444aa"
+            }
+          ],
+          "id": "fd92b993-56e1-4b27-8554-468cecb62ca3",
+          "createdAt": "2026-07-28T02:06:51.000Z",
+          "updatedAt": "2026-07-28T02:06:51.000Z",
+          "uid": "35240-fd92b993-56e1-4b27-8554-468cecb62ca3"
+        }
+      ],
+      "id": "0e807177-ed2d-4fcb-97e1-536603ca5132",
+      "createdAt": "2026-07-28T02:06:51.000Z",
+      "updatedAt": "2026-07-28T02:06:51.000Z",
+      "uid": "35240-0e807177-ed2d-4fcb-97e1-536603ca5132"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "lr_partner_apis",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://ims-na1.adobelogin.com/ims/token/v3",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://ims-na1.adobelogin.com/ims/authorize/v2",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://lr.adobe.io/v2"
+    }
+  ]
+}
