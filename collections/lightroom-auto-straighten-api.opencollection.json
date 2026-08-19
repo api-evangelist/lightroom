@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Lightroom Lightroom Albums Album Assets Auto Straighten API",
+    "version": "2"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://ims-na1.adobelogin.com/ims/authorize/v2",
+      "accessTokenUrl": "https://ims-na1.adobelogin.com/ims/token/v3",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auto Straighten",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom Automatically Straighten an Image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://lr.adobe.io/v2/lrService/autoStraighten",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Detects the horizon or dominant lines in an image and applies a rotation correction to straighten it. Uses AI analysis to determine the appropriate rotation angle, similar to Lightroom's auto straighten feature in the Crop & Rotate tool."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Lightroom Lightroom Albums Album Assets Health API",
+    "version": "2"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://ims-na1.adobelogin.com/ims/authorize/v2",
+      "accessTokenUrl": "https://ims-na1.adobelogin.com/ims/token/v3",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom Check Api Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/health"
+          },
+          "docs": "Returns the current health status of the Lightroom Services API. This endpoint does not require authentication and is intended for monitoring and uptime verification."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

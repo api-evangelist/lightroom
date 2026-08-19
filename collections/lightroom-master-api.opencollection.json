@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Lightroom Lightroom Albums Album Assets Master API",
+    "version": "2"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://ims-na1.adobelogin.com/ims/authorize/v2",
+      "accessTokenUrl": "https://ims-na1.adobelogin.com/ims/token/v3",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Master",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom Upload the Original Master File",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/assets/:asset_id/master",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": "image/jpeg"
+              },
+              {
+                "name": "Content-Length",
+                "value": "10"
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset (UUID format)"
+              }
+            ]
+          },
+          "docs": "Uploads the original (master) image or video file for a previously created asset. The Content-Type header must match the file type being uploaded. Supported formats include JPEG, PNG, TIFF, DNG, and MP4."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

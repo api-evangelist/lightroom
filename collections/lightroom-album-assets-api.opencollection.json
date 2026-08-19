@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Lightroom Lightroom Albums Album Assets API",
+    "version": "2"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://ims-na1.adobelogin.com/ims/authorize/v2",
+      "accessTokenUrl": "https://ims-na1.adobelogin.com/ims/token/v3",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Album Assets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom List Assets in an Album",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/albums/:album_id/assets",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "album_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the album (UUID format)"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of results"
+              },
+              {
+                "name": "offset",
+                "value": "10",
+                "type": "query",
+                "description": "Pagination offset"
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of assets belonging to the specified album. Returns the same asset structure as the catalog assets endpoint."
+        },
+        {
+          "info": {
+            "name": "Adobe Lightroom Add Assets to an Album",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/albums/:album_id/assets",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "album_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the album (UUID format)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds one or more existing catalog assets to the specified album. Assets must already exist in the catalog. Each asset reference includes an optional sort order."
+        },
+        {
+          "info": {
+            "name": "Adobe Lightroom Remove an Asset From an Album",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/albums/:album_id/assets/:asset_id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "album_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the album (UUID format)"
+              },
+              {
+                "name": "asset_id",
+                "value": "500123",
+                "type": "path",
+                "description": "Asset ID to remove from the album"
+              }
+            ]
+          },
+          "docs": "Removes a specific asset from the album. The asset itself is not deleted from the catalog."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

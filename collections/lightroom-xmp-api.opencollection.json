@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Lightroom Lightroom Albums Album Assets XMP API",
+    "version": "2"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://ims-na1.adobelogin.com/ims/authorize/v2",
+      "accessTokenUrl": "https://ims-na1.adobelogin.com/ims/token/v3",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "XMP",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom Get Develop Settings Xmp",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/assets/:asset_id/xmp/develop",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset (UUID format)"
+              }
+            ]
+          },
+          "docs": "Retrieves the external develop XMP sidecar data for the asset. Contains Lightroom develop module settings including exposure, white balance, tone curve, and other adjustments in XMP/RDF format."
+        },
+        {
+          "info": {
+            "name": "Adobe Lightroom Upload Develop Settings Xmp",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://lr.adobe.io/v2/catalogs/:catalog_id/assets/:asset_id/xmp/develop",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "catalog_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lightroom catalog"
+              },
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset (UUID format)"
+              }
+            ]
+          },
+          "docs": "Uploads external develop XMP sidecar data for the asset. Applies Lightroom develop settings to the asset."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

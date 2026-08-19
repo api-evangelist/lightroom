@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Lightroom Lightroom Albums Album Assets Edit Image API",
+    "version": "2"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://ims-na1.adobelogin.com/ims/authorize/v2",
+      "accessTokenUrl": "https://ims-na1.adobelogin.com/ims/token/v3",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Edit Image",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Lightroom Apply Custom Edit Settings to an Image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://lr.adobe.io/v2/lrService/edit",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Applies custom Lightroom develop settings to an image. Accepts a comprehensive set of editing parameters covering white balance, exposure, contrast, highlights, shadows, tone curve, HSL, split toning, sharpening, noise reduction, lens corrections, and more. Provides the full range of non-destructive editing capabilities available in the Lightroom develop module."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
