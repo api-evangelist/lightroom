@@ -1,0 +1,46 @@
+slug: lightroom
+provider: Adobe Lightroom
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Media, Entertainment & Telecom Content
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Assets
+  spec_file: lightroom-assets-api-openapi.yml
+  capability_id: BC-3710
+  capability_id_l1: BC-3710
+  capability_name: Media Asset Management
+  confidence: 0.75
+  evidence: '''List Assets in a Catalog'', ''Get Asset Metadata'', ''Upload the Master (original) File
+    for an Asset'', ''Get the Develop Settings Xmp for an Asset'''
+  reason: These operations ingest master files into a catalog and read/write descriptive and technical
+    (XMP) metadata for media assets — the core of media asset management. Spans ingest (BC-3710.10) and
+    metadata cataloguing (BC-3710.20), so reported at L1.
+- tag: Master
+  spec_file: lightroom-master-api-openapi.yml
+  capability_id: BC-3710.10
+  capability_id_l1: BC-3710
+  capability_name: Asset Ingest & Quality Control
+  confidence: 0.7
+  evidence: PUT /catalogs/{catalog_id}/assets/{asset_id}/master — "Upload the Original Master File"; "Supports
+    creating master assets, uploading original files"
+  reason: Uploading the original master file of an asset into the cloud catalog is onboarding of source
+    material into the asset platform, i.e. asset ingest.
+- tag: Renditions
+  spec_file: lightroom-renditions-api-openapi.yml
+  capability_id: BC-3710.40
+  capability_id_l1: BC-3710
+  capability_name: Transcoding & Format Conversion
+  confidence: 0.7
+  evidence: GET /catalogs/{catalog_id}/assets/{asset_id}/renditions/{rendition_type} — "Get an Asset Rendition";
+    "generating renditions at various sizes"
+  reason: Generation and retrieval of derivative renditions of a stored asset matches production of intermediate/distribution
+    renditions (transcoding and format conversion).
