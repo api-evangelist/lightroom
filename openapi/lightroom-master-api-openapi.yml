@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Lightroom Lightroom Albums Album Assets Master API
-  description: API for creating and managing albums and collections within an Adobe Lightroom cloud catalog. Albums organize assets into user-defined collections. Supports listing, creating, updating, and deleting albums as well as managing the assets within each album.
+  title: Adobe Lightroom Lightroom Assets Master API
+  description: API for managing photo assets within an Adobe Lightroom cloud catalog. Supports creating master assets, uploading original files, reading and writing external develop XMP sidecar files, and generating renditions at various sizes. Assets represent individual photos or videos stored in a customer's Lightroom catalog.
   version: '2'
   contact:
     name: Adobe Lightroom Developer Support
@@ -79,29 +79,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    AssetId:
-      name: asset_id
-      in: path
-      required: true
-      description: Unique identifier of the asset (UUID format)
-      schema:
-        type: string
-        format: uuid
-    CatalogId:
-      name: catalog_id
-      in: path
-      required: true
-      description: Unique identifier of the Lightroom catalog
-      schema:
-        type: string
-    XApiKey:
-      name: X-Api-Key
-      in: header
-      required: true
-      description: API key from Adobe Developer Console
-      schema:
-        type: string
   responses:
     NotFound:
       description: Resource not found
@@ -125,6 +102,29 @@ components:
         description:
           type: string
           example: A sample description.
+  parameters:
+    XApiKey:
+      name: X-Api-Key
+      in: header
+      required: true
+      description: API key from Adobe Developer Console
+      schema:
+        type: string
+    CatalogId:
+      name: catalog_id
+      in: path
+      required: true
+      description: Unique identifier of the Lightroom catalog
+      schema:
+        type: string
+    AssetId:
+      name: asset_id
+      in: path
+      required: true
+      description: Unique identifier of the asset (UUID format)
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     oauth2:
       type: oauth2
@@ -139,5 +139,5 @@ components:
       name: X-Api-Key
       in: header
 externalDocs:
-  description: Lightroom Albums API Documentation
+  description: Lightroom Assets API Documentation
   url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/

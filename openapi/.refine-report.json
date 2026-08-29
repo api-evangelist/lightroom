@@ -1,36 +1,54 @@
 {
   "provider": "lightroom",
   "sources": [
-    "lightroom-album-assets-api-openapi.yml",
-    "lightroom-albums-api-openapi.yml",
-    "lightroom-assets-api-openapi.yml",
-    "lightroom-auto-straighten-api-openapi.yml",
-    "lightroom-auto-tone-api-openapi.yml",
-    "lightroom-catalog-api-openapi.yml",
-    "lightroom-edit-image-api-openapi.yml",
-    "lightroom-health-api-openapi.yml",
-    "lightroom-master-api-openapi.yml",
-    "lightroom-presets-api-openapi.yml",
-    "lightroom-renditions-api-openapi.yml",
-    "lightroom-xmp-api-openapi.yml"
+    "_original/lightroom-albums-openapi.yml",
+    "_original/lightroom-assets-openapi.yml",
+    "_original/lightroom-catalog-openapi.yml",
+    "_original/lightroom-firefly-services-openapi.yml",
+    "_original/lightroom-services-openapi.yml"
   ],
   "outputs": [
     "lightroom-album-assets-api-openapi.yml",
     "lightroom-albums-api-openapi.yml",
     "lightroom-assets-api-openapi.yml",
+    "lightroom-master-api-openapi.yml",
+    "lightroom-renditions-api-openapi.yml",
+    "lightroom-xmp-api-openapi.yml",
+    "lightroom-catalog-api-openapi.yml",
+    "lightroom-health-api-openapi.yml",
     "lightroom-auto-straighten-api-openapi.yml",
     "lightroom-auto-tone-api-openapi.yml",
-    "lightroom-catalog-api-openapi.yml",
     "lightroom-edit-image-api-openapi.yml",
-    "lightroom-health-api-openapi.yml",
-    "lightroom-master-api-openapi.yml",
-    "lightroom-presets-api-openapi.yml",
-    "lightroom-renditions-api-openapi.yml",
-    "lightroom-xmp-api-openapi.yml"
+    "lightroom-presets-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (5 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "lightroom-albums-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "lightroom-assets-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "lightroom-catalog-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "lightroom-firefly-services-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "lightroom-services-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tag 'Albums' spans 2 source specs (lightroom-albums-openapi.yml, lightroom-services-openapi.yml): per-path servers applied",
+    "tag 'Assets' spans 2 source specs (lightroom-assets-openapi.yml, lightroom-services-openapi.yml): per-path servers applied",
+    "tag 'Renditions' spans 2 source specs (lightroom-assets-openapi.yml, lightroom-services-openapi.yml): per-path servers applied",
+    "tag 'Catalog' spans 2 source specs (lightroom-catalog-openapi.yml, lightroom-services-openapi.yml): per-path servers applied",
+    "tag 'Health' spans 2 source specs (lightroom-catalog-openapi.yml, lightroom-services-openapi.yml): per-path servers applied"
+  ],
+  "skipped": [
+    "lightroom-album-assets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lightroom-albums-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lightroom-assets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lightroom-auto-straighten-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lightroom-auto-tone-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lightroom-catalog-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lightroom-edit-image-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lightroom-health-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lightroom-master-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lightroom-presets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lightroom-renditions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lightroom-xmp-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
