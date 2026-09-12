@@ -296,6 +296,8 @@ apis:
   - type: GettingStarted
     url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
 common:
+  - type: Website
+    url: https://www.adobe.com/
   - type: CapabilityMap
     url: capabilities/lightroom-capability-edges.yml
     name: Adobe Lightroom Business Capability Map
