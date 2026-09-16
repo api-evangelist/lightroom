@@ -211,27 +211,6 @@ apis:
     url: https://developer.adobe.com/firefly-services/docs/lightroom/
   - type: GettingStarted
     url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
-- aid: lightroom:lightroom-master-api
-  name: Adobe Lightroom Master API
-  description: Upload and manage original master files
-  humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/
-  tags:
-  - Master
-  properties:
-  - type: OpenAPI
-    url: openapi/lightroom-master-api-openapi.yml
-  - type: Documentation
-    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
-  - type: Authentication
-    url: https://developer.adobe.com/developer-console/docs/guides/authentication/
-  - type: GettingStarted
-    url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
-  - type: ChangeLog
-    url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
-  - type: Documentation
-    url: https://developer.adobe.com/firefly-services/docs/lightroom/
-  - type: GettingStarted
-    url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
 - aid: lightroom:lightroom-presets-api
   name: Adobe Lightroom Presets API
   description: Apply Lightroom presets (XMP develop settings) to images
@@ -262,27 +241,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lightroom-renditions-api-openapi.yml
-  - type: Documentation
-    url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
-  - type: Authentication
-    url: https://developer.adobe.com/developer-console/docs/guides/authentication/
-  - type: GettingStarted
-    url: https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/
-  - type: ChangeLog
-    url: https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/
-  - type: Documentation
-    url: https://developer.adobe.com/firefly-services/docs/lightroom/
-  - type: GettingStarted
-    url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
-- aid: lightroom:lightroom-xmp-api
-  name: Adobe Lightroom XMP API
-  description: Read and write external develop XMP sidecar files
-  humanURL: https://developer.adobe.com/lightroom/lightroom-api-docs/
-  tags:
-  - XMP
-  properties:
-  - type: OpenAPI
-    url: openapi/lightroom-xmp-api-openapi.yml
   - type: Documentation
     url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/
   - type: Authentication
