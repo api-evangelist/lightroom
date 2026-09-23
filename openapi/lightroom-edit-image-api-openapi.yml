@@ -143,12 +143,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions or quota exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required or invalid token
       content:
@@ -157,6 +151,12 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     TooManyRequests:
       description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions or quota exceeded
       content:
         application/json:
           schema:
@@ -222,6 +222,26 @@ components:
           type: string
           description: Detailed error message
           example: example_value
+    StorageInput:
+      type: object
+      description: Reference to an input file stored in cloud storage
+      required:
+      - href
+      - storage
+      properties:
+        href:
+          type: string
+          description: URL or path to the input file. For Creative Cloud, use the asset path. For external storage, use the presigned URL.
+          example: example_value
+        storage:
+          type: string
+          description: Storage type where the input file is located
+          enum:
+          - adobe
+          - external
+          - azure
+          - dropbox
+          example: adobe
     JobResponse:
       type: object
       properties:
@@ -278,26 +298,6 @@ components:
                 href:
                   type: string
           example: example_value
-    StorageInput:
-      type: object
-      description: Reference to an input file stored in cloud storage
-      required:
-      - href
-      - storage
-      properties:
-        href:
-          type: string
-          description: URL or path to the input file. For Creative Cloud, use the asset path. For external storage, use the presigned URL.
-          example: example_value
-        storage:
-          type: string
-          description: Storage type where the input file is located
-          enum:
-          - adobe
-          - external
-          - azure
-          - dropbox
-          example: adobe
     EditImageRequest:
       type: object
       required:

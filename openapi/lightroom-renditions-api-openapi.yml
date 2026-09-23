@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Lightroom Renditions API
+  title: Adobe Lightroom Lightroom Services Renditions API
+  description: Core partner API for accessing Adobe Lightroom cloud catalog data, albums, and assets. Partner applications authenticate Lightroom customers through Adobe Identity Management System (IMS) using a standard OAuth 2.0 workflow. Provides RESTful access to a customer's cloud-synced Lightroom catalog including photos, albums, and metadata.
   version: '2'
   contact:
     name: Adobe Lightroom Developer Support
@@ -9,7 +10,6 @@ info:
     name: Adobe Terms of Service
     url: https://www.adobe.com/legal/terms.html
   termsOfService: https://www.adobe.com/legal/terms.html
-  description: 'Operations tagged Renditions across 2 of this provider''s published API definitions: lightroom-assets-openapi.yml, lightroom-services-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://lr.adobe.io/v2
   description: Lightroom Services Production Server
@@ -19,43 +19,31 @@ security:
 - apiKey: []
 tags:
 - name: Renditions
-  description: Retrieve generated renditions (previews and thumbnails)
+  description: Operations on asset renditions (thumbnails and previews)
 paths:
   /catalogs/{catalog_id}/assets/{asset_id}/renditions/{rendition_type}:
     get:
-      operationId: getRendition
+      operationId: getAssetRendition
       summary: Adobe Lightroom Get an Asset Rendition
-      description: Retrieves a server-generated rendition of the asset at the specified size. Renditions are JPEG preview images generated from the master file with current develop settings applied.
+      description: Retrieves a generated rendition (preview image) for the specified asset. The rendition_type parameter specifies the size and format. Renditions are generated server-side from the master file.
       tags:
       - Renditions
       parameters:
       - $ref: '#/components/parameters/CatalogId'
       - $ref: '#/components/parameters/AssetId'
-      - name: rendition_type
-        in: path
-        required: true
-        description: Rendition size type. thumbnail2x is a small thumbnail, numeric values indicate the longest edge in pixels, and fullsize is the maximum resolution available.
-        schema:
-          type: string
-          enum:
-          - thumbnail2x
-          - '640'
-          - '1024'
-          - '2048'
-          - fullsize
-        example: thumbnail2x
+      - $ref: '#/components/parameters/RenditionType'
       - $ref: '#/components/parameters/XApiKey'
       responses:
         '200':
-          description: Rendition image returned
+          description: Rendition retrieved successfully
           content:
             image/jpeg:
               schema:
                 type: string
                 format: binary
               examples:
-                Getrendition200Example:
-                  summary: Default getRendition 200 response
+                Getassetrendition200Example:
+                  summary: Default getAssetRendition 200 response
                   x-microcks-default: true
                   value: example_value
         '401':
@@ -65,46 +53,57 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-    servers:
-    - url: https://lr.adobe.io/v2
-      description: Lightroom Services Production Server
 components:
   responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound_2:
-      description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse_2'
-    Unauthorized_2:
       description: Authentication required or invalid credentials
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse_2'
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    CatalogId:
+      name: catalog_id
+      in: path
+      required: true
+      description: Unique identifier of the Lightroom catalog
+      schema:
+        type: string
+    AssetId:
+      name: asset_id
+      in: path
+      required: true
+      description: Unique identifier of the asset
+      schema:
+        type: string
+    XApiKey:
+      name: X-Api-Key
+      in: header
+      required: true
+      description: API key from the Adobe Developer Console
+      schema:
+        type: string
+    RenditionType:
+      name: rendition_type
+      in: path
+      required: true
+      description: Type of rendition to retrieve. Specifies the size of the generated preview image.
+      schema:
+        type: string
+        enum:
+        - thumbnail2x
+        - 640
+        - 1024
+        - 2048
+        - fullsize
   schemas:
     ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          example: 10
-        description:
-          type: string
-          example: A sample description.
-    ErrorResponse_2:
       type: object
       properties:
         code:
@@ -125,69 +124,22 @@ components:
               field:
                 type: string
           example: []
-  parameters:
-    XApiKey:
-      name: X-Api-Key
-      in: header
-      required: true
-      description: API key from Adobe Developer Console
-      schema:
-        type: string
-    CatalogId:
-      name: catalog_id
-      in: path
-      required: true
-      description: Unique identifier of the Lightroom catalog
-      schema:
-        type: string
-    AssetId:
-      name: asset_id
-      in: path
-      required: true
-      description: Unique identifier of the asset (UUID format)
-      schema:
-        type: string
-        format: uuid
-    XApiKey_2:
-      name: X-Api-Key
-      in: header
-      required: true
-      description: API key from the Adobe Developer Console
-      schema:
-        type: string
-    RenditionType:
-      name: rendition_type
-      in: path
-      required: true
-      description: Type of rendition to retrieve. Specifies the size of the generated preview image.
-      schema:
-        type: string
-        enum:
-        - thumbnail2x
-        - 640
-        - 1024
-        - 2048
-        - fullsize
-    AssetId_2:
-      name: asset_id
-      in: path
-      required: true
-      description: Unique identifier of the asset
-      schema:
-        type: string
   securitySchemes:
     oauth2:
       type: oauth2
+      description: OAuth 2.0 authorization code flow via Adobe Identity Management System (IMS). Partner applications must be registered in the Adobe Developer Console.
       flows:
         authorizationCode:
           authorizationUrl: https://ims-na1.adobelogin.com/ims/authorize/v2
           tokenUrl: https://ims-na1.adobelogin.com/ims/token/v3
           scopes:
             lr_partner_apis: Access Lightroom partner APIs
+            openid: OpenID Connect
     apiKey:
       type: apiKey
       name: X-Api-Key
       in: header
-x-refined-from:
-- lightroom-assets-openapi.yml
-- lightroom-services-openapi.yml
+      description: API key from the Adobe Developer Console project (client_id of the integration)
+externalDocs:
+  description: Lightroom Services API Documentation
+  url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/

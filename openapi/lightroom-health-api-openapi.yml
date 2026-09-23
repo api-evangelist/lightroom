@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Lightroom Health API
+  title: Adobe Lightroom Lightroom Services Health API
+  description: Core partner API for accessing Adobe Lightroom cloud catalog data, albums, and assets. Partner applications authenticate Lightroom customers through Adobe Identity Management System (IMS) using a standard OAuth 2.0 workflow. Provides RESTful access to a customer's cloud-synced Lightroom catalog including photos, albums, and metadata.
   version: '2'
   contact:
     name: Adobe Lightroom Developer Support
@@ -9,7 +10,6 @@ info:
     name: Adobe Terms of Service
     url: https://www.adobe.com/legal/terms.html
   termsOfService: https://www.adobe.com/legal/terms.html
-  description: 'Operations tagged Health across 2 of this provider''s published API definitions: lightroom-catalog-openapi.yml, lightroom-services-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://lr.adobe.io/v2
   description: Lightroom Services Production Server
@@ -19,43 +19,32 @@ security:
 - apiKey: []
 tags:
 - name: Health
-  description: API health and availability checks
+  description: API health check endpoints
 paths:
   /health:
     get:
       operationId: getHealthCheck
-      summary: Adobe Lightroom Check Api Health
-      description: Returns the current health status of the Lightroom Services API. This endpoint does not require authentication and is intended for monitoring and uptime verification.
+      summary: Adobe Lightroom Get Api Health Status
+      description: Returns the health status of the Lightroom Services API. This endpoint does not require authentication and can be used to verify API availability.
       tags:
       - Health
       security: []
       responses:
         '200':
-          description: API is healthy
+          description: API is healthy and available
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    description: Health status
-                    examples:
-                    - available
+                $ref: '#/components/schemas/HealthResponse'
               examples:
                 Gethealthcheck200Example:
                   summary: Default getHealthCheck 200 response
                   x-microcks-default: true
                   value:
                     status: example_value
-        '503':
-          description: API is unavailable
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-    servers:
-    - url: https://lr.adobe.io/v2
-      description: Lightroom Services Production Server
 components:
   schemas:
     HealthResponse:
@@ -69,16 +58,19 @@ components:
   securitySchemes:
     oauth2:
       type: oauth2
+      description: OAuth 2.0 authorization code flow via Adobe Identity Management System (IMS). Partner applications must be registered in the Adobe Developer Console.
       flows:
         authorizationCode:
           authorizationUrl: https://ims-na1.adobelogin.com/ims/authorize/v2
           tokenUrl: https://ims-na1.adobelogin.com/ims/token/v3
           scopes:
             lr_partner_apis: Access Lightroom partner APIs
+            openid: OpenID Connect
     apiKey:
       type: apiKey
       name: X-Api-Key
       in: header
-x-refined-from:
-- lightroom-catalog-openapi.yml
-- lightroom-services-openapi.yml
+      description: API key from the Adobe Developer Console project (client_id of the integration)
+externalDocs:
+  description: Lightroom Services API Documentation
+  url: https://developer.adobe.com/lightroom/lightroom-api-docs/api/

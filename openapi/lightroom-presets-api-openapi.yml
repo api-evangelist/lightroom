@@ -124,12 +124,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions or quota exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required or invalid token
       content:
@@ -142,7 +136,38 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions or quota exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ApplyPresetsRequest:
+      type: object
+      required:
+      - inputs
+      - outputs
+      properties:
+        inputs:
+          type: object
+          required:
+          - source
+          - presets
+          properties:
+            source:
+              $ref: '#/components/schemas/StorageInput'
+            presets:
+              type: array
+              description: List of preset XMP files to apply. Presets are applied in order, with later presets overriding earlier ones.
+              items:
+                $ref: '#/components/schemas/StorageInput'
+          example: example_value
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/StorageOutput'
+          example: []
     StorageOutput:
       type: object
       description: Reference to the output destination in cloud storage
@@ -203,6 +228,26 @@ components:
           type: string
           description: Detailed error message
           example: example_value
+    StorageInput:
+      type: object
+      description: Reference to an input file stored in cloud storage
+      required:
+      - href
+      - storage
+      properties:
+        href:
+          type: string
+          description: URL or path to the input file. For Creative Cloud, use the asset path. For external storage, use the presigned URL.
+          example: example_value
+        storage:
+          type: string
+          description: Storage type where the input file is located
+          enum:
+          - adobe
+          - external
+          - azure
+          - dropbox
+          example: adobe
     JobResponse:
       type: object
       properties:
@@ -259,51 +304,6 @@ components:
                 href:
                   type: string
           example: example_value
-    StorageInput:
-      type: object
-      description: Reference to an input file stored in cloud storage
-      required:
-      - href
-      - storage
-      properties:
-        href:
-          type: string
-          description: URL or path to the input file. For Creative Cloud, use the asset path. For external storage, use the presigned URL.
-          example: example_value
-        storage:
-          type: string
-          description: Storage type where the input file is located
-          enum:
-          - adobe
-          - external
-          - azure
-          - dropbox
-          example: adobe
-    ApplyPresetsRequest:
-      type: object
-      required:
-      - inputs
-      - outputs
-      properties:
-        inputs:
-          type: object
-          required:
-          - source
-          - presets
-          properties:
-            source:
-              $ref: '#/components/schemas/StorageInput'
-            presets:
-              type: array
-              description: List of preset XMP files to apply. Presets are applied in order, with later presets overriding earlier ones.
-              items:
-                $ref: '#/components/schemas/StorageInput'
-          example: example_value
-        outputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/StorageOutput'
-          example: []
   parameters:
     XApiKey:
       name: X-Api-Key

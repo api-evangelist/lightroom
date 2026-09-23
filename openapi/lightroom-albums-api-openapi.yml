@@ -333,12 +333,6 @@ paths:
       description: Lightroom Services Production Server
 components:
   responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required
       content:
@@ -351,8 +345,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound_2:
-      description: The specified resource was not found
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized_2:
+      description: Authentication required or invalid credentials
       content:
         application/json:
           schema:
@@ -363,13 +363,104 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse_2'
-    Unauthorized_2:
-      description: Authentication required or invalid credentials
+    NotFound_2:
+      description: The specified resource was not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse_2'
   schemas:
+    AlbumCreateRequest:
+      type: object
+      required:
+      - subtype
+      - payload
+      properties:
+        subtype:
+          type: string
+          enum:
+          - collection
+          - collection_set
+          - project
+          example: collection
+        payload:
+          type: object
+          required:
+          - name
+          properties:
+            name:
+              type: string
+              description: Display name for the album
+            userCreated:
+              type: string
+              format: date-time
+            userUpdated:
+              type: string
+              format: date-time
+            cover:
+              type: object
+              properties:
+                id:
+                  type: string
+            parent:
+              type: object
+              properties:
+                id:
+                  type: string
+          example: example_value
+    Links:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          href:
+            type: string
+    AlbumsListResponse:
+      type: object
+      properties:
+        base:
+          type: string
+          example: example_value
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Album'
+          example: []
+        links:
+          $ref: '#/components/schemas/Links'
+    AlbumPayload:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Display name of the album
+          example: Example Title
+        userCreated:
+          type: string
+          format: date-time
+          description: When the user created the album
+          example: '2026-01-15T10:30:00Z'
+        userUpdated:
+          type: string
+          format: date-time
+          description: When the user last modified the album
+          example: '2026-01-15T10:30:00Z'
+        cover:
+          type: object
+          description: Cover asset for the album
+          properties:
+            id:
+              type: string
+              description: Asset ID used as cover
+          example: example_value
+        parent:
+          type: object
+          description: Parent album reference for nested albums
+          properties:
+            id:
+              type: string
+              description: Parent album ID
+          example: example_value
     ErrorResponse:
       type: object
       properties:
@@ -410,97 +501,6 @@ components:
           $ref: '#/components/schemas/AlbumPayload'
         links:
           $ref: '#/components/schemas/Links'
-    AlbumPayload:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Display name of the album
-          example: Example Title
-        userCreated:
-          type: string
-          format: date-time
-          description: When the user created the album
-          example: '2026-01-15T10:30:00Z'
-        userUpdated:
-          type: string
-          format: date-time
-          description: When the user last modified the album
-          example: '2026-01-15T10:30:00Z'
-        cover:
-          type: object
-          description: Cover asset for the album
-          properties:
-            id:
-              type: string
-              description: Asset ID used as cover
-          example: example_value
-        parent:
-          type: object
-          description: Parent album reference for nested albums
-          properties:
-            id:
-              type: string
-              description: Parent album ID
-          example: example_value
-    AlbumsListResponse:
-      type: object
-      properties:
-        base:
-          type: string
-          example: example_value
-        resources:
-          type: array
-          items:
-            $ref: '#/components/schemas/Album'
-          example: []
-        links:
-          $ref: '#/components/schemas/Links'
-    Links:
-      type: object
-      additionalProperties:
-        type: object
-        properties:
-          href:
-            type: string
-    AlbumCreateRequest:
-      type: object
-      required:
-      - subtype
-      - payload
-      properties:
-        subtype:
-          type: string
-          enum:
-          - collection
-          - collection_set
-          - project
-          example: collection
-        payload:
-          type: object
-          required:
-          - name
-          properties:
-            name:
-              type: string
-              description: Display name for the album
-            userCreated:
-              type: string
-              format: date-time
-            userUpdated:
-              type: string
-              format: date-time
-            cover:
-              type: object
-              properties:
-                id:
-                  type: string
-            parent:
-              type: object
-              properties:
-                id:
-                  type: string
-          example: example_value
     AlbumResponse:
       type: object
       properties:
@@ -529,39 +529,35 @@ components:
           $ref: '#/components/schemas/AlbumPayload'
         links:
           $ref: '#/components/schemas/Links'
-    ErrorResponse_2:
+    AlbumAssetsRequest:
       type: object
+      required:
+      - resources
       properties:
-        code:
-          type: integer
-          description: HTTP status code
-          example: 10
-        description:
-          type: string
-          description: Error description
-          example: A sample description.
-        errors:
+        resources:
           type: array
+          description: List of asset references to add to the album
           items:
             type: object
+            required:
+            - id
             properties:
-              message:
+              id:
                 type: string
-              field:
-                type: string
+                description: Asset ID to add
+              payload:
+                type: object
+                properties:
+                  order:
+                    type: string
+                    description: Sort order within the album
           example: []
-    Album_2:
+    AlbumCreateRequest_2:
       type: object
+      required:
+      - subtype
+      - payload
       properties:
-        id:
-          type: string
-          description: Unique identifier of the album
-          example: abc123
-        type:
-          type: string
-          description: Resource type
-          const: album
-          example: example_value
         subtype:
           type: string
           description: Album subtype
@@ -570,62 +566,27 @@ components:
           - collection_set
           - project
           example: collection
-        created:
-          type: string
-          format: date-time
-          description: Album creation timestamp
-          example: '2026-01-15T10:30:00Z'
-        updated:
-          type: string
-          format: date-time
-          description: Album last updated timestamp
-          example: '2026-01-15T10:30:00Z'
         payload:
           type: object
-          description: Album payload data
+          required:
+          - name
           properties:
             name:
               type: string
-              description: Display name of the album
+              description: Display name for the album
             userCreated:
               type: string
               format: date-time
-              description: When the user created the album
             userUpdated:
               type: string
               format: date-time
-              description: When the user last updated the album
-            cover:
-              type: object
-              description: Cover asset for the album
-              properties:
-                id:
-                  type: string
-                  description: Asset ID used as the album cover
             parent:
               type: object
-              description: Parent album (for nested album sets)
               properties:
                 id:
                   type: string
-                  description: Parent album ID
+                  description: Parent album ID for nesting
           example: example_value
-        links:
-          $ref: '#/components/schemas/Links_2'
-    AlbumsListResponse_2:
-      type: object
-      properties:
-        base:
-          type: string
-          example: example_value
-        resources:
-          type: array
-          description: List of album resources
-          items:
-            $ref: '#/components/schemas/Album_2'
-          example: []
-        links:
-          $ref: '#/components/schemas/Links_2'
     Links_2:
       type: object
       description: HATEOAS links for resource navigation
@@ -725,6 +686,41 @@ components:
           example: example_value
         links:
           $ref: '#/components/schemas/Links_2'
+    AlbumsListResponse_2:
+      type: object
+      properties:
+        base:
+          type: string
+          example: example_value
+        resources:
+          type: array
+          description: List of album resources
+          items:
+            $ref: '#/components/schemas/Album_2'
+          example: []
+        links:
+          $ref: '#/components/schemas/Links_2'
+    ErrorResponse_2:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+          example: 10
+        description:
+          type: string
+          description: Error description
+          example: A sample description.
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+              field:
+                type: string
+          example: []
     AssetsListResponse:
       type: object
       properties:
@@ -740,12 +736,18 @@ components:
           example: []
         links:
           $ref: '#/components/schemas/Links_2'
-    AlbumCreateRequest_2:
+    Album_2:
       type: object
-      required:
-      - subtype
-      - payload
       properties:
+        id:
+          type: string
+          description: Unique identifier of the album
+          example: abc123
+        type:
+          type: string
+          description: Resource type
+          const: album
+          example: example_value
         subtype:
           type: string
           description: Album subtype
@@ -754,50 +756,48 @@ components:
           - collection_set
           - project
           example: collection
+        created:
+          type: string
+          format: date-time
+          description: Album creation timestamp
+          example: '2026-01-15T10:30:00Z'
+        updated:
+          type: string
+          format: date-time
+          description: Album last updated timestamp
+          example: '2026-01-15T10:30:00Z'
         payload:
           type: object
-          required:
-          - name
+          description: Album payload data
           properties:
             name:
               type: string
-              description: Display name for the album
+              description: Display name of the album
             userCreated:
               type: string
               format: date-time
+              description: When the user created the album
             userUpdated:
               type: string
               format: date-time
-            parent:
+              description: When the user last updated the album
+            cover:
               type: object
+              description: Cover asset for the album
               properties:
                 id:
                   type: string
-                  description: Parent album ID for nesting
+                  description: Asset ID used as the album cover
+            parent:
+              type: object
+              description: Parent album (for nested album sets)
+              properties:
+                id:
+                  type: string
+                  description: Parent album ID
           example: example_value
-    AlbumAssetsRequest:
-      type: object
-      required:
-      - resources
-      properties:
-        resources:
-          type: array
-          description: List of asset references to add to the album
-          items:
-            type: object
-            required:
-            - id
-            properties:
-              id:
-                type: string
-                description: Asset ID to add
-              payload:
-                type: object
-                properties:
-                  order:
-                    type: string
-                    description: Sort order within the album
-          example: []
+        links:
+          $ref: '#/components/schemas/Links_2'
     AlbumResponse_2:
       type: object
       properties:
@@ -828,18 +828,18 @@ components:
         links:
           $ref: '#/components/schemas/Links_2'
   parameters:
-    XApiKey:
-      name: X-Api-Key
-      in: header
-      required: true
-      description: API key from Adobe Developer Console
-      schema:
-        type: string
     CatalogId:
       name: catalog_id
       in: path
       required: true
       description: Unique identifier of the Lightroom catalog
+      schema:
+        type: string
+    XApiKey:
+      name: X-Api-Key
+      in: header
+      required: true
+      description: API key from Adobe Developer Console
       schema:
         type: string
     AlbumId:

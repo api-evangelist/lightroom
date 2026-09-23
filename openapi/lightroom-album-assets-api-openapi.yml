@@ -140,26 +140,36 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    AlbumAssetsRequest:
+      type: object
+      required:
+      - resources
+      properties:
+        resources:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            properties:
+              id:
+                type: string
+                description: Asset ID to add
+              payload:
+                type: object
+                properties:
+                  order:
+                    type: string
+                    description: Sort order within the album
+          example: []
+    Links:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          href:
+            type: string
     ErrorResponse:
       type: object
       properties:
@@ -169,13 +179,6 @@ components:
         description:
           type: string
           example: A sample description.
-    Links:
-      type: object
-      additionalProperties:
-        type: object
-        properties:
-          href:
-            type: string
     AssetsListResponse:
       type: object
       properties:
@@ -207,28 +210,25 @@ components:
           example: []
         links:
           $ref: '#/components/schemas/Links'
-    AlbumAssetsRequest:
-      type: object
-      required:
-      - resources
-      properties:
-        resources:
-          type: array
-          items:
-            type: object
-            required:
-            - id
-            properties:
-              id:
-                type: string
-                description: Asset ID to add
-              payload:
-                type: object
-                properties:
-                  order:
-                    type: string
-                    description: Sort order within the album
-          example: []
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     CatalogId:
       name: catalog_id
