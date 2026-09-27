@@ -304,31 +304,20 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required or invalid credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions. The user has not granted access or the partner application is not entitled.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    CatalogId:
-      name: catalog_id
-      in: path
+    CapturedAfter:
+      name: captured_after
+      in: query
+      required: false
+      description: Filter assets captured after this ISO 8601 timestamp
+      schema:
+        type: string
+        format: date-time
+    XApiKey:
+      name: X-Api-Key
+      in: header
       required: true
-      description: Unique identifier of the Lightroom catalog
+      description: API key from the Adobe Developer Console
       schema:
         type: string
     AssetId:
@@ -336,6 +325,13 @@ components:
       in: path
       required: true
       description: Unique identifier of the asset
+      schema:
+        type: string
+    CatalogId:
+      name: catalog_id
+      in: path
+      required: true
+      description: Unique identifier of the Lightroom catalog
       schema:
         type: string
     Limit:
@@ -348,6 +344,14 @@ components:
         default: 100
         minimum: 1
         maximum: 500
+    CapturedBefore:
+      name: captured_before
+      in: query
+      required: false
+      description: Filter assets captured before this ISO 8601 timestamp
+      schema:
+        type: string
+        format: date-time
     Offset:
       name: offset
       in: query
@@ -357,29 +361,6 @@ components:
         type: integer
         default: 0
         minimum: 0
-    CapturedBefore:
-      name: captured_before
-      in: query
-      required: false
-      description: Filter assets captured before this ISO 8601 timestamp
-      schema:
-        type: string
-        format: date-time
-    XApiKey:
-      name: X-Api-Key
-      in: header
-      required: true
-      description: API key from the Adobe Developer Console
-      schema:
-        type: string
-    CapturedAfter:
-      name: captured_after
-      in: query
-      required: false
-      description: Filter assets captured after this ISO 8601 timestamp
-      schema:
-        type: string
-        format: date-time
     SubtypeFilter:
       name: subtype
       in: query
@@ -400,6 +381,43 @@ components:
           href:
             type: string
             description: URL for the linked resource
+    AssetRevisionRequest:
+      type: object
+      required:
+      - subtype
+      - payload
+      properties:
+        subtype:
+          type: string
+          description: Asset subtype
+          enum:
+          - image
+          - video
+          example: image
+        payload:
+          type: object
+          description: Asset metadata payload
+          properties:
+            captureDate:
+              type: string
+              format: date-time
+            userCreated:
+              type: string
+              format: date-time
+            userUpdated:
+              type: string
+              format: date-time
+            importSource:
+              type: object
+              properties:
+                fileName:
+                  type: string
+                importedOnDevice:
+                  type: string
+                importTimestamp:
+                  type: string
+                  format: date-time
+          example: example_value
     Asset:
       type: object
       properties:
@@ -490,43 +508,27 @@ components:
           example: example_value
         links:
           $ref: '#/components/schemas/Links'
-    AssetRevisionRequest:
+    ErrorResponse:
       type: object
-      required:
-      - subtype
-      - payload
       properties:
-        subtype:
+        code:
+          type: integer
+          description: HTTP status code
+          example: 10
+        description:
           type: string
-          description: Asset subtype
-          enum:
-          - image
-          - video
-          example: image
-        payload:
-          type: object
-          description: Asset metadata payload
-          properties:
-            captureDate:
-              type: string
-              format: date-time
-            userCreated:
-              type: string
-              format: date-time
-            userUpdated:
-              type: string
-              format: date-time
-            importSource:
-              type: object
-              properties:
-                fileName:
-                  type: string
-                importedOnDevice:
-                  type: string
-                importTimestamp:
-                  type: string
-                  format: date-time
-          example: example_value
+          description: Error description
+          example: A sample description.
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+              field:
+                type: string
+          example: []
     AssetResponse:
       type: object
       properties:
@@ -556,27 +558,6 @@ components:
           example: example_value
         links:
           $ref: '#/components/schemas/Links'
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-          example: 10
-        description:
-          type: string
-          description: Error description
-          example: A sample description.
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-              field:
-                type: string
-          example: []
     AssetsListResponse:
       type: object
       properties:
@@ -592,6 +573,25 @@ components:
           example: []
         links:
           $ref: '#/components/schemas/Links'
+  responses:
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions. The user has not granted access or the partner application is not entitled.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2

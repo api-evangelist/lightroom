@@ -102,6 +102,36 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Links:
+      type: object
+      description: HATEOAS links for resource navigation
+      additionalProperties:
+        type: object
+        properties:
+          href:
+            type: string
+            description: URL for the linked resource
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+          example: 10
+        description:
+          type: string
+          description: Error description
+          example: A sample description.
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+              field:
+                type: string
+          example: []
     CatalogResponse:
       type: object
       properties:
@@ -146,49 +176,19 @@ components:
           example: example_value
         links:
           $ref: '#/components/schemas/Links'
-    Links:
-      type: object
-      description: HATEOAS links for resource navigation
-      additionalProperties:
-        type: object
-        properties:
-          href:
-            type: string
-            description: URL for the linked resource
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-          example: 10
-        description:
-          type: string
-          description: Error description
-          example: A sample description.
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-              field:
-                type: string
-          example: []
   parameters:
-    CatalogId:
-      name: catalog_id
-      in: path
-      required: true
-      description: Unique identifier of the Lightroom catalog
-      schema:
-        type: string
     XApiKey:
       name: X-Api-Key
       in: header
       required: true
       description: API key from the Adobe Developer Console
+      schema:
+        type: string
+    CatalogId:
+      name: catalog_id
+      in: path
+      required: true
+      description: Unique identifier of the Lightroom catalog
       schema:
         type: string
   responses:
@@ -198,14 +198,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions. The user has not granted access or the partner application is not entitled.
+    NotFound:
+      description: The specified resource was not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The specified resource was not found
+    Forbidden:
+      description: Insufficient permissions. The user has not granted access or the partner application is not entitled.
       content:
         application/json:
           schema:

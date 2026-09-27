@@ -6,17 +6,20 @@ description: >-
   operations such as auto tone, auto straighten, and preset application.
 kind: contract
 deliveryModel:
-  model: unknown
+  model: saas
+  license_evidence:
+    not_product:
+    - adobedocs/lightroom-public-apis
   open_source: unknown
   commercial: true
   callable_host: true
-  label: Delivery model not determined — needs a product licence on record
+  label: Hosted service · you call their endpoint
   confidence: low
   source:
   - openapi
   - pricing
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: freemium
