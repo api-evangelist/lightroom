@@ -102,15 +102,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Links:
-      type: object
-      description: HATEOAS links for resource navigation
-      additionalProperties:
-        type: object
-        properties:
-          href:
-            type: string
-            description: URL for the linked resource
     ErrorResponse:
       type: object
       properties:
@@ -132,6 +123,15 @@ components:
               field:
                 type: string
           example: []
+    Links:
+      type: object
+      description: HATEOAS links for resource navigation
+      additionalProperties:
+        type: object
+        properties:
+          href:
+            type: string
+            description: URL for the linked resource
     CatalogResponse:
       type: object
       properties:
@@ -177,18 +177,18 @@ components:
         links:
           $ref: '#/components/schemas/Links'
   parameters:
-    XApiKey:
-      name: X-Api-Key
-      in: header
-      required: true
-      description: API key from the Adobe Developer Console
-      schema:
-        type: string
     CatalogId:
       name: catalog_id
       in: path
       required: true
       description: Unique identifier of the Lightroom catalog
+      schema:
+        type: string
+    XApiKey:
+      name: X-Api-Key
+      in: header
+      required: true
+      description: API key from the Adobe Developer Console
       schema:
         type: string
   responses:
@@ -198,14 +198,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The specified resource was not found
+    Forbidden:
+      description: Insufficient permissions. The user has not granted access or the partner application is not entitled.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions. The user has not granted access or the partner application is not entitled.
+    NotFound:
+      description: The specified resource was not found
       content:
         application/json:
           schema:

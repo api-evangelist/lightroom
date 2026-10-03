@@ -141,6 +141,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 10
+        description:
+          type: string
+          example: A sample description.
     Links:
       type: object
       additionalProperties:
@@ -170,15 +179,6 @@ components:
                     type: string
                     description: Sort order within the album
           example: []
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          example: 10
-        description:
-          type: string
-          example: A sample description.
     AssetsListResponse:
       type: object
       properties:
@@ -211,18 +211,18 @@ components:
         links:
           $ref: '#/components/schemas/Links'
   parameters:
-    XApiKey:
-      name: X-Api-Key
-      in: header
-      required: true
-      description: API key from Adobe Developer Console
-      schema:
-        type: string
     CatalogId:
       name: catalog_id
       in: path
       required: true
       description: Unique identifier of the Lightroom catalog
+      schema:
+        type: string
+    XApiKey:
+      name: X-Api-Key
+      in: header
+      required: true
+      description: API key from Adobe Developer Console
       schema:
         type: string
     AlbumId:
@@ -234,8 +234,8 @@ components:
         type: string
         format: uuid
   responses:
-    NotFound:
-      description: Resource not found
+    Unauthorized:
+      description: Authentication required
       content:
         application/json:
           schema:
@@ -246,8 +246,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
