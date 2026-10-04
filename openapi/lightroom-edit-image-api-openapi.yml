@@ -253,26 +253,6 @@ components:
           minimum: 1
           maximum: 12
           example: 10
-    StorageInput:
-      type: object
-      description: Reference to an input file stored in cloud storage
-      required:
-      - href
-      - storage
-      properties:
-        href:
-          type: string
-          description: URL or path to the input file. For Creative Cloud, use the asset path. For external storage, use the presigned URL.
-          example: example_value
-        storage:
-          type: string
-          description: Storage type where the input file is located
-          enum:
-          - adobe
-          - external
-          - azure
-          - dropbox
-          example: adobe
     EditImageRequest:
       type: object
       required:
@@ -405,31 +385,26 @@ components:
               minimum: 0
               maximum: 100
           example: example_value
-  responses:
-    Unauthorized:
-      description: Authentication required or invalid token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions or quota exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    TooManyRequests:
-      description: Rate limit exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    StorageInput:
+      type: object
+      description: Reference to an input file stored in cloud storage
+      required:
+      - href
+      - storage
+      properties:
+        href:
+          type: string
+          description: URL or path to the input file. For Creative Cloud, use the asset path. For external storage, use the presigned URL.
+          example: example_value
+        storage:
+          type: string
+          description: Storage type where the input file is located
+          enum:
+          - adobe
+          - external
+          - azure
+          - dropbox
+          example: adobe
   parameters:
     Authorization:
       name: Authorization
@@ -446,6 +421,31 @@ components:
       description: API key (client_id) from Adobe Developer Console
       schema:
         type: string
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions or quota exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2

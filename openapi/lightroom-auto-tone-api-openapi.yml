@@ -137,26 +137,6 @@ components:
           type: string
           description: Detailed error message
           example: example_value
-    AutoToneRequest:
-      type: object
-      required:
-      - inputs
-      - outputs
-      properties:
-        inputs:
-          type: object
-          required:
-          - source
-          properties:
-            source:
-              $ref: '#/components/schemas/StorageInput'
-          example: example_value
-        outputs:
-          type: array
-          description: One or more output destinations
-          items:
-            $ref: '#/components/schemas/StorageOutput'
-          example: []
     JobResponse:
       type: object
       properties:
@@ -274,37 +254,26 @@ components:
           - azure
           - dropbox
           example: adobe
-  responses:
-    Unauthorized:
-      description: Authentication required or invalid token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    UnsupportedMediaType:
-      description: Input file format not supported
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions or quota exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    TooManyRequests:
-      description: Rate limit exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    AutoToneRequest:
+      type: object
+      required:
+      - inputs
+      - outputs
+      properties:
+        inputs:
+          type: object
+          required:
+          - source
+          properties:
+            source:
+              $ref: '#/components/schemas/StorageInput'
+          example: example_value
+        outputs:
+          type: array
+          description: One or more output destinations
+          items:
+            $ref: '#/components/schemas/StorageOutput'
+          example: []
   parameters:
     Authorization:
       name: Authorization
@@ -321,6 +290,37 @@ components:
       description: API key (client_id) from Adobe Developer Console
       schema:
         type: string
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions or quota exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnsupportedMediaType:
+      description: Input file format not supported
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2

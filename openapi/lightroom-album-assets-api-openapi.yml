@@ -150,35 +150,6 @@ components:
         description:
           type: string
           example: A sample description.
-    Links:
-      type: object
-      additionalProperties:
-        type: object
-        properties:
-          href:
-            type: string
-    AlbumAssetsRequest:
-      type: object
-      required:
-      - resources
-      properties:
-        resources:
-          type: array
-          items:
-            type: object
-            required:
-            - id
-            properties:
-              id:
-                type: string
-                description: Asset ID to add
-              payload:
-                type: object
-                properties:
-                  order:
-                    type: string
-                    description: Sort order within the album
-          example: []
     AssetsListResponse:
       type: object
       properties:
@@ -210,32 +181,38 @@ components:
           example: []
         links:
           $ref: '#/components/schemas/Links'
-  parameters:
-    CatalogId:
-      name: catalog_id
-      in: path
-      required: true
-      description: Unique identifier of the Lightroom catalog
-      schema:
-        type: string
-    XApiKey:
-      name: X-Api-Key
-      in: header
-      required: true
-      description: API key from Adobe Developer Console
-      schema:
-        type: string
-    AlbumId:
-      name: album_id
-      in: path
-      required: true
-      description: Unique identifier of the album (UUID format)
-      schema:
-        type: string
-        format: uuid
+    Links:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          href:
+            type: string
+    AlbumAssetsRequest:
+      type: object
+      required:
+      - resources
+      properties:
+        resources:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            properties:
+              id:
+                type: string
+                description: Asset ID to add
+              payload:
+                type: object
+                properties:
+                  order:
+                    type: string
+                    description: Sort order within the album
+          example: []
   responses:
-    Unauthorized:
-      description: Authentication required
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
@@ -246,12 +223,35 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
+    Unauthorized:
+      description: Authentication required
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    XApiKey:
+      name: X-Api-Key
+      in: header
+      required: true
+      description: API key from Adobe Developer Console
+      schema:
+        type: string
+    CatalogId:
+      name: catalog_id
+      in: path
+      required: true
+      description: Unique identifier of the Lightroom catalog
+      schema:
+        type: string
+    AlbumId:
+      name: album_id
+      in: path
+      required: true
+      description: Unique identifier of the album (UUID format)
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     oauth2:
       type: oauth2
