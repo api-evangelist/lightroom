@@ -257,6 +257,12 @@ apis:
   - type: GettingStarted
     url: https://developer.adobe.com/firefly-services/docs/lightroom/getting_started/
 common:
+  - type: Plans
+    url: plans/lightroom-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/lightroom-rate-limits.yml
+  - type: FinOps
+    url: finops/lightroom-finops.yml
   - type: Website
     url: https://www.adobe.com/
   - type: CapabilityMap
